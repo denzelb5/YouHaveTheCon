@@ -4,6 +4,7 @@ import Navbar from '../components/shared/Navbar/Navbar';
 import Home from '../components/pages/Home/Home';
 import Login from '../components/pages/Login/Login';
 import SingleCon from '../components/pages/SingleCon/SingleCon';
+import AllCosplays from '../components/pages/AllCosplays/AllCosplays';
 // import FirebaseApp from '../helpers/data/connection';
 
 import {
@@ -59,6 +60,7 @@ class App extends React.Component {
             <PublicRoute path="/login" exact component={Login} authed={authed} handleAuth={this.handleAuthChange} />
             <PublicRoute path="/con/allcons" exact component={AllCons} authed={authed} />
             <PublicRoute path="/con/:conId" exact component={SingleCon} authed={authed} />
+            <PublicRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
           </Switch>
         </Router>
         
