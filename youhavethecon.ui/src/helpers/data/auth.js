@@ -1,21 +1,22 @@
-// import axios from 'axios';
+import axios from 'axios';
+import { baseUrl } from '../apiKeys.json';
 
-// const baseUrl = 'https://localhost:44363/api';
 
-// const loginUser = (email) => {
-//   axios.get(`${baseUrl}/api/users/${email}`).then((userResponse) => {
-//     sessionStorage.setItem('userId', userResponse.id);
-//   });
-// };
 
-// const logoutUser = () => {
-//   sessionStorage.removeItem('userId');
-// };
+const loginUser = (email) => {
+  axios.get(`${baseUrl}/api/user/${email}`).then((userResponse) => {
+    sessionStorage.setItem('userId', userResponse.id);
+  });
+};
 
-// const getUserId = () => sessionStorage.getItem('userId');
+const logoutUser = () => {
+  sessionStorage.removeItem('userId');
+};
 
-// export default {
-//   getUserId,
-//   loginUser,
-//   logoutUser,
-// };
+const getUserId = () => sessionStorage.getItem('userId');
+
+export default {
+  getUserId,
+  loginUser,
+  logoutUser,
+};
