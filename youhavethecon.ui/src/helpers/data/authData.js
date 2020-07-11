@@ -4,7 +4,7 @@ import { baseUrl } from '../apiKeys.json';
 
 
 const loginUser = (email) => {
-  axios.get(`${baseUrl}/api/user/${email}`).then((userResponse) => {
+  axios.get(`${baseUrl}/api/user/email/${email}`).then((userResponse) => {
     sessionStorage.setItem('userId', userResponse.id);
   });
 };

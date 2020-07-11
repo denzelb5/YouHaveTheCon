@@ -1,14 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import authData from '../../../helpers/data/authData';
 import './Navbar.scss';
 
 class Navbar extends React.Component {
-    state = {
-        authed: false
+    static propTypes = {
+      authed: PropTypes.bool
+    }
+
+    logoutMeOut = () => {
+      authData.logoutUser();
     }
 
     render() {
-        // const { authed } = this.state;
+        const { authed } = this.props;
 
         return (
             <div>
@@ -16,30 +22,32 @@ class Navbar extends React.Component {
               <div className="navbar-nav ml-auto">
                 <ul className="navbar-nav justify-content-end">
                   <li className="nav-item">
-                    { 
+                  { authed && ( 
                       <Link
                         className="nav-link"
                         to="/con/allcons">
                         My Cons
                       </Link>
-                    }
+                  )}
                   </li>
                   <li className="nav-item cosplay">
-                    { 
+                  { authed && (
                       <Link
                         className="nav-link"
                         to="/cosplay/allcosplays">
                         My Cosplays
                       </Link>
-                    }
+                  )}
                   </li>
                   <li className="nav-item logout">
+                  { authed && (
                     <Link
                       className='nav-link logoutBtn'
                       to='/'
-                    //   onClick={this.logMeOut}
+                       onClick={this.logMeOut}
                       >Log Out
-                    </Link>  
+                    </Link> 
+                  )} 
                 </li>  
                 </ul>
               </div>
