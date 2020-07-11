@@ -17,14 +17,15 @@ namespace YouHaveTheCon.DataAccess
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
 
-        public List<User> GetAllUsers()
+        public User GetUserByEmail(string email)
         {
-            var sql = @"select * from [User]";
+            var sql = @"select * from [User] where email = @email";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var users = db.Query<User>(sql).ToList();
-                return users;
+                var parameters = new { email = email };
+                var user = db.QueryFirstOrDefault<User>(sql, parameters);
+                return user;
             }
         }
     }

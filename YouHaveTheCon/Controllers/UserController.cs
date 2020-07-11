@@ -19,16 +19,16 @@ namespace YouHaveTheCon.Controllers
             _userRepository = userRepository;
         }
 
-        // api/user/allusers
-        [HttpGet("allusers")] 
-        public IActionResult GetUsers()
+        // api/user/email/{email}
+        [HttpGet("email/{email}")] 
+        public IActionResult GetUser(string email)
         {
-            var users = _userRepository.GetAllUsers();
-            if (!users.Any())
+            var user = _userRepository.GetUserByEmail(email);
+            if (user == null)
             {
-                return NotFound("No valid users available");
+                return NotFound("Not a valid user");
             }
-            return Ok(users);
+            return Ok(user);
         }
 
 
