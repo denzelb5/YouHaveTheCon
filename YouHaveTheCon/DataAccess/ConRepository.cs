@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YouHaveTheCon.Models;
+using System.Data.SqlClient;
+using Dapper;
 
 namespace YouHaveTheCon.DataAccess
 {
@@ -13,5 +16,19 @@ namespace YouHaveTheCon.DataAccess
         {
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
+
+        public List<Convention> GetAllCons()
+        {
+            var sql = @"SELECT * FROM Convention;";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var cons = db.Query<Convention>(sql).ToList();
+                return cons;
+            }
+        }
     }
+
+
+
 }
