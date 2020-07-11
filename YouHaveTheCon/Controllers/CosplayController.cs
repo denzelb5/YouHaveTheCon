@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace YouHaveTheCon.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/cosplay")]
     [ApiController]
     public class CosplayController : ControllerBase
     {
