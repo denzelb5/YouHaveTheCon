@@ -5,6 +5,7 @@ import Home from '../components/pages/Home/Home';
 import Login from '../components/pages/Login/Login';
 import SingleCon from '../components/pages/SingleCon/SingleCon';
 import AllCosplays from '../components/pages/AllCosplays/AllCosplays';
+import AddConForm from '../components/pages/AddConForm/AddConForm';
 
 
 import {
@@ -43,9 +44,9 @@ class App extends React.Component {
     }
   }
 
-  handleAuthChange(authed) {
-    this.setState({authed: authed});
-  }
+  // handleAuthChange(authed) {
+  //   this.setState({authed: authed});
+  // }
 
   render() {
     const { authed } = this.state;
@@ -56,9 +57,10 @@ class App extends React.Component {
           <Navbar authed={authed} />
           <Switch>
             <Route path="/" exact component={Home} authed={authed} />
-            <PrivateRoute path="/login" exact component={Login} authed={authed} handleAuth={this.handleAuthChange} />
+            <PrivateRoute path="/login" exact component={Login} authed={authed} />
             <PrivateRoute path="/con/allcons" exact component={AllCons} authed={authed} />
             <PrivateRoute path="/con/:conId" exact component={SingleCon} authed={authed} />
+            <PrivateRoute path ="/con/addcon" exact component={AddConForm} authed={authed} />
             <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
           </Switch>
         </Router>

@@ -1,6 +1,7 @@
 import React from 'react';
 import conData from '../../../helpers/data/conData';
 import ConCard from '../../shared/ConCard/ConCard';
+import { Link } from 'react-router-dom';
 import './AllCons.scss';
 
 class AllCons extends React.Component {
@@ -20,9 +21,13 @@ class AllCons extends React.Component {
   
     render() {
         const { allCons } = this.state;
+        
         return (
             <div className="all-cons">
-                {allCons.map((con) => <ConCard key={con.conId} con={con} />)}
+                <div className="all-my-cons d-flex flex-wrap">
+                    {allCons.map((con) => <ConCard key={con.conId} con={con} />)}
+                </div>
+                <Link className="btn btn-primary" to="/con/addcon">Add a con</Link>
             </div>
         )
     }
