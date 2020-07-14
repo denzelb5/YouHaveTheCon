@@ -27,7 +27,7 @@ class AllCons extends React.Component {
                 <div className="all-my-cons d-flex flex-wrap">
                     {allCons.map((con) => <ConCard key={con.conId} con={con} />)}
                 </div>
-                <Link className="btn btn-primary" to="/con/addcon">Add a con</Link>
+                <Link className="btn btn-primary" to="/addcon">Add a con</Link>
             </div>
         )
     }

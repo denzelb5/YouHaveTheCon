@@ -103,10 +103,10 @@ class AddConForm extends React.Component {
         <div className="form-group">
           <label htmlFor="con-start-date">Con Start Date</label>
           <input
-          type="text"
+          type="datetime-local"
           className="form-control"
           id="con-start-date"
-          placeholder="Enter Con Start Date YYYY-MM-DD"
+          placeholder=""
           value={conStartDate}
           onChange={this.conStartChange}
           />
@@ -114,10 +114,10 @@ class AddConForm extends React.Component {
         <div className="form-group">
           <label htmlFor="con-enddate">Con End Date</label>
           <input
-          type="text"
+          type="datetime-local"
           className="form-control"
           id="con-end-date"
-          placeholder="Enter Con End Date YYYY-MM-DD"
+          placeholder=""
           value={conEndDate}
           onChange={this.conEndChange}
           />
