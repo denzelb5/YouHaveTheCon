@@ -9,7 +9,7 @@ class Navbar extends React.Component {
       authed: PropTypes.bool
     }
 
-    logoutMeOut = () => {
+    logMeOut = () => {
       authData.logoutUser();
     }
 
@@ -40,14 +40,15 @@ class Navbar extends React.Component {
                   )}
                   </li>
                   <li className="nav-item logout">
-                  { authed && (
+                   { authed && (
                     <Link
                       className='nav-link logoutBtn'
                       to='/'
                        onClick={this.logMeOut}
                       >Log Out
                     </Link> 
-                  )} 
+                  )}  
+                    
                 </li>  
                 </ul>
               </div>

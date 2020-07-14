@@ -12,6 +12,7 @@ class Home extends React.Component {
 
     loginClickEvent = () => {
         authData.loginUser('denviol@yahoo.com');
+        
     }
 
     render() {

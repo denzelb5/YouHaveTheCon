@@ -6,7 +6,6 @@ const getUser = (email) => new Promise((resolve, reject) => {
     axios.get(`${baseUrl}/api/user/email/${email}`)
     .then((request) => {
         const user = request.data;
-        console.log(request.data);
         resolve(user);
     }).catch((error) => reject(error));
 });

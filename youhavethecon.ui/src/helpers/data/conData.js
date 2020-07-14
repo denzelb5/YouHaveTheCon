@@ -9,4 +9,7 @@ const getAllCons = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export default { getAllCons };
+const getSingleCon = (conId) => axios.get(`${baseUrl}/api/con/${conId}`)
+const addCon = (newCon) => axios.post(`${baseUrl}/api/con/addcon`, newCon);
+
+export default { getAllCons, addCon, getSingleCon };

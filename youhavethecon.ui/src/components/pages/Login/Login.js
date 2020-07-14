@@ -26,7 +26,7 @@ class Login extends React.Component {
       <div className="Profile">
         <h1>Welcome {user.firstName} {user.lastName}</h1>
         <h3>User Email: {user.email}</h3>
-        <Link to="/con/allcons" className="btn btn-primary">My Cons</Link>
+        <Link to="/convention/allcons" className="btn btn-primary">My Cons</Link>
         
       </div>
     );

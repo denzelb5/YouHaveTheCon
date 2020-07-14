@@ -5,6 +5,7 @@ import Home from '../components/pages/Home/Home';
 import Login from '../components/pages/Login/Login';
 import SingleCon from '../components/pages/SingleCon/SingleCon';
 import AllCosplays from '../components/pages/AllCosplays/AllCosplays';
+import AddConForm from '../components/pages/AddConForm/AddConForm';
 
 
 import {
@@ -15,6 +16,7 @@ import {
 } from 'react-router-dom';
 
 import './App.scss';
+import authData from '../helpers/data/authData';
 
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
@@ -27,28 +29,31 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 class App extends React.Component {
   state = { authed: false }
 
-  componentDidMount() {
-    if (sessionStorage.getItem('userId')) {
-      this.setState({ authed: true });
-    } else {
-      this.setState({ authed: false });
-    }
-  }
+  // componentDidUpdate() {
+  //   if (sessionStorage.getItem('userId')) {
+  //     this.setState({ authed: true });
+  //   } else {
+  //     this.setState({ authed: false });
+  //   }
+  // }
 
-  componentWillUnmount() {
-    if (sessionStorage.getItem('userId')) {
-      this.setState({ authed: true });
-    } else {
-      this.setState({ authed: false });
-    }
-  }
+  // componentWillUnmount() {
+  //   if (sessionStorage.getItem('userId')) {
+  //     this.setState({ authed: true });
+  //   } else {
+  //     this.setState({ authed: false });
+  //   }
+  // }
 
-  handleAuthChange(authed) {
-    this.setState({authed: authed});
-  }
+  // handleAuthChange(authed) {
+  //   this.setState({authed: authed});
+  // }
 
   render() {
-    const { authed } = this.state;
+    // const { authed } = this.state;
+    // const authed = authData.authed();
+    const authed = true;
+    
     return (
       <div className="App">
 
@@ -56,9 +61,10 @@ class App extends React.Component {
           <Navbar authed={authed} />
           <Switch>
             <Route path="/" exact component={Home} authed={authed} />
-            <PrivateRoute path="/login" exact component={Login} authed={authed} handleAuth={this.handleAuthChange} />
-            <PrivateRoute path="/con/allcons" exact component={AllCons} authed={authed} />
+            <Route path="/login" exact component={Login} authed={authed} />
+            <PrivateRoute path="/convention/allcons" exact component={AllCons} authed={authed} />
             <PrivateRoute path="/con/:conId" exact component={SingleCon} authed={authed} />
+            <PrivateRoute path ="/addcon" exact component={AddConForm} authed={authed} />
             <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
           </Switch>
         </Router>

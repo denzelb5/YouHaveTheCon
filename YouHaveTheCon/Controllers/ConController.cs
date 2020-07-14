@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouHaveTheCon.DataAccess;
+using YouHaveTheCon.Commands;
 
 namespace YouHaveTheCon.Controllers
 {
@@ -32,6 +33,22 @@ namespace YouHaveTheCon.Controllers
             return Ok(cons);
         }
 
+        // api/con/addcon
+        [HttpPost("addcon")]
+        public IActionResult AddCon(AddNewConCommand newCon)
+        {
+            var existingCon = _conRepository.GetIdByCon(newCon.ConName, newCon.ConStartDate, newCon.ConEndDate, newCon.LocationName, newCon.LocationInfo);
+
+            if (existingCon == null)
+            {
+                var createdCon = _conRepository.AddNewCon(newCon);
+                return Created("", createdCon);
+            }
+            else
+            {
+                return BadRequest("Con already exists");
+            }
+        }
 
 
 
