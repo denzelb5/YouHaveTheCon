@@ -7,6 +7,7 @@ using YouHaveTheCon.Models;
 using System.Data.SqlClient;
 using Dapper;
 using YouHaveTheCon.Commands;
+using YouHaveTheCon.ViewModels;
 
 namespace YouHaveTheCon.DataAccess
 {
@@ -83,6 +84,50 @@ namespace YouHaveTheCon.DataAccess
                 return conToAdd;
             }
         }
+
+        public List<ConBudget> GetBudgetCategoriesForBudget(int conId)
+        {
+            var sql = @"select * from Budget where budget.conId = @conId;";
+
+            var budgetCatSql = @"select BudgetCategoryForBudget.*, BudgetCategory.BudgetCategoryName, Budget.conId
+                                from BudgetCategoryforBudget
+                                join BudgetCategory
+                                on BudgetCategoryForBudget.budgetCategoryId = BudgetCategory.budgetCategoryId
+                                join Budget 
+                                on Budget.BudgetId = BudgetCategoryForBudget.budgetId
+                                where budget.conId = @conId;";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    conId = conId
+                };
+
+                var budgetsForCons= db.Query<ConBudget>(sql, parameters);
+                var budgetCategories = db.Query<BudgetCategories>(budgetCatSql, parameters);
+                List<ConBudget> budgetsWithCategories = new List<ConBudget>();
+
+                foreach (var budget in budgetsForCons)
+                {
+                    var budgetWithCategories = new ConBudget
+                    {
+                        BudgetId = budget.BudgetId,
+                        BudgetName = budget.BudgetName,
+                        AmountBudgeted = budget.AmountBudgeted,
+                        UserId = budget.UserId,
+                        ConId = budget.ConId,
+                        BudgetCategories = budgetCategories.Where(x => x.BudgetId == budget.BudgetId).Select(x => x.BudgetCategoryName).ToList()
+                    };
+                    budgetsWithCategories.Add(budgetWithCategories);
+                }
+                return budgetsWithCategories;
+            }
+
+           
+        }
+
+
 
 
 
