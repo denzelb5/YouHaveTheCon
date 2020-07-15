@@ -50,6 +50,22 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        //api/con/budget/{conId}
+        [HttpGet("budget/{conId}")]
+        public IActionResult GetBudgetByConId(int conId)
+        {
+            var budgetByCon = _conRepository.GetBudgetCategoriesForBudget(conId);
+
+            if (budgetByCon == null)
+            {
+                return NotFound("There is no budget for that con");
+            }
+            else
+            {
+                return Ok(budgetByCon);
+            }
+        }
+
 
 
     }
