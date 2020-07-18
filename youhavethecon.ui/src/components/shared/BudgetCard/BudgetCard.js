@@ -15,21 +15,21 @@ class BudgetCard extends React.Component {
         conId: PropTypes.int
     }
 
-    amountChange = (e) => {
-        e.preventDefault();
-        this.setState({ amount: e.target.value });
-      }
+    // amountChange = (e) => {
+    //     e.preventDefault();
+    //     this.setState({ amount: e.target.value });
+    //   }
 
-      editAmountEvent = (e) => {
-          e.preventDefault();
-          const { budgetCategoryId } = e.target.value;
-          const editAmount = {
-              amount: this.state.catAmount
-          };
-          conData.updateAmount(budgetCategoryId, editAmount)
-          .then().catch((error) => console.error(error));
+    //   editAmountEvent = (e) => {
+    //       e.preventDefault();
+    //       const { budgetCategoryId } = e.target.value;
+    //       const editAmount = {
+    //           amount: this.state.catAmount
+    //       };
+    //       conData.updateAmount(budgetCategoryId, editAmount)
+    //       .then().catch((error) => console.error(error));
 
-      }
+    //   }
 
     render() {
         const { conBudget } = this.props;
@@ -47,9 +47,9 @@ class BudgetCard extends React.Component {
                     </div>
                     <div className="col-sm">
                         <h5>Amount Needed</h5>
-                        
+                        {conBudget.catAmounts.map((amount) => <div key={amount} className="col-sm">{amount}</div>)}
                             
-                        {conBudget.budgetCategories.map((amount) => <div key={amount.budgetCategoryId} className="col-sm "><form>
+                        {/* {conBudget.budgetCategories.map((amount) => <div key={amount.budgetCategoryId} className="col-sm "><form>
                         <div className="form-group">
                             <input
                             type="text"
@@ -58,7 +58,7 @@ class BudgetCard extends React.Component {
                             placeholder="Enter con name"
                             value={amount.budgetCategoryName}
                             onChange={this.amountChange}
-                            /> </div> </form> </div>)}
+                            /> </div> </form> </div>)} */}
                           
                         </div>
                         <div className="col-sm">
