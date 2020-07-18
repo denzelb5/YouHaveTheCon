@@ -85,7 +85,22 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        public List<ConBudget> GetBudgetCategoriesForBudget(int conId)
+        public Convention GetConById(int conId)
+        {
+            var sql = @"select *
+                        from Convention
+                        where conId = @conId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { conId = conId };
+
+                var convention = db.QueryFirstOrDefault<Convention>(sql, parameters);
+                return convention;
+            }
+        }
+
+        public IEnumerable<ConBudget> GetBudgetCategoriesForBudget(int conId)
         {
             var sql = @"select * from Budget where budget.conId = @conId;";
 
@@ -97,6 +112,16 @@ namespace YouHaveTheCon.DataAccess
                                 on Budget.BudgetId = BudgetCategoryForBudget.budgetId
                                 where budget.conId = @conId;";
 
+            var amountSql = @"select BudgetCategoryForBudget.*, BudgetCategory.BudgetCategoryName, Budget.conId, CategoryAmount.CatAmount
+                                from BudgetCategoryforBudget
+                                join BudgetCategory 
+                                on BudgetCategoryForBudget.budgetCategoryId = BudgetCategory.budgetCategoryId
+                                join Budget 
+                                on Budget.BudgetId = BudgetCategoryForBudget.budgetId
+								join CategoryAmount 
+								on CategoryAmount.BudgetCategoryId = BudgetCategory.BudgetCategoryId
+                                where budget.conId = @conId";
+
             using (var db = new SqlConnection(ConnectionString))
             {
                 var parameters = new
@@ -104,9 +129,10 @@ namespace YouHaveTheCon.DataAccess
                     conId = conId
                 };
 
-                var budgetsForCons= db.Query<ConBudget>(sql, parameters);
+                var budgetsForCons = db.Query<ConBudget>(sql, parameters);
                 var budgetCategories = db.Query<BudgetCategories>(budgetCatSql, parameters);
-                List<ConBudget> budgetsWithCategories = new List<ConBudget>();
+                var categoryAmounts = db.Query<CategoryAmounts>(amountSql, parameters);
+                var budgetsWithCategories = new List<ConBudget>();
 
                 foreach (var budget in budgetsForCons)
                 {
@@ -117,15 +143,32 @@ namespace YouHaveTheCon.DataAccess
                         AmountBudgeted = budget.AmountBudgeted,
                         UserId = budget.UserId,
                         ConId = budget.ConId,
-                        BudgetCategories = budgetCategories.Where(x => x.BudgetId == budget.BudgetId).Select(x => x.BudgetCategoryName).ToList()
+                        BudgetCategories = budgetCategories.Where(x => x.BudgetId == budget.BudgetId).Select(x => x.BudgetCategoryName).ToList(),
+                        CatAmounts = categoryAmounts.Where(xm => xm.BudgetId == budget.BudgetId).Select(xm => xm.CatAmount).ToList()
                     };
                     budgetsWithCategories.Add(budgetWithCategories);
                 }
                 return budgetsWithCategories;
             }
-
-           
         }
+
+        public CategoryAmount UpdateAmount(CategoryAmount amountToUpdate)
+        {
+            var sql = @"update CategoryAmount set CatAmount = @CatAmount output inserted.* where BudgetCategoryId = @BudgetCategoryId;";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    CatAmount = amountToUpdate.CatAmount,
+                    BudgetCategoryId = amountToUpdate.BudgetCategoryId
+                };
+
+                var updatedAmount = db.QueryFirstOrDefault<CategoryAmount>(sql, parameters);
+                return updatedAmount;
+            }
+        }
+        
 
 
 

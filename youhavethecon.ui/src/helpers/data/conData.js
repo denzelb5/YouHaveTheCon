@@ -9,7 +9,16 @@ const getAllCons = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const getBudgetForCon = (conId) => axios.get(`${baseUrl}/api/con/budget/${conId}`)
+
 const getSingleCon = (conId) => axios.get(`${baseUrl}/api/con/${conId}`)
 const addCon = (newCon) => axios.post(`${baseUrl}/api/con/addcon`, newCon);
+const updateAmount = (budgetCategoryId, amountToUpdate) => axios.post(`${baseUrl}/api/con/budgetCategory/${budgetCategoryId}`, amountToUpdate);
 
-export default { getAllCons, addCon, getSingleCon };
+export default { 
+    getAllCons, 
+    addCon, 
+    getSingleCon,
+    getBudgetForCon,
+    updateAmount
+ };

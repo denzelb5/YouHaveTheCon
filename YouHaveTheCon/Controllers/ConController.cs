@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouHaveTheCon.DataAccess;
 using YouHaveTheCon.Commands;
+using YouHaveTheCon.Models;
 
 namespace YouHaveTheCon.Controllers
 {
@@ -50,6 +51,22 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/con/{conId}
+        [HttpGet("{conId}")]
+        public IActionResult GetConByConId(int conId)
+        {
+            var con = _conRepository.GetConById(conId);
+
+            if (con == null)
+            {
+                return NotFound("No con with that Id could be found.");
+            }
+            else
+            {
+                return Ok(con);
+            }
+        }
+
         //api/con/budget/{conId}
         [HttpGet("budget/{conId}")]
         public IActionResult GetBudgetByConId(int conId)
@@ -66,6 +83,13 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/con/budget/{budgetCategoryId} 
+        [HttpPut("budgetCategory/{budgetCategoryId}")]
+        public IActionResult UpdateCategoryAmount(CategoryAmount amountToUpdate)
+        {
+            var updatedAmount = _conRepository.UpdateAmount(amountToUpdate);
+            return Ok();
+        }
 
 
     }
