@@ -9,10 +9,14 @@ namespace YouHaveTheCon.ViewModels
     {
         public int BudgetId { get; set; }
         public string BudgetName { get; set; }
-        public Decimal AmountBudgeted { get; set; }
         public int UserId { get; set; }
         public int ConId { get; set; }
-        public List<string> BudgetCategories { get; set; }
-        public List<decimal> CatAmounts { get; set; }
+        public List<BudgetLineItem> BudgetLineItems { get; set; }
+    }
+
+    public class BudgetLineItem
+    {
+        public string Name { get; set; }
+        public decimal Amount { get; set; }
     }
 }

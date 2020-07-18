@@ -15,10 +15,12 @@ namespace YouHaveTheCon.Controllers
     public class ConController : ControllerBase
     {
         ConRepository _conRepository;
+        BudgetRepository _budgetRepository;
 
-        public ConController(ConRepository conRepository)
+        public ConController(ConRepository conRepository, BudgetRepository budgetRepository)
         {
             _conRepository = conRepository;
+            _budgetRepository = budgetRepository;
         }
 
         // api/con/allcons
@@ -68,10 +70,10 @@ namespace YouHaveTheCon.Controllers
         }
 
         //api/con/budget/{conId}
-        [HttpGet("budget/{conId}")]
-        public IActionResult GetBudgetByConId(int conId)
+        [HttpGet("budget/{conId}/{userId}")]
+        public IActionResult GetBudgetByConId(int conId, int userId)
         {
-            var budgetByCon = _conRepository.GetBudgetCategoriesForBudget(conId);
+            var budgetByCon = _budgetRepository.GetBudgetDetailsForConvention(conId, userId);
 
             if (budgetByCon == null)
             {
@@ -82,15 +84,5 @@ namespace YouHaveTheCon.Controllers
                 return Ok(budgetByCon);
             }
         }
-
-        // api/con/budget/{budgetCategoryId} 
-        [HttpPut("budgetCategory/{budgetCategoryId}")]
-        public IActionResult UpdateCategoryAmount(CategoryAmount amountToUpdate)
-        {
-            var updatedAmount = _conRepository.UpdateAmount(amountToUpdate);
-            return Ok();
-        }
-
-
     }
 }
