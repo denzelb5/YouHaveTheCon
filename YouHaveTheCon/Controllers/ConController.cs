@@ -69,7 +69,7 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
-        //api/con/budget/{conId}
+        //api/con/budget/{conId}/{userId}
         [HttpGet("budget/{conId}/{userId}")]
         public IActionResult GetBudgetByConId(int conId, int userId)
         {
