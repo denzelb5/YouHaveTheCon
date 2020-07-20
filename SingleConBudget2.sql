@@ -20,11 +20,11 @@
 --BudgetCategoryId int foreign key references BudgetCategory(BudgetCategoryId)
 --)
 
---insert into BudgetCategoryForBudget (BudgetId, BudgetCategoryId)
---values (1, 1),
---(1, 2),
---(1, 3),
---(1, 4);
+insert into BudgetCategoryForBudget (BudgetId, BudgetCategoryId)
+values (1, 5),
+(1, 6),
+(1, 7);
+
 
 --alter table Budget 
 --add BudgetCategoryId int foreign key references BudgetCategory(BudgetCategoryId);
@@ -45,16 +45,20 @@ where budget.conId = Convention.conId;
 
 --select * from BudgetCategory
 
-select Convention.ConName, budget.*
-from Convention 
-join Budget
-on Budget.userId = Convention.userId
-where Budget.conId = Convention.conId;
+--select Convention.ConName, budget.*
+--from Convention 
+--join Budget
+--on Budget.userId = Convention.userId
+--where Budget.conId = Convention.conId;
 
-select BudgetCategoryForBudget.*, BudgetCategory.BudgetCategoryName, Budget.*
+select BudgetCategoryForBudget.*, BudgetCategory.BudgetCategoryName, Budget.conId
 from BudgetCategoryforBudget
 join BudgetCategory
 on BudgetCategoryForBudget.budgetCategoryId = BudgetCategory.budgetCategoryId
 join Budget 
 on Budget.BudgetId = BudgetCategoryForBudget.budgetId
 where budget.conId = 1;
+
+select * from Budget where budget.budgetId = 1;
+
+select * from BudgetCategory;

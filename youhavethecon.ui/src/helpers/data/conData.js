@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from '../apiKeys.json';
+import authData from './authData';
 
 const getAllCons = () => new Promise((resolve, reject) => {
     axios.get(`${baseUrl}/api/con/allcons`)
@@ -9,7 +10,16 @@ const getAllCons = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-const getSingleCon = (conId) => axios.get(`${baseUrl}/api/con/${conId}`)
-const addCon = (newCon) => axios.post(`${baseUrl}/api/con/addcon`, newCon);
+const getBudgetForCon = (conId, userId) => axios.get(`${baseUrl}/api/con/budget/${conId}/${userId}`)
 
-export default { getAllCons, addCon, getSingleCon };
+const getSingleCon = (conId, userId) => axios.get(`${baseUrl}/api/con/${conId}/${userId}`)
+const addCon = (newCon) => axios.post(`${baseUrl}/api/con/addcon`, newCon);
+const updateAmount = (budgetCategoryId, amountToUpdate) => axios.post(`${baseUrl}/api/con/budgetCategory/${budgetCategoryId}`, amountToUpdate);
+
+export default { 
+    getAllCons, 
+    addCon, 
+    getSingleCon,
+    getBudgetForCon,
+    updateAmount
+ };

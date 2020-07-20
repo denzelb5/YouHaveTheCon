@@ -63,7 +63,7 @@ class App extends React.Component {
             <Route path="/" exact component={Home} authed={authed} />
             <Route path="/login" exact component={Login} authed={authed} />
             <PrivateRoute path="/convention/allcons" exact component={AllCons} authed={authed} />
-            <PrivateRoute path="/con/:conId" exact component={SingleCon} authed={authed} />
+            <PrivateRoute path="/con/:conId/:userId" exact component={SingleCon} authed={authed} />
             <PrivateRoute path ="/addcon" exact component={AddConForm} authed={authed} />
             <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
           </Switch>

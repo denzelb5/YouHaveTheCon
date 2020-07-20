@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouHaveTheCon.DataAccess;
 using YouHaveTheCon.Commands;
+using YouHaveTheCon.Models;
 
 namespace YouHaveTheCon.Controllers
 {
@@ -14,10 +15,12 @@ namespace YouHaveTheCon.Controllers
     public class ConController : ControllerBase
     {
         ConRepository _conRepository;
+        BudgetRepository _budgetRepository;
 
-        public ConController(ConRepository conRepository)
+        public ConController(ConRepository conRepository, BudgetRepository budgetRepository)
         {
             _conRepository = conRepository;
+            _budgetRepository = budgetRepository;
         }
 
         // api/con/allcons
@@ -50,11 +53,27 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
-        //api/con/budget/{conId}
-        [HttpGet("budget/{conId}")]
-        public IActionResult GetBudgetByConId(int conId)
+        // api/con/{conId}/{userId}
+        [HttpGet("{conId}/{userId}")]
+        public IActionResult GetConByConId(int conId, int userId)
         {
-            var budgetByCon = _conRepository.GetBudgetCategoriesForBudget(conId);
+            var con = _conRepository.GetConById(conId, userId);
+
+            if (con == null)
+            {
+                return NotFound("No con with that Id could be found.");
+            }
+            else
+            {
+                return Ok(con);
+            }
+        }
+
+        //api/con/budget/{conId}/{userId}
+        [HttpGet("budget/{conId}/{userId}")]
+        public IActionResult GetBudgetByConId(int conId, int userId)
+        {
+            var budgetByCon = _budgetRepository.GetBudgetDetailsForConvention(conId, userId);
 
             if (budgetByCon == null)
             {
@@ -65,8 +84,5 @@ namespace YouHaveTheCon.Controllers
                 return Ok(budgetByCon);
             }
         }
-
-
-
     }
 }

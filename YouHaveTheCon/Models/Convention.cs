@@ -13,6 +13,7 @@ namespace YouHaveTheCon.Models
         public DateTime ConEndDate { get; set; }
         public string LocationInfo { get; set; }
         public string LocationName { get; set; }
+        public int UserId { get; set; }
 
     }
 }

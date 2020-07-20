@@ -85,51 +85,20 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        public List<ConBudget> GetBudgetCategoriesForBudget(int conId)
+        public Convention GetConById(int conId, int userId)
         {
-            var sql = @"select * from Budget where budget.conId = @conId;";
-
-            var budgetCatSql = @"select BudgetCategoryForBudget.*, BudgetCategory.BudgetCategoryName, Budget.conId
-                                from BudgetCategoryforBudget
-                                join BudgetCategory
-                                on BudgetCategoryForBudget.budgetCategoryId = BudgetCategory.budgetCategoryId
-                                join Budget 
-                                on Budget.BudgetId = BudgetCategoryForBudget.budgetId
-                                where budget.conId = @conId;";
+            var sql = @"select *
+                        from Convention
+                        where conId = @conId
+                        and userId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var parameters = new
-                {
-                    conId = conId
-                };
+                var parameters = new { conId = conId, userId = userId };
 
-                var budgetsForCons= db.Query<ConBudget>(sql, parameters);
-                var budgetCategories = db.Query<BudgetCategories>(budgetCatSql, parameters);
-                List<ConBudget> budgetsWithCategories = new List<ConBudget>();
-
-                foreach (var budget in budgetsForCons)
-                {
-                    var budgetWithCategories = new ConBudget
-                    {
-                        BudgetId = budget.BudgetId,
-                        BudgetName = budget.BudgetName,
-                        AmountBudgeted = budget.AmountBudgeted,
-                        UserId = budget.UserId,
-                        ConId = budget.ConId,
-                        BudgetCategories = budgetCategories.Where(x => x.BudgetId == budget.BudgetId).Select(x => x.BudgetCategoryName).ToList()
-                    };
-                    budgetsWithCategories.Add(budgetWithCategories);
-                }
-                return budgetsWithCategories;
+                var convention = db.QueryFirstOrDefault<Convention>(sql, parameters);
+                return convention;
             }
-
-           
         }
-
-
-
-
-
     }
 }

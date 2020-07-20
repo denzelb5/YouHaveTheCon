@@ -11,28 +11,6 @@ class AddConForm extends React.Component {
         locationInfo: ''
     }
 
-    // getConData = () => {
-    //   const { conId } = this.props.match.params;
-    //   if (conId) {
-    //     conData.getSingleCon(conId)
-    //       .then((response) => {
-    //         this.setState({
-    //           conName: response.data.conName,
-    //           conStartDate: response.data.conStartDate,
-    //           conEndDate: response.data.conEndDate,
-    //           locationName: response.data.locationName,
-    //           locationInfo: response.data.locationInfo
-    //         });
-    //       })
-    //       .catch((error) => console.error(error));
-    //   }
-    // }
-
-    // componentDidMount() {
-    //   this.getConData();
-    // }
-
-
     conNameChange = (e) => {
         e.preventDefault();
         this.setState({ conName: e.target.value });
