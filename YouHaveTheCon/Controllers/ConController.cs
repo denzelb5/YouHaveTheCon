@@ -53,11 +53,11 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
-        // api/con/{conId}
-        [HttpGet("{conId}")]
-        public IActionResult GetConByConId(int conId)
+        // api/con/{conId}/{userId}
+        [HttpGet("{conId}/{userId}")]
+        public IActionResult GetConByConId(int conId, int userId)
         {
-            var con = _conRepository.GetConById(conId);
+            var con = _conRepository.GetConById(conId, userId);
 
             if (con == null)
             {

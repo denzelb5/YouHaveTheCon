@@ -10,9 +10,9 @@ const getAllCons = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-const getBudgetForCon = (conId) => axios.get(`${baseUrl}/api/con/budget/${conId}`)
+const getBudgetForCon = (conId, userId) => axios.get(`${baseUrl}/api/con/budget/${conId}/${userId}`)
 
-const getSingleCon = (conId) => axios.get(`${baseUrl}/api/con/${conId}`)
+const getSingleCon = (conId, userId) => axios.get(`${baseUrl}/api/con/${conId}/${userId}`)
 const addCon = (newCon) => axios.post(`${baseUrl}/api/con/addcon`, newCon);
 const updateAmount = (budgetCategoryId, amountToUpdate) => axios.post(`${baseUrl}/api/con/budgetCategory/${budgetCategoryId}`, amountToUpdate);
 

@@ -14,9 +14,9 @@ namespace YouHaveTheCon.ViewModels
         public List<BudgetLineItem> BudgetLineItems { get; set; }
     }
 
-    public class BudgetLineItem
-    {
-        public string Name { get; set; }
-        public decimal Amount { get; set; }
-    }
+    //public class BudgetLineItem
+    //{
+    //    public string Name { get; set; }
+    //    public decimal Amount { get; set; }
+    //}
 }

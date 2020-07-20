@@ -1,19 +1,19 @@
 import React from 'react';
 import './BudgetCard.scss';
-import conData from '../../../helpers/data/conData';
-import PropTypes from 'prop-types';
+// import conData from '../../../helpers/data/conData';
+// import PropTypes from 'prop-types';
 
 
 
 // function BudgetCard(props) {
 class BudgetCard extends React.Component {
-    state = {
-        amount: ''
-    }
+    // state = {
+    //     amount: ''
+    // }
 
-    static props = {
-        conId: PropTypes.int
-    }
+    // static props = {
+    //     conId: PropTypes.int
+    // }
 
     // amountChange = (e) => {
     //     e.preventDefault();
@@ -36,18 +36,20 @@ class BudgetCard extends React.Component {
 
         
 
-        if (conBudget.budgetCategories !== undefined) {
+        if (conBudget.budgetLineItems !== undefined) {
 
             return (
+                
                 <div className="container">
+                    <h1>This is the budget Card</h1>
                     <div className="row ">
                     <div className="col-sm">
                         <h5>Category</h5>
-                        {conBudget.budgetCategories.map((budgetCategory) => <div key={budgetCategory} className="col-sm ">{budgetCategory}</div>)}
+                        {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.name}</div>)}
                     </div>
                     <div className="col-sm">
                         <h5>Amount Needed</h5>
-                        {conBudget.catAmounts.map((amount) => <div key={amount} className="col-sm">{amount}</div>)}
+                        {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.amount}</div>)}
                             
                         {/* {conBudget.budgetCategories.map((amount) => <div key={amount.budgetCategoryId} className="col-sm "><form>
                         <div className="form-group">

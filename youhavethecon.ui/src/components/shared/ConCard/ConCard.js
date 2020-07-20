@@ -14,7 +14,7 @@ class ConCard extends React.Component {
                     <h5 className="card-subtitle mb-2 text-muted">{moment(con.conStartDate).format('LL')}</h5>
                     <h6 className="location-name">{con.locationName}</h6>
                     <p className="card-text">{con.locationInfo}</p>
-                    <Link to={`/con/${con.conId}`} className="card-link">View Details</Link>
+                    <Link to={`/con/${con.conId}/${con.userId}`} className="card-link">View Details</Link>
                     
                 </div>
             </div>

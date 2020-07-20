@@ -85,15 +85,16 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        public Convention GetConById(int conId)
+        public Convention GetConById(int conId, int userId)
         {
             var sql = @"select *
                         from Convention
-                        where conId = @conId";
+                        where conId = @conId
+                        and userId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var parameters = new { conId = conId };
+                var parameters = new { conId = conId, userId = userId };
 
                 var convention = db.QueryFirstOrDefault<Convention>(sql, parameters);
                 return convention;
