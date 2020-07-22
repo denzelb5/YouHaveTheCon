@@ -7,6 +7,7 @@ using Dapper;
 using Microsoft.Extensions.Configuration;
 using YouHaveTheCon.Models;
 using YouHaveTheCon.ViewModels;
+using YouHaveTheCon.Commands;
 
 namespace YouHaveTheCon.DataAccess
 {
@@ -18,29 +19,87 @@ namespace YouHaveTheCon.DataAccess
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
 
-        public ConBudget GetBudgetDetailsForConvention(int conId, int userId)
+        //public ConBudget GetBudgetDetailsForConvention(int conId, int userId)
+        //{
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+
+        //        var sql = @"
+        //            select *
+        //            from Budget
+        //            where 
+        //                budget.conId = @conId
+        //                and budget.userId = @userId";
+
+        //        var parameters = new
+        //        {
+        //            conId = conId,
+        //            userId = userId
+        //        };
+                
+
+        //        var budgetsForCons = db.QueryFirstOrDefault<ConBudget>(sql, parameters);
+
+        //       if (budgetsForCons != null)
+        //        {
+        //            budgetsForCons.BudgetLineItems = GetBudgetLineItemsForBudget(budgetsForCons.BudgetId);
+                    
+        //        }
+        //            return budgetsForCons;
+
+                
+        //    }
+        //}
+
+        public int? GetBudgetIdByBudgetName(string budgetName, decimal amountBudgeted)
         {
+            var sql = @"select BudgetId from Budget
+                        where budgetName = @budgetName
+                        and amountBudgeted = @amountBudgeted";
+
             using (var db = new SqlConnection(ConnectionString))
             {
-
-                var sql = @"
-                    select *
-                    from Budget
-                    where 
-                        budget.conId = @conId
-                        and budget.userId = @userId";
-
                 var parameters = new
                 {
-                    conId = conId,
-                    userId = userId
+                    budgetName = budgetName,
+                    amountBudgeted = amountBudgeted
                 };
-                var budgetsForCons = db.QueryFirst<ConBudget>(sql, parameters);
 
-                budgetsForCons.BudgetLineItems = GetBudgetLineItemsForBudget(budgetsForCons.BudgetId);
-                return budgetsForCons;
+                var result = db.QueryFirstOrDefault<int>(sql, parameters);
+
+                if (result != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
+
+
+        public Budget AddNewBudget(AddNewBudgetCommand newBudget)
+        {
+            var sql = @"insert into Budget (budgetName, amountBudgeted, conId, userId)
+                        values (@budgetName, @amountBudgeted, @conId, @userId)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    budgetName = newBudget.BudgetName,
+                    amountBudgeted = newBudget.AmountBudgeted,
+                    conId = newBudget.ConId,
+                    userId = newBudget.UserId
+                };
+
+                var addedBudget = db.QueryFirstOrDefault<Budget>(sql, parameters);
+                return addedBudget;
+            }
+        }
+
+
 
         private List<BudgetLineItem> GetBudgetLineItemsForBudget(int budgetId)
         {
@@ -63,5 +122,10 @@ namespace YouHaveTheCon.DataAccess
             var budgetLineItems = db.Query<BudgetLineItem>(sql, parameters);
             return budgetLineItems.ToList();
         }
+
+        //public ConBudget AddNewBudget(AddNewConCommand newBudget)
+        //{
+        //    var sql = @"insert into  "
+        //}
     }
 }
