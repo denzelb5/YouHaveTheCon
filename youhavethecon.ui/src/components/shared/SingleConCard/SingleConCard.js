@@ -13,7 +13,6 @@ class SingleConCard extends React.Component {
                     <h6 className="location-name">{singleCon.locationName}</h6>
                     <p className="card-text">{singleCon.locationInfo}</p>
                    
-                    
                 </div>
             </div>
         );

@@ -6,6 +6,7 @@ import Login from '../components/pages/Login/Login';
 import SingleCon from '../components/pages/SingleCon/SingleCon';
 import AllCosplays from '../components/pages/AllCosplays/AllCosplays';
 import AddConForm from '../components/pages/AddConForm/AddConForm';
+import AddBudgetForm from '../components/pages/AddBudgetForm/AddBudgetForm';
 
 
 import {
@@ -62,15 +63,16 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Home} authed={authed} />
             <Route path="/login" exact component={Login} authed={authed} />
-            <PrivateRoute path="/convention/allcons" exact component={AllCons} authed={authed} />
+            <PrivateRoute path="/convention/allcons/:userId" exact component={AllCons} authed={authed} />
             <PrivateRoute path="/con/:conId/:userId" exact component={SingleCon} authed={authed} />
             <PrivateRoute path ="/addcon" exact component={AddConForm} authed={authed} />
             <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
+            {/* <PrivateRoute path="/con/budget/:conId/:userId/addbudget" exact component={AddBudgetForm} authed={authed}/> */}
           </Switch>
         </Router>
         
       </div>
-    );
+    );               
 
   }
 }

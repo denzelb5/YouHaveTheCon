@@ -23,11 +23,11 @@ namespace YouHaveTheCon.Controllers
             _budgetRepository = budgetRepository;
         }
 
-        // api/con/allcons
-        [HttpGet("allcons")]
-        public IActionResult GetCons()
+        // api/con/allcons/{userId}
+        [HttpGet("allcons/{userId}")]
+        public IActionResult GetConsByUserId(int userId)
         {
-            var cons = _conRepository.GetAllCons();
+            var cons = _conRepository.GetAllConsByUserId(userId);
 
             if (!cons.Any())
             {
@@ -69,20 +69,39 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
-        //api/con/budget/{conId}/{userId}
-        [HttpGet("budget/{conId}/{userId}")]
-        public IActionResult GetBudgetByConId(int conId, int userId)
-        {
-            var budgetByCon = _budgetRepository.GetBudgetDetailsForConvention(conId, userId);
+        ////api/con/budget/{conId}/{userId}
+        //[HttpGet("budget/{conId}/{userId}")]
+        //public IActionResult GetBudgetByConId(int conId, int userId)
+        //{
+        //    var budgetByCon = _budgetRepository.GetBudgetDetailsForConvention(conId, userId);
 
-            if (budgetByCon == null)
+        //    if (budgetByCon == null)
+        //    {
+        //        return NotFound("There is no budget for that con");
+        //    }
+        //    else
+        //    {
+        //        return Ok(budgetByCon);
+        //    }
+        //}
+
+        //api/con/budget/addBudget
+        [HttpPost("budget/addBudget")]
+        public IActionResult AddBudget(AddNewBudgetCommand newBudget)
+        {
+            var existingBudget = _budgetRepository.GetBudgetIdByBudgetName(newBudget.BudgetName, newBudget.AmountBudgeted);
+
+            if (existingBudget == null)
             {
-                return NotFound("There is no budget for that con");
+                var createdBudget = _budgetRepository.AddNewBudget(newBudget);
+                return Created("", createdBudget);
             }
             else
             {
-                return Ok(budgetByCon);
+                return BadRequest("Budget already exists");
             }
         }
+
+
     }
 }

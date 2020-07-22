@@ -19,13 +19,14 @@ namespace YouHaveTheCon.DataAccess
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
 
-        public List<Convention> GetAllCons()
+        public List<Convention> GetAllConsByUserId(int userId)
         {
-            var sql = @"SELECT * FROM Convention;";
+            var sql = @"SELECT * FROM Convention where userId = @userId;";
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var cons = db.Query<Convention>(sql).ToList();
+                var parameters = new { userId = userId };
+                var cons = db.Query<Convention>(sql, parameters).ToList();
                 return cons;
             }
         }

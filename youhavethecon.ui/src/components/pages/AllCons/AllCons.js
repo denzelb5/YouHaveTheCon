@@ -10,7 +10,8 @@ class AllCons extends React.Component {
     }
 
     getConData = () => {
-        conData.getAllCons()
+        const { userId } = this.props.match.params;
+        conData.getAllConsByUserId(userId)
         .then((request) => this.setState({ allCons: request }))
         .catch((error) => console.error(error));
     }

@@ -7,30 +7,7 @@ import './BudgetCard.scss';
 
 // function BudgetCard(props) {
 class BudgetCard extends React.Component {
-    // state = {
-    //     amount: ''
-    // }
-
-    // static props = {
-    //     conId: PropTypes.int
-    // }
-
-    // amountChange = (e) => {
-    //     e.preventDefault();
-    //     this.setState({ amount: e.target.value });
-    //   }
-
-    //   editAmountEvent = (e) => {
-    //       e.preventDefault();
-    //       const { budgetCategoryId } = e.target.value;
-    //       const editAmount = {
-    //           amount: this.state.catAmount
-    //       };
-    //       conData.updateAmount(budgetCategoryId, editAmount)
-    //       .then().catch((error) => console.error(error));
-
-    //   }
-
+    
     render() {
         const { conBudget } = this.props;
 
@@ -51,17 +28,7 @@ class BudgetCard extends React.Component {
                         <h5>Amount Needed</h5>
                         {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.amount}</div>)}
                             
-                        {/* {conBudget.budgetCategories.map((amount) => <div key={amount.budgetCategoryId} className="col-sm "><form>
-                        <div className="form-group">
-                            <input
-                            type="text"
-                            className="form-control"
-                            
-                            placeholder="Enter con name"
-                            value={amount.budgetCategoryName}
-                            onChange={this.amountChange}
-                            /> </div> </form> </div>)} */}
-                          
+                        
                         </div>
                         <div className="col-sm">
                             Available Funds

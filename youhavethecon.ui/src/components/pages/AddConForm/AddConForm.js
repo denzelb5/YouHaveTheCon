@@ -9,7 +9,7 @@ class AddConForm extends React.Component {
         conEndDate: '',
         locationName: '',
         locationInfo: ''
-    }
+    } 
 
     conNameChange = (e) => {
         e.preventDefault();

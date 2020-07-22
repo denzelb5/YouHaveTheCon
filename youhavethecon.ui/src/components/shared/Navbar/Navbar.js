@@ -25,7 +25,7 @@ class Navbar extends React.Component {
                   { authed && ( 
                       <Link
                         className="nav-link"
-                        to="/convention/allcons">
+                        to="/convention/allcons/:userId">
                         My Cons
                       </Link>
                   )}
