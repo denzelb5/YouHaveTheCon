@@ -69,21 +69,21 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
-        ////api/con/budget/{conId}/{userId}
-        //[HttpGet("budget/{conId}/{userId}")]
-        //public IActionResult GetBudgetByConId(int conId, int userId)
-        //{
-        //    var budgetByCon = _budgetRepository.GetBudgetDetailsForConvention(conId, userId);
+        //api/con/budget/{conId}/{userId}
+        [HttpGet("budget/{conId}/{userId}")]
+        public IActionResult GetBudgetByConId(int conId, int userId)
+        {
+            var budgetByCon = _budgetRepository.GetBudgetDetailsForConvention(conId, userId);
 
-        //    if (budgetByCon == null)
-        //    {
-        //        return NotFound("There is no budget for that con");
-        //    }
-        //    else
-        //    {
-        //        return Ok(budgetByCon);
-        //    }
-        //}
+            if (budgetByCon == null)
+            {
+                return NotFound("There is no budget for that con");
+            }
+            else
+            {
+                return Ok(budgetByCon);
+            }
+        }
 
         //api/con/budget/addBudget
         [HttpPost("budget/addBudget")]
@@ -99,6 +99,23 @@ namespace YouHaveTheCon.Controllers
             else
             {
                 return BadRequest("Budget already exists");
+            }
+        }
+
+        // api/con/budget/addline
+        [HttpPost("budget/addline")]
+        public IActionResult AddBudgetLine(AddBudgetLineItemCommand newLineItem)
+        {
+            var existingLine = _budgetRepository.GetBudgetItemIdByItemName(newLineItem.Name, newLineItem.Amount); 
+             
+            if (existingLine == null)
+            {
+                var createdLineItem = _budgetRepository.AddNewBudgetLineItem(newLineItem);
+                return Created("", createdLineItem);
+            }
+            else
+            {
+                return BadRequest("Category already exists");
             }
         }
 

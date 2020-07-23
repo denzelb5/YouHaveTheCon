@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import budgetData from '../../../helpers/data/budgetData';
-import BudgetBox from '../../shared/BudgetBox/BudgetBox';
+import BudgetBox from '../BudgetBox/BudgetBox';
+import BudgetCard from '../BudgetCard/BudgetCard';
 
 class AddBudgetForm extends React.Component {
     state = {
@@ -48,7 +49,7 @@ class AddBudgetForm extends React.Component {
         return (
             <div>
                 {
-                    showBudgetBox ? (<div><BudgetBox budgetName={budgetName} amountBudgeted={amountBudgeted} /></div>) 
+                    showBudgetBox ? (<div><BudgetCard budgetName={budgetName} amountBudgeted={amountBudgeted} /></div>) 
                     : (
                         <form className="budget-form">
                             <h1>Add Budget Page</h1>
