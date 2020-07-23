@@ -5,6 +5,7 @@ import SingleConCard from '../../shared/SingleConCard/SingleConCard';
 import BudgetCard from '../../shared/BudgetCard/BudgetCard';
 import AddBudgetForm from '../../shared/AddBudgetForm/AddBudgetForm';
 import budgetData from '../../../helpers/data/budgetData';
+import AddBudgetItemForm from '../../shared/AddBudgetItemForm/AddBudgetItemForm';
 
 
 class SingleCon extends React.Component {
@@ -13,7 +14,8 @@ class SingleCon extends React.Component {
         userId: parseInt(this.props.match.params.userId),
         singleCon: {},
         conBudget: {},
-        showBudgetForm: false
+        showBudgetForm: false,
+        showLineForm: false
     }
 
     getCurrentCon = () => {
@@ -49,18 +51,29 @@ class SingleCon extends React.Component {
         }
     }
 
+    showLineEvent = (e) => {
+        if (e.target.id === 'create-line-item') {
+            this.setState({ showLineForm: true });
+        }
+    }
+
     
 
     render() {
-        const { singleCon, showBudgetForm, conBudget, conId, userId } = this.state;
+        const { singleCon, showBudgetForm, showLineForm, conBudget, conId, userId } = this.state;
         
         return (
             <div className="single-con">
                 <h1>This is the SingleCon Page</h1>
                 <SingleConCard key={singleCon.conId} singleCon={singleCon} />
                 <button id="create-budget" onClick={this.showFormEvent} className="btn btn-dark">Create A Budget</button> 
+                
                 {
                     showBudgetForm ? <AddBudgetForm conId={conId} userId={userId}/> : ('')
+                }
+                <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
+                {
+                    showLineForm ? <AddBudgetItemForm budgetId={conBudget.budgetId} key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
                 }
                 <div className="budget">
                     <BudgetCard key={conBudget.budgetId} conBudget={conBudget} />
