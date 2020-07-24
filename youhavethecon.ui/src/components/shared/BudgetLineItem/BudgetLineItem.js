@@ -1,14 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './BudgetLineItem.scss';
 
 class BudgetLineItem extends React.Component {
+    static propTypes = {
+        name: PropTypes.string,
+        amount: PropTypes.number
+    }
     
     render() {
         
         const { conBudget } = this.props;
 
       
- 
+        if (conBudget.budgetLineItems !== undefined) {
             return (
                 
                 <div className="container">
@@ -37,7 +42,8 @@ class BudgetLineItem extends React.Component {
             );
             
         
-
+        }
+        return <></>;
         
     }
 }

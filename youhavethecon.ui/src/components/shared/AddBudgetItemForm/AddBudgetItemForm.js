@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import BudgetCard from '../BudgetCard/BudgetCard';
 import BudgetLineItem from '../BudgetLineItem/BudgetLineItem';
 import './AddBudgetItemForm.scss';
 import budgetData from '../../../helpers/data/budgetData';
@@ -13,7 +14,8 @@ class AddBudgetItemForm extends React.Component {
     }
 
     static props = {
-        budgetId: PropTypes.int
+        budgetId: PropTypes.int,
+        
     }
 
     itemNameChange = (e) => {
@@ -36,19 +38,20 @@ class AddBudgetItemForm extends React.Component {
         };
         budgetData.addBudgetLineItems(newLine)
         .then((result) => {
-            this.setState({ showLineForm: true });
+            this.setState({ showLineForm: true })
         })
         .catch((error) => console.error(error));
     }
 
     render() {
         const { name, amount, showLineForm } = this.state;
+        const { budgetId, conBudget } = this.props;
         return (
         <div>
             {
-                showLineForm ? (<div><BudgetLineItem key={name} amount={amount} name={name} /></div> )
+                showLineForm ? (<div><BudgetLineItem conBudget={conBudget} budgetId={budgetId} amount={amount} name={name} /></div> )
                 : (
-                    <form className="budget-form">
+                    <form className="budget-line">
                     
                 <div className="form-group">
                 <label htmlFor="budget-name">Category Name</label>

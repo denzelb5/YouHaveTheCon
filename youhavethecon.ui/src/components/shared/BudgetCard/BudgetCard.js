@@ -11,7 +11,7 @@ class BudgetCard extends React.Component {
     render() {
         const { conBudget } = this.props;
 
-         if (conBudget.budgetLineItems !== undefined) {
+          if (conBudget.budgetLineItems !== undefined) {
             return (
                 
                 <div className="container">
@@ -26,11 +26,11 @@ class BudgetCard extends React.Component {
                                 <h5>Category</h5>
                                 
                            
-                            {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.name}</div>)}
+                            {/* {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.name}</div>)} */}
                         </div>
                     <div className="col-sm">
                         <h5>Amount Needed</h5>
-                        {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.amount}</div>)}
+                        {/* {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId} className="col-sm ">{lineItem.amount}</div>)} */}
                             
                         
                     </div>

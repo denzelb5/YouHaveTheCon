@@ -71,13 +71,14 @@ class SingleCon extends React.Component {
                 {
                     showBudgetForm ? <AddBudgetForm conId={conId} userId={userId}/> : ('')
                 }
+                
+                <div className="budget">
+                    <BudgetCard key={conBudget.budgetId} conBudget={conBudget} />
+                </div>
                 <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
                 {
                     showLineForm ? <AddBudgetItemForm budgetId={conBudget.budgetId} key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
                 }
-                <div className="budget">
-                    <BudgetCard key={conBudget.budgetId} conBudget={conBudget} />
-                </div>
             </div>
         )
     }
