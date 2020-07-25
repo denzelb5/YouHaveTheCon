@@ -14,7 +14,8 @@ class AddBudgetForm extends React.Component {
 
     static props = {
         conId: PropTypes.int,
-        userId: PropTypes.int
+        userId: PropTypes.int,
+        onSave: PropTypes.func
         }
 
     budgetNameChange = (e) => {
@@ -39,6 +40,7 @@ class AddBudgetForm extends React.Component {
         budgetData.addBudget(newBudget)
         .then((result) => {
             this.setState({ showBudgetBox: true });
+            this.props.onSave();
         })
         .catch((error) => console.error(error));
     }
@@ -49,7 +51,7 @@ class AddBudgetForm extends React.Component {
         return (
             <div>
                 {
-                    showBudgetBox ? (<div><BudgetCard budgetName={budgetName} amountBudgeted={amountBudgeted} /></div>) 
+                    showBudgetBox ? (<div></div>) 
                     : (
                         <form className="budget-form">
                             <h1>Add Budget Page</h1>
@@ -74,7 +76,7 @@ class AddBudgetForm extends React.Component {
                         onChange={this.amountBudgetedChange}
                         />
                             </div>
-                            <Link className="btn btn-dark" onClick={this.AddNewBudgetEvent}>Save</Link>
+                            <div className="btn btn-dark" onClick={this.AddNewBudgetEvent}>Save</div>
                         </form>
                     )
                 }

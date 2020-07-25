@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import SingleCon from '../../pages/SingleCon/SingleCon';
 import BudgetCard from '../BudgetCard/BudgetCard';
 import BudgetLineItem from '../BudgetLineItem/BudgetLineItem';
 import './AddBudgetItemForm.scss';
@@ -15,7 +16,10 @@ class AddBudgetItemForm extends React.Component {
 
     static props = {
         budgetId: PropTypes.int,
-        
+        conId: PropTypes.int,
+        userId: PropTypes.int,
+        budgetLineItems: PropTypes.array,
+        onSave: PropTypes.func
     }
 
     itemNameChange = (e) => {
@@ -30,6 +34,7 @@ class AddBudgetItemForm extends React.Component {
 
     AddNewLineItemEvent = (e) => {
         e.preventDefault();
+        const { conId, userId } = this.props;
         const newLine = {
             budgetLineItemId: '',
             budgetId: this.props.budgetId,
@@ -38,18 +43,19 @@ class AddBudgetItemForm extends React.Component {
         };
         budgetData.addBudgetLineItems(newLine)
         .then((result) => {
-            this.setState({ showLineForm: true })
+            this.setState({ showLineForm: true  })
+            this.props.onSave();
         })
         .catch((error) => console.error(error));
     }
 
     render() {
         const { name, amount, showLineForm } = this.state;
-        const { budgetId, conBudget } = this.props;
+        const { budgetId, conBudget, budgetLineItems } = this.props;
         return (
         <div>
             {
-                showLineForm ? (<div><BudgetLineItem conBudget={conBudget} budgetId={budgetId} amount={amount} name={name} /></div> )
+                showLineForm ? (<div></div> )
                 : (
                     <form className="budget-line">
                     
@@ -74,7 +80,7 @@ class AddBudgetItemForm extends React.Component {
                 onChange={this.itemAmountChange}
                 />
                     </div>
-                    <Link className="btn btn-dark" onClick={this.AddNewLineItemEvent}>Save</Link>
+                    <div className="btn btn-dark" onClick={this.AddNewLineItemEvent}>Save</div>
                 </form> 
                 )
             } 

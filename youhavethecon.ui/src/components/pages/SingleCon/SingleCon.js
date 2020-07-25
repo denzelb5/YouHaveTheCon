@@ -45,6 +45,12 @@ class SingleCon extends React.Component {
         this.getConBudget();
     }
 
+    componentDidUpdate(prevState) {
+        if (prevState !== this.state.conBudget.budgetLineItems) {
+            // this.getConBudget()
+        }
+    }
+
     showFormEvent = (e) => {
         if (e.target.id === 'create-budget') {
             this.setState({ showBudgetForm: true });
@@ -69,7 +75,7 @@ class SingleCon extends React.Component {
                 <button id="create-budget" onClick={this.showFormEvent} className="btn btn-dark">Create A Budget</button> 
                 
                 {
-                    showBudgetForm ? <AddBudgetForm conId={conId} userId={userId}/> : ('')
+                    showBudgetForm ? <AddBudgetForm conId={conId} userId={userId} onSave={this.getConBudget}/> : ('')
                 }
                 
                 <div className="budget">
@@ -77,7 +83,13 @@ class SingleCon extends React.Component {
                 </div>
                 <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
                 {
-                    showLineForm ? <AddBudgetItemForm budgetId={conBudget.budgetId} key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
+                    showLineForm ? <AddBudgetItemForm
+                                        budgetId={conBudget.budgetId}
+                                        conId={conBudget.conId}
+                                        conBudget={conBudget}
+                                        userId={userId}
+                                        onSave={this.getConBudget}
+                                        key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
                 }
             </div>
         )
