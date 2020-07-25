@@ -1,19 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './SingleCon.scss';
 import conData from '../../../helpers/data/conData';
 import SingleConCard from '../../shared/SingleConCard/SingleConCard';
 import BudgetCard from '../../shared/BudgetCard/BudgetCard';
-import AddBudgetForm from '../../pages/AddBudgetForm/AddBudgetForm';
+import AddBudgetForm from '../../shared/AddBudgetForm/AddBudgetForm';
 import budgetData from '../../../helpers/data/budgetData';
-// import userData from '../../../helpers/data/userData';
+import AddBudgetItemForm from '../../shared/AddBudgetItemForm/AddBudgetItemForm';
+
 
 class SingleCon extends React.Component {
     state = {
         conId: parseInt(this.props.match.params.conId),
         userId: parseInt(this.props.match.params.userId),
         singleCon: {},
-        showBudgetForm: false
+        conBudget: {},
+        showBudgetForm: false,
+        showLineForm: false
     }
 
     getCurrentCon = () => {
@@ -40,7 +42,13 @@ class SingleCon extends React.Component {
 
     componentDidMount() {
         this.getCurrentCon();
-        // this.getConBudget();
+        this.getConBudget();
+    }
+
+    componentDidUpdate(prevState) {
+        if (prevState !== this.state.conBudget.budgetLineItems) {
+            // this.getConBudget()
+        }
     }
 
     showFormEvent = (e) => {
@@ -49,26 +57,40 @@ class SingleCon extends React.Component {
         }
     }
 
-    // renderBudgetCards(conBudget)  {
-    //     return conBudget.map((budget) => <BudgetCard key={budget.budgetId} conBudget={budget} />)
-    // }
+    showLineEvent = (e) => {
+        if (e.target.id === 'create-line-item') {
+            this.setState({ showLineForm: true });
+        }
+    }
+
+    
 
     render() {
-        const { singleCon, showBudgetForm, conId, userId } = this.state;
+        const { singleCon, showBudgetForm, showLineForm, conBudget, conId, userId } = this.state;
         
         return (
             <div className="single-con">
                 <h1>This is the SingleCon Page</h1>
                 <SingleConCard key={singleCon.conId} singleCon={singleCon} />
-                {/* <Link to={`/con/budget/${singleCon.conId}/${singleCon.userId}/addbudget`} id="create=budget" className="btn btn-dark">Create A Budget</Link>  */}
                 <button id="create-budget" onClick={this.showFormEvent} className="btn btn-dark">Create A Budget</button> 
+                
                 {
-                    showBudgetForm ? <AddBudgetForm conId={conId} userId={userId}/> : ('')
+                    showBudgetForm ? <AddBudgetForm conId={conId} userId={userId} onSave={this.getConBudget}/> : ('')
                 }
+                
                 <div className="budget">
-                   {/* {this.renderBudgetCards(conBudget)} */}
-                {/* <BudgetCard key={conBudget.budgetId} conBudget={conBudget} /> */}
+                    <BudgetCard key={conBudget.budgetId} conBudget={conBudget} />
                 </div>
+                <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
+                {
+                    showLineForm ? <AddBudgetItemForm
+                                        budgetId={conBudget.budgetId}
+                                        conId={conBudget.conId}
+                                        conBudget={conBudget}
+                                        userId={userId}
+                                        onSave={this.getConBudget}
+                                        key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
+                }
             </div>
         )
     }

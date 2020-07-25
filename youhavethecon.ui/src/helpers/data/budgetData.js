@@ -5,5 +5,7 @@ const getBudgetForCon = (conId, userId) => axios.get(`${baseUrl}/api/con/budget/
 
 const addBudget = (newBudget) => axios.post(`${baseUrl}/api/con/budget/addbudget`, newBudget);
 
-export default { getBudgetForCon, addBudget };
+const addBudgetLineItems = (newLineItem) => axios.post(`${baseUrl}/api/con/budget/addline`, newLineItem);
+
+export default { getBudgetForCon, addBudget, addBudgetLineItems };
 

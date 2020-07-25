@@ -19,37 +19,37 @@ namespace YouHaveTheCon.DataAccess
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
 
-        //public ConBudget GetBudgetDetailsForConvention(int conId, int userId)
-        //{
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
+        public ConBudget GetBudgetDetailsForConvention(int conId, int userId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
 
-        //        var sql = @"
-        //            select *
-        //            from Budget
-        //            where 
-        //                budget.conId = @conId
-        //                and budget.userId = @userId";
+                var sql = @"
+                    select *
+                    from Budget
+                    where 
+                        budget.conId = @conId
+                        and budget.userId = @userId";
 
-        //        var parameters = new
-        //        {
-        //            conId = conId,
-        //            userId = userId
-        //        };
-                
+                var parameters = new
+                {
+                    conId = conId,
+                    userId = userId
+                };
 
-        //        var budgetsForCons = db.QueryFirstOrDefault<ConBudget>(sql, parameters);
 
-        //       if (budgetsForCons != null)
-        //        {
-        //            budgetsForCons.BudgetLineItems = GetBudgetLineItemsForBudget(budgetsForCons.BudgetId);
-                    
-        //        }
-        //            return budgetsForCons;
+                var budgetsForCons = db.QueryFirstOrDefault<ConBudget>(sql, parameters);
 
-                
-        //    }
-        //}
+                if (budgetsForCons != null)
+                {
+                    budgetsForCons.BudgetLineItems = GetBudgetLineItemsForBudget(budgetsForCons.BudgetId);
+
+                }
+                return budgetsForCons;
+
+
+            }
+        }
 
         public int? GetBudgetIdByBudgetName(string budgetName, decimal amountBudgeted)
         {
@@ -78,10 +78,37 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public int? GetBudgetItemIdByItemName(string name, decimal amount)
+        {
+            var sql = @"select BudgetLineItemId from BudgetLineItem
+                        where name = @name
+                        and amount = @amount";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    name = name,
+                    amount = amount
+                };
+
+                var lineItemId = db.QueryFirstOrDefault<int>(sql, parameters);
+
+                if (lineItemId != 0)
+                {
+                    return lineItemId;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         public Budget AddNewBudget(AddNewBudgetCommand newBudget)
         {
             var sql = @"insert into Budget (budgetName, amountBudgeted, conId, userId)
+                        output inserted.*
                         values (@budgetName, @amountBudgeted, @conId, @userId)";
 
             using (var db = new SqlConnection(ConnectionString))
@@ -99,9 +126,29 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public BudgetLineItem AddNewBudgetLineItem(AddBudgetLineItemCommand newLineItem)
+        {
+            var sql = @"insert into BudgetLineItem (budgetId, name, amount)
+                        output inserted.*
+                        values (@budgetId, @name, @amount)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    budgetId = newLineItem.BudgetId,
+                    name = newLineItem.Name,
+                    amount = newLineItem.Amount
+                };
+
+                var addedLineItem = db.QueryFirstOrDefault<BudgetLineItem>(sql, parameters);
+                return addedLineItem;
+            }
+        }
 
 
-        private List<BudgetLineItem> GetBudgetLineItemsForBudget(int budgetId)
+
+        public List<BudgetLineItem> GetBudgetLineItemsForBudget(int budgetId)
         {
             using var db = new SqlConnection(ConnectionString);
 
