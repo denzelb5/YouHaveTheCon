@@ -79,7 +79,7 @@ namespace YouHaveTheCon.DataAccess
                         join Expenses 
                         on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
                         where BudgetId = @budgetId
-                        and Expenses.expenseName = @name;";
+                        and BudgetLineItem.name = @name;";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -89,10 +89,37 @@ namespace YouHaveTheCon.DataAccess
                     name = name
                 };
 
-                var budgetAmounts = db.QueryFirstOrDefault<Expense_budgetAmounts>(sql, parameters);
+                var expenseAmounts = db.QueryFirstOrDefault<Expense_budgetAmounts>(sql, parameters);
 
-                return budgetAmounts;
+                if (expenseAmounts != null)
+                {
+                   expenseAmounts.Expenses = GetExpensesForBudget(expenseAmounts.BudgetId, expenseAmounts.Name);
+
+                }
+
+                return expenseAmounts;
             }
+        }
+
+        public List<Expenses> GetExpensesForBudget(int budgetId, string name)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"
+                select BudgetLineItem.Name, Expenses.*
+                from BudgetLineItem
+                join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
+                where BudgetId = @budgetId
+                and Expenses.expenseName = @name";
+
+            var parameters = new
+            {
+                budgetId = budgetId,
+                name = name
+            };
+
+            var expenses = db.Query<Expenses>(sql, parameters);
+            return expenses.ToList();
         }
 
 
