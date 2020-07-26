@@ -93,7 +93,7 @@ class SingleCon extends React.Component {
                                         key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
                 }
 
-                <div><ExpenseCard /></div>
+                <div><ExpenseCard conBudget={conBudget} /></div>
             </div>
         )
     }
