@@ -6,6 +6,7 @@ import BudgetCard from '../../shared/BudgetCard/BudgetCard';
 import AddBudgetForm from '../../shared/AddBudgetForm/AddBudgetForm';
 import budgetData from '../../../helpers/data/budgetData';
 import AddBudgetItemForm from '../../shared/AddBudgetItemForm/AddBudgetItemForm';
+import ExpenseCard from '../../shared/ExpenseCard/ExpenseCard';
 
 
 class SingleCon extends React.Component {
@@ -91,6 +92,8 @@ class SingleCon extends React.Component {
                                         onSave={this.getConBudget}
                                         key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
                 }
+
+                <div><ExpenseCard /></div>
             </div>
         )
     }

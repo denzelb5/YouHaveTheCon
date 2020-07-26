@@ -16,11 +16,13 @@ namespace YouHaveTheCon.Controllers
     {
         ConRepository _conRepository;
         BudgetRepository _budgetRepository;
+        ExpenseRepository _expenseRepository;
 
-        public ConController(ConRepository conRepository, BudgetRepository budgetRepository)
+        public ConController(ConRepository conRepository, BudgetRepository budgetRepository, ExpenseRepository expenseRepository)
         {
             _conRepository = conRepository;
             _budgetRepository = budgetRepository;
+            _expenseRepository = expenseRepository;
         }
 
         // api/con/allcons/{userId}
@@ -116,6 +118,23 @@ namespace YouHaveTheCon.Controllers
             else
             {
                 return BadRequest("Category already exists");
+            }
+        }
+
+        // api/con/expenses/addExpense
+        [HttpPost("expenses/addExpense")]
+        public IActionResult AddExpense(AddNewExpenseCommand newExpense)
+        {
+            var existingExpense = _expenseRepository.GetExpenseIdByExpenseName(newExpense.ExpenseName, newExpense.UserId, newExpense.BudgetLineItemId, newExpense.Cost);
+
+            if (existingExpense == null)
+            {
+                var createdExpense = _expenseRepository.AddNewExpense(newExpense);
+                return Created("", createdExpense);
+            }
+            else
+            {
+                return BadRequest("Expense already exists");
             }
         }
 
