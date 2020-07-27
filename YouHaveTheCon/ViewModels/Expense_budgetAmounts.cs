@@ -16,7 +16,7 @@ namespace YouHaveTheCon.ViewModels
         public string ExpenseName { get; set; }
         public int UserId { get; set; }
         public decimal Cost { get; set; }
-        public List<Expenses> Expenses { get; set; }
+        //public List<Expenses> Expenses { get; set; }
         
     }
 }

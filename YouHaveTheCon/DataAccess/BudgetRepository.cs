@@ -43,12 +43,33 @@ namespace YouHaveTheCon.DataAccess
                 if (budgetsForCons != null)
                 {
                     budgetsForCons.BudgetLineItems = GetBudgetLineItemsForBudget(budgetsForCons.BudgetId);
+                    budgetsForCons.Expenses = GetExpensesForBudget(budgetsForCons.BudgetId);
 
                 }
                 return budgetsForCons;
 
 
             }
+        }
+
+        public List<Expenses> GetExpensesForBudget(int budgetId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"
+                select BudgetLineItem.Name, Expenses.*
+                from BudgetLineItem
+                join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
+                where BudgetId = @budgetId";
+
+            var parameters = new
+            {
+                budgetId = budgetId
+                
+            };
+
+            var expenses = db.Query<Expenses>(sql, parameters);
+            return expenses.ToList();
         }
 
         public int? GetBudgetIdByBudgetName(string budgetName, decimal amountBudgeted)
@@ -170,9 +191,6 @@ namespace YouHaveTheCon.DataAccess
             return budgetLineItems.ToList();
         }
 
-        //public ConBudget AddNewBudget(AddNewConCommand newBudget)
-        //{
-        //    var sql = @"insert into  "
-        //}
+        
     }
 }

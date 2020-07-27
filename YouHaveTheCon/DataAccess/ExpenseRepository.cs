@@ -72,55 +72,55 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        public Expense_budgetAmounts GetBudgetedAmounts(int budgetId, string name)
-        {
-            var sql = @"select budgetlineitem.*, Expenses.*
-                        from BudgetLineItem 
-                        join Expenses 
-                        on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
-                        where BudgetId = @budgetId
-                        and BudgetLineItem.name = @name;";
+        //public Expense_budgetAmounts GetBudgetedAmounts(int budgetId, string name)
+        //{
+        //    var sql = @"select budgetlineitem.*, Expenses.*
+        //                from BudgetLineItem 
+        //                join Expenses 
+        //                on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
+        //                where BudgetId = @budgetId
+        //                and BudgetLineItem.name = @name;";
 
-            using (var db = new SqlConnection(ConnectionString))
-            {
-                var parameters = new
-                {
-                    budgetId = budgetId,
-                    name = name
-                };
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var parameters = new
+        //        {
+        //            budgetId = budgetId,
+        //            name = name
+        //        };
 
-                var expenseAmounts = db.QueryFirstOrDefault<Expense_budgetAmounts>(sql, parameters);
+        //        var expenseAmounts = db.QueryFirstOrDefault<Expense_budgetAmounts>(sql, parameters);
 
-                if (expenseAmounts != null)
-                {
-                   expenseAmounts.Expenses = GetExpensesForBudget(expenseAmounts.BudgetId, expenseAmounts.Name);
+        //        if (expenseAmounts != null)
+        //        {
+        //            expenseAmounts.Expenses = GetExpensesForBudget(expenseAmounts.BudgetId, expenseAmounts.Name);
 
-                }
+        //        }
 
-                return expenseAmounts;
-            }
-        }
+        //        return expenseAmounts;
+        //    }
+        //}
 
-        public List<Expenses> GetExpensesForBudget(int budgetId, string name)
-        {
-            using var db = new SqlConnection(ConnectionString);
+        //public List<Expenses> GetExpensesForBudget(int budgetId, string name)
+        //{
+        //    using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"
-                select BudgetLineItem.Name, Expenses.*
-                from BudgetLineItem
-                join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
-                where BudgetId = @budgetId
-                and Expenses.expenseName = @name";
+        //    var sql = @"
+        //        select BudgetLineItem.Name, Expenses.*
+        //        from BudgetLineItem
+        //        join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
+        //        where BudgetId = @budgetId
+        //        and Expenses.expenseName = @name";
 
-            var parameters = new
-            {
-                budgetId = budgetId,
-                name = name
-            };
+        //    var parameters = new
+        //    {
+        //        budgetId = budgetId,
+        //        name = name
+        //    };
 
-            var expenses = db.Query<Expenses>(sql, parameters);
-            return expenses.ToList();
-        }
+        //    var expenses = db.Query<Expenses>(sql, parameters);
+        //    return expenses.ToList();
+        //}
 
 
     }
