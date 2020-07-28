@@ -7,7 +7,7 @@ class AddExpenseForm extends React.Component {
     state = {
         expenseName: '',
         cost: '',
-        name: ''
+        budgetLineItemId: ''
         
     }
 
@@ -28,7 +28,7 @@ class AddExpenseForm extends React.Component {
 
     categoryChange = (e) => {
         e.preventDefault();
-        this.setState({ name: e.target.value })
+        this.setState({ budgetLineItemId: e.target.value })
     }
 
     addExpenseEvent = (e) => {
@@ -37,21 +37,29 @@ class AddExpenseForm extends React.Component {
             expenseId: '',
             expenseName: this.state.expenseName,
             userId: this.props.userId,
-            budgetLineItemId: this.props.budgetLineItems.budgetLineItemId,
-            cost: this.state.cost
+            budgetLineItemId: parseInt(this.state.budgetLineItemId),
+            cost: parseFloat(this.state.cost)
         };
         expenseData.addExpense(newExpense)
         .then((result) => {
             this.setState({ showExpenseForm: true })
             this.props.onSave();
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+            console.error(error)
+        });
+            
     }
 
     render() {
         const { expenseName, cost, category, showExpenseForm } = this.state;
         const { conBudget } = this.props;
         return (
+        <div>
+            {
+                showExpenseForm ? (<div></div> )
+                : (
+           
             <form className="expense">   
                 <div className="form-group">
                     <label htmlFor="budget-name">Expense Name</label>
@@ -78,6 +86,7 @@ class AddExpenseForm extends React.Component {
                          </select>
                      </div>
                  </div>
+                
              </div>
 
 
@@ -91,9 +100,11 @@ class AddExpenseForm extends React.Component {
                         onChange={this.costChange}
                     />
                 </div>
-                <div className="btn btn-dark" onClick={this.AddExpenseEvent}>Save</div>
+                <div className="btn btn-dark" onClick={this.addExpenseEvent}>Save</div>
             </form>
-            
+                )
+            }
+            </div> 
         )
     }
 }

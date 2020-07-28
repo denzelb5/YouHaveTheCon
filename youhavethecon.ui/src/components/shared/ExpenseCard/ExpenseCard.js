@@ -22,7 +22,7 @@ class ExpenseCard extends React.Component {
         const budgetItemName = conBudget.budgetLineItems.map((line) => line);
         expenseName.forEach((expense) => {
             budgetItemName.forEach((item) => {
-                if (expense.expenseName === item.name) {
+                if (expense.budgetLineItemId === item.budgetLineItemId) {
                     matchingValues.push(<div  className="col-sm">{item.amount}</div>);
                 }
             });
@@ -38,7 +38,7 @@ class ExpenseCard extends React.Component {
         const budgetCats = conBudget.budgetLineItems.map((line) => line);
         expenses.forEach((exp) => {
             budgetCats.forEach((cat) => {
-                if (exp.expenseName === cat.name) {
+                if (exp.budgetLineItemId === cat.budgetLineItemId) {
                     matchingCats.push(<div className="col-sm">{cat.name}</div>)
                 }
             });
@@ -46,18 +46,61 @@ class ExpenseCard extends React.Component {
         return matchingCats;
     }
 
+    
+
     renderRemainingFunds() {
         const { conBudget } = this.props;
-        let expAmount = conBudget.expenses.map((exp) => exp);
-        let cost = expAmount[expAmount.expenseName].reduce((a, b) => a += b);
-        console.log(cost);
-    }
+        
+        // const totalCosts = [];
+        // let expAmounts = conBudget.expenses.map((exp) => exp);
+        // let test = expAmounts.filter((x) => x.expenseName);
+        // console.log('test', test);
+        // let budgetCats = conBudget.budgetLineItems.map((item) => item);
+        // expAmounts.forEach((exp) => {
+        //             let total = exp.name.sort((a,b) => b.exp);
+        //             totalCosts.push(total);
+        //            console.log(totalCosts);
+        // });
+        // return totalCosts;
+        // const costs = expAmounts.map(c => c.cost);
+        // const keys = expAmounts.map((x) => x.expenseName);
+        // console.log('costs', costs);
+        // let test = expAmounts.reduce((r, o) => {
+        //     keys.forEach((k) => r[k] + o[k]);
+        //     return r;
+        // }, Object.assign(...keys.map((k) => ({ [k]: costs }))));
 
+        // const test2 = expAmounts.reduce((a, b) => {
+        //     costs.forEach((j) => a[j] + b[j]);
+        //     return a;
+        // }, Object.assign(...costs.map((f) => ({ 0 : [f]}))));
+        
+        // console.log('test', test, 'test2', test2);
+        // let total = expAmounts.expenseName.reduce((a, b) => b.cost + b.cost);
+        
+        // let results = expAmount.reduce((c, v) => (v.cost) + ' ' + c); 
+        // results.forEach((result) => {
+        //     let total = (result += result)
+            //  console.log('total', total);
+        //     return total;
+        // })
+        // console.log('results', results);
+    } 
 
     render() {
         const { conBudget } = this.props;
 
         if (conBudget.budgetLineItems !== undefined) {
+
+            function addAllExpenses(prev, current) {
+                return prev + current.cost;
+            }
+
+            const spentMoney = conBudget.expenses.reduce(addAllExpenses, 0);
+            console.log('spentMoney', spentMoney);
+            let availableMoney = conBudget.amountBudgeted;
+            console.log('availMoney', availableMoney);
+            let remainder = availableMoney - spentMoney;
 
         return (
             <div className="container">
@@ -76,7 +119,7 @@ class ExpenseCard extends React.Component {
                     <div className="col-sm">
                         <h5>Amount Spent</h5>
                         {conBudget.expenses.map((exp) => <div className="col-sm"> {exp.cost}</div>)}  
-                        <p>insert into expense -- expense.cost</p>
+                        
                     </div>
                     <div className="col-sm">
                         {/* <h5>{`Available Funds $${remainder.toFixed(2)}`}</h5> */}
@@ -85,8 +128,8 @@ class ExpenseCard extends React.Component {
                     </div>
                     <div className="col-sm">
                         <h5>Remaining funds</h5>
-                        <div>{this.renderRemainingFunds()}</div>
-                        <p>calculate on front end</p>
+                        <div>{remainder}</div>
+                        
                     </div>
                     
                 </div>

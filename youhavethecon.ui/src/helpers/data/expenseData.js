@@ -9,6 +9,9 @@ import { baseUrl } from '../apiKeys.json';
 //     }).catch((error) => reject(error));
 // });
 
-const addExpense = (newExpense) => axios.post(`${baseUrl}/con/expenses/addExpense`, newExpense);
+const addExpense = (newExpense) => {
+    const url = `${baseUrl}/api/con/expenses/addExpense`;
+    return axios.post(url, newExpense);
+}
 
 export default { addExpense };
