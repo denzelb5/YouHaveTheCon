@@ -12,4 +12,10 @@ namespace YouHaveTheCon.ViewModels
         public string Name { get; set; }
         public decimal Amount { get; set; }
     }
+
+    public class EditLineItem
+    {
+        public string Name { get; set; }
+        public decimal Amount { get; set; }
+    }
 }

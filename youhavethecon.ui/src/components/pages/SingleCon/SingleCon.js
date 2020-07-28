@@ -104,7 +104,7 @@ class SingleCon extends React.Component {
                 }
                 
                 <div className="budget">
-                    <BudgetCard key={conBudget.budgetId} conBudget={conBudget} />
+                    <BudgetCard key={conBudget.budgetId} onSave={this.getConBudget} conBudget={conBudget} />
                 </div>
                 <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
                 {
@@ -114,7 +114,9 @@ class SingleCon extends React.Component {
                                         conBudget={conBudget}
                                         userId={userId}
                                         onSave={this.getConBudget}
-                                        key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
+                                        key={conBudget.budgetLineItems.budgetLineItemId}
+                                        
+                                        /> : ('')
                 }
                 <div>
                     <button className="btn btn-dark" id="show-expense-card" onClick={this.showExpenseEvent}>Add An Expense</button>
