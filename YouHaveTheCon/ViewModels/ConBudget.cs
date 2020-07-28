@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YouHaveTheCon.Models;
 
 namespace YouHaveTheCon.ViewModels
 {
@@ -13,6 +14,7 @@ namespace YouHaveTheCon.ViewModels
         public int ConId { get; set; }
         public decimal AmountBudgeted { get; set; }
         public List<BudgetLineItem> BudgetLineItems { get; set; }
+        public List<Expenses> Expenses { get; set; }
     }
 
     //public class BudgetLineItem

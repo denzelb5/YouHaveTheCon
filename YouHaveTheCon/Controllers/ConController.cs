@@ -138,6 +138,23 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        //// api/con/expenses/budgetamounts
+        //[HttpGet("expenses/budgetamounts/{budgetId}/{name}")]
+        //public IActionResult GetBudgetAmountsForExpenseTable(int budgetId, string name)
+        //{
+        //    var budgetedAmounts = _expenseRepository.GetBudgetedAmounts(budgetId, name);
+
+        //    if (budgetedAmounts == null)
+        //    {
+        //        return NotFound("No such value found");
+        //    }
+        //    else
+        //    {
+        //        return Ok(budgetedAmounts);
+        //    }
+
+        //}
+
 
     }
 }

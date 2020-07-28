@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using YouHaveTheCon.Models;
 using YouHaveTheCon.Commands;
+using YouHaveTheCon.ViewModels;
 
 namespace YouHaveTheCon.DataAccess
 {
@@ -17,27 +18,6 @@ namespace YouHaveTheCon.DataAccess
         {
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
-
-        //public Budget AddNewBudget(AddNewBudgetCommand newBudget)
-        //{
-        //    var sql = @"insert into Budget (budgetName, amountBudgeted, conId, userId)
-        //                output inserted.*
-        //                values (@budgetName, @amountBudgeted, @conId, @userId)";
-
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-        //        var parameters = new
-        //        {
-        //            budgetName = newBudget.BudgetName,
-        //            amountBudgeted = newBudget.AmountBudgeted,
-        //            conId = newBudget.ConId,
-        //            userId = newBudget.UserId
-        //        };
-
-        //        var addedBudget = db.QueryFirstOrDefault<Budget>(sql, parameters);
-        //        return addedBudget;
-        //    }
-        //}
 
         public Expenses AddNewExpense(AddNewExpenseCommand newExpense)
         {
@@ -60,32 +40,6 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        //public int? GetBudgetItemIdByItemName(string name, decimal amount)
-        //{
-        //    var sql = @"select BudgetLineItemId from BudgetLineItem
-        //                where name = @name
-        //                and amount = @amount";
-
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-        //        var parameters = new
-        //        {
-        //            name = name,
-        //            amount = amount
-        //        };
-
-        //        var lineItemId = db.QueryFirstOrDefault<int>(sql, parameters);
-
-        //        if (lineItemId != 0)
-        //        {
-        //            return lineItemId;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
 
         public int? GetExpenseIdByExpenseName(string expenseName, int userId, int budgetLineItemId, decimal cost)
         {
@@ -117,5 +71,57 @@ namespace YouHaveTheCon.DataAccess
                 }
             }
         }
+
+        //public Expense_budgetAmounts GetBudgetedAmounts(int budgetId, string name)
+        //{
+        //    var sql = @"select budgetlineitem.*, Expenses.*
+        //                from BudgetLineItem 
+        //                join Expenses 
+        //                on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
+        //                where BudgetId = @budgetId
+        //                and BudgetLineItem.name = @name;";
+
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var parameters = new
+        //        {
+        //            budgetId = budgetId,
+        //            name = name
+        //        };
+
+        //        var expenseAmounts = db.QueryFirstOrDefault<Expense_budgetAmounts>(sql, parameters);
+
+        //        if (expenseAmounts != null)
+        //        {
+        //            expenseAmounts.Expenses = GetExpensesForBudget(expenseAmounts.BudgetId, expenseAmounts.Name);
+
+        //        }
+
+        //        return expenseAmounts;
+        //    }
+        //}
+
+        //public List<Expenses> GetExpensesForBudget(int budgetId, string name)
+        //{
+        //    using var db = new SqlConnection(ConnectionString);
+
+        //    var sql = @"
+        //        select BudgetLineItem.Name, Expenses.*
+        //        from BudgetLineItem
+        //        join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
+        //        where BudgetId = @budgetId
+        //        and Expenses.expenseName = @name";
+
+        //    var parameters = new
+        //    {
+        //        budgetId = budgetId,
+        //        name = name
+        //    };
+
+        //    var expenses = db.Query<Expenses>(sql, parameters);
+        //    return expenses.ToList();
+        //}
+
+
     }
 }

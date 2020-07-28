@@ -6,7 +6,9 @@ import BudgetCard from '../../shared/BudgetCard/BudgetCard';
 import AddBudgetForm from '../../shared/AddBudgetForm/AddBudgetForm';
 import budgetData from '../../../helpers/data/budgetData';
 import AddBudgetItemForm from '../../shared/AddBudgetItemForm/AddBudgetItemForm';
+import AddExpenseForm from '../../shared/AddExpenseForm/AddExpenseForm';
 import ExpenseCard from '../../shared/ExpenseCard/ExpenseCard';
+import expenseData from '../../../helpers/data/expenseData';
 
 
 class SingleCon extends React.Component {
@@ -15,8 +17,10 @@ class SingleCon extends React.Component {
         userId: parseInt(this.props.match.params.userId),
         singleCon: {},
         conBudget: {},
+        expenses: {},
         showBudgetForm: false,
-        showLineForm: false
+        showLineForm: false,
+        showExpenseForm: false
     }
 
     getCurrentCon = () => {
@@ -41,15 +45,22 @@ class SingleCon extends React.Component {
         .catch((error) => console.error(error));
     }
 
+    // getBudgetAmountsForExpenses = () => {
+    //     const { conBudget } = this.state;
+    //     const { budgetId, name } = this.state;
+    //     // const { name } = conBudget.budgetLineItems.name;
+    //     expenseData.getBudgetedAmountForExpenses(budgetId, name)
+    //     .then((response) => {
+    //         const { expenses } = response.data;
+    //         this.setState({ expenses })
+    //     })
+
+    //  }
+
     componentDidMount() {
         this.getCurrentCon();
         this.getConBudget();
-    }
-
-    componentDidUpdate(prevState) {
-        if (prevState !== this.state.conBudget.budgetLineItems) {
-            // this.getConBudget()
-        }
+        // this.getBudgetAmountsForExpenses();
     }
 
     showFormEvent = (e) => {
@@ -64,10 +75,23 @@ class SingleCon extends React.Component {
         }
     }
 
+    showExpenseEvent = (e) => {
+        if (e.target.id === 'show-expense-card') {
+            this.setState({ showExpenseForm: true });
+        }
+    }
+
     
 
     render() {
-        const { singleCon, showBudgetForm, showLineForm, conBudget, conId, userId } = this.state;
+        const { 
+            singleCon, 
+            showBudgetForm, 
+            showLineForm, 
+            conBudget, 
+            conId, 
+            userId,
+            showExpenseForm } = this.state;
         
         return (
             <div className="single-con">
@@ -92,8 +116,19 @@ class SingleCon extends React.Component {
                                         onSave={this.getConBudget}
                                         key={conBudget.budgetLineItems.budgetLineItemId}/> : ('')
                 }
-
-                <div><ExpenseCard /></div>
+                <div>
+                    <button className="btn btn-dark" id="show-expense-card" onClick={this.showExpenseEvent}>Add An Expense</button>
+                </div>
+                {
+                    showExpenseForm ? <AddExpenseForm 
+                                            key={conBudget.expenses.expenseId} 
+                                            conBudget={conBudget} 
+                                            budgetId={conBudget.budgetId}
+                                            userId={userId}
+                                            onSave={this.getConBudget} /> : ('')
+                }
+                <div><ExpenseCard conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses}/></div>
+                {/* <button className="btn btn-dark" id="create-expense">Add Expense</button> */}
             </div>
         )
     }
