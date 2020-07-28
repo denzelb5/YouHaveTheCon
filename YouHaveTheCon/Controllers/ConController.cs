@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using YouHaveTheCon.DataAccess;
 using YouHaveTheCon.Commands;
 using YouHaveTheCon.Models;
+using YouHaveTheCon.ViewModels;
 
 namespace YouHaveTheCon.Controllers
 {
@@ -137,6 +138,19 @@ namespace YouHaveTheCon.Controllers
                 return BadRequest("Expense already exists");
             }
         }
+
+        // api/con/1/edit
+        [HttpPut("{budgetLineItemId}/edit")] 
+        public IActionResult UpdateBudgetLineItem(int budgetLineItemId, EditLineItem lineToUpdate )
+        {
+            var updatedLine = _budgetRepository.UpdateBudgetLine(budgetLineItemId, lineToUpdate);
+            return Ok();
+        }
+
+
+
+
+
 
         //// api/con/expenses/budgetamounts
         //[HttpGet("expenses/budgetamounts/{budgetId}/{name}")]

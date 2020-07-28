@@ -11,7 +11,8 @@ class AddBudgetItemForm extends React.Component {
     state = {
         name: '',
         amount: '',
-        showLineForm: false
+        showLineForm: false,
+        showEditForm: false
     }
 
     static props = {
@@ -34,7 +35,6 @@ class AddBudgetItemForm extends React.Component {
 
     AddNewLineItemEvent = (e) => {
         e.preventDefault();
-        const { conId, userId } = this.props;
         const newLine = {
             budgetLineItemId: '',
             budgetId: this.props.budgetId,
@@ -49,9 +49,15 @@ class AddBudgetItemForm extends React.Component {
         .catch((error) => console.error(error));
     }
 
+    
+
     render() {
-        const { name, amount, showLineForm } = this.state;
-        const { budgetId, conBudget, budgetLineItems } = this.props;
+        const { 
+            name, 
+            amount, 
+            showLineForm,
+            showEditForm } = this.state;
+        
         return (
         <div>
             {
@@ -82,6 +88,36 @@ class AddBudgetItemForm extends React.Component {
                     </div>
                     <div className="btn btn-dark" onClick={this.AddNewLineItemEvent}>Save</div>
                 </form> 
+                )
+            },
+            {
+                showEditForm ? (<div></div>) 
+                : (
+                    <form className="budget-line">
+                    
+                    <div className="form-group">
+                    <label htmlFor="budget-name">Category Name</label>
+                    <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter category name"
+                    value={name}
+                    onChange={this.itemNameChange}
+                    />
+                    
+                    </div>
+                    <div className="form-group">
+                    <label htmlFor="amount-budgeted">Amount</label>
+                    <input
+                    type="number"  step="0.01" min="0" max="10"
+                    className="form-control"
+                    placeholder="Enter Budget Amount"
+                    value={amount}
+                    onChange={this.itemAmountChange}
+                    />
+                        </div>
+                        <div className="btn btn-dark" onClick={this.updateLineItemEvent}>Save</div>
+                    </form> 
                 )
             } 
         </div>

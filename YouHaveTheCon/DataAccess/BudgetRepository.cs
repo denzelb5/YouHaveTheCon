@@ -191,6 +191,27 @@ namespace YouHaveTheCon.DataAccess
             return budgetLineItems.ToList();
         }
 
+        public BudgetLineItem UpdateBudgetLine(int budgetLineItemId, EditLineItem lineToUpdate)
+        {
+            var sql = @"update BudgetLineItem
+                        set name = @name, amount = @amount
+                        where budgetLineItemId = @budgetLineItemId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    name = lineToUpdate.Name,
+                    amount = lineToUpdate.Amount,
+                    budgetLineItemId = budgetLineItemId
+                };
+                var updatedLine = db.QueryFirstOrDefault<BudgetLineItem>(sql, parameters);
+                return updatedLine;
+
+            }
+
+        }
+
         
     }
 }
