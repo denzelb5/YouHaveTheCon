@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YouHaveTheCon.Models
+namespace YouHaveTheCon.Commands
 {
-    public class ConEvents
+    public class AddNewEventCommand
     {
-        public int EventId { get; set; }
         public string EventName { get; set; }
         public DateTime EventDateTime { get; set; }
         public DateTime EventEndDate { get; set; }
