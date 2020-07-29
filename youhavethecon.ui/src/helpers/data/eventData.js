@@ -11,5 +11,10 @@ const getConEventsByConId = (conId, userId) => new Promise((resolve, reject) => 
 });
 
 const addEvent = (eventToAdd) => axios.post(`${baseUrl}/api/event/addevent`, eventToAdd);
+const updateEvent = (eventId, eventToUpdate) => axios.put(`${baseUrl}/api/event/${eventId}/updateevent`, eventToUpdate);
 
-export default { getConEventsByConId, addEvent };
+export default { 
+    getConEventsByConId, 
+    addEvent, 
+    updateEvent
+ };

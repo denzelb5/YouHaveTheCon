@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './EventCard.scss';
 
@@ -25,6 +26,7 @@ class EventCard extends React.Component {
                     <div className="col-sm">
                         {event.eventLocation}
                     </div>
+                    <Link className="btn btn-light" to={`/editevent/${event.eventId}/${event.conId}/${event.userId}`}>Edit</Link>
                 </div>
             </div>
         )
