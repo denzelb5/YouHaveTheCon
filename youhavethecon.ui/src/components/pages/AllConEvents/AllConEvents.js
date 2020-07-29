@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import EventCard from '../../shared/EventCard/EventCard';
 import eventData from '../../../helpers/data/eventData';
@@ -39,6 +40,8 @@ class AllConEvents extends React.Component {
 
     render() {
         const { allConEvents, con } = this.state;
+        const userId = parseInt(this.props.match.params.userId);
+        const conId = parseInt(this.props.match.params.conId);
         return (
             <div>
                 <h3>{con.conName}</h3>
@@ -61,6 +64,7 @@ class AllConEvents extends React.Component {
                 <div>
                     {allConEvents.map((event) => <EventCard key={event.eventId} event={event} />)}
                 </div>
+                <Link className="btn btn-dark" to={`/addevent/${conId}/${userId}`}>Add Event</Link>
             </div>
 
         );

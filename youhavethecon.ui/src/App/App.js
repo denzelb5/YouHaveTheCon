@@ -7,6 +7,7 @@ import SingleCon from '../components/pages/SingleCon/SingleCon';
 import AllCosplays from '../components/pages/AllCosplays/AllCosplays';
 import AddConForm from '../components/pages/AddConForm/AddConForm';
 import AllConEvents from '../components/pages/AllConEvents/AllConEvents';
+import AddEventForm from '../components/pages/AddEventForm/AddEventForm';
 
 
 
@@ -69,6 +70,7 @@ class App extends React.Component {
             <PrivateRoute path ="/addcon" exact component={AddConForm} authed={authed} />
             <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
             <PrivateRoute path="/event/allevents/:conId/:userId" exact component={AllConEvents} authed={authed} />
+            <PrivateRoute path="/addevent/:conId/:userId" exact component={AddEventForm} authed={authed} />
           </Switch>
         </Router>
         
