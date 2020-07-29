@@ -38,6 +38,7 @@ namespace YouHaveTheCon
             services.AddTransient<UserRepository>();
             services.AddTransient<BudgetRepository>();
             services.AddTransient<ExpenseRepository>();
+            services.AddTransient<EventRepository>();
             services.AddSingleton<IConfiguration>(Configuration);
         }
 
