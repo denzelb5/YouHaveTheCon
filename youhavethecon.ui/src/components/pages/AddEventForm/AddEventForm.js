@@ -9,7 +9,8 @@ class AddEventForm extends React.Component {
         eventName: '',
         eventDateTime: '',
         eventEndDate: '',
-        eventLocation: ''
+        eventLocation: '',
+        
     }
 
     static props = {
@@ -59,10 +60,35 @@ class AddEventForm extends React.Component {
         eventData.addEvent(eventToAdd)
         .then((result) => {
             this.props.history.push(`/event/allevents/${conId}/${userId}`)
-           
         })
         .catch((error) => console.error(error));
     }
+
+    updateEventEvent = (e) => {
+        e.preventDefault();
+        const conId = parseInt(this.props.match.params.conId);
+        const userId = parseInt(this.props.match.params.userId);
+        const eventId = parseInt(this.props.match.params.eventId);
+        const {
+            eventName,
+            eventDateTime,
+            eventEndDate,
+            eventLocation
+        } = this.state;
+        const eventToUpdate = {
+            eventName: eventName,
+            eventDateTime: eventDateTime,
+            eventEndDate: eventEndDate,
+            eventLocation: eventLocation 
+        };
+        eventData.updateEvent(eventId, eventToUpdate)
+        .then(() => {
+            this.props.history.push(`/event/allevents/${conId}/${userId}`)
+        })
+        .catch((error) => console.error(error));
+    }
+
+
 
     render() {
         const { 
@@ -72,6 +98,7 @@ class AddEventForm extends React.Component {
             eventLocation
         } = this.state;
 
+        const eventId = parseInt(this.props.match.params.eventId);
         const conId = parseInt(this.props.match.params.conId);
         const userId = parseInt(this.props.match.params.userId);
         return (
@@ -121,8 +148,15 @@ class AddEventForm extends React.Component {
                     />
                     </div>
 
+                    {
+                        !eventId
+                        ? <button className="btn btn-dark" onClick={this.addNewEventEvent}>Save</button>
+                        : <button className="btn btn-primary" onClick={this.updateEventEvent}>Edit Event</button>
+                        
 
-                    <div className="btn btn-dark" onClick={this.addNewEventEvent}>Save</div>
+                    }
+
+
                     <Link className="btn btn-danger" to={`/event/allevents/${conId}/${userId}`}>Cancel</Link>
                 </form> 
 

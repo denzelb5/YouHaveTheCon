@@ -64,16 +64,10 @@ class BudgetCard extends React.Component {
         e.preventDefault();
         const { lineName, lineAmount, lineId } = this.state;
         const editedLine = {
-             
-             
-            //budgetId: this.props.match.params.conBudget.budgetId,
             name: lineName,
             amount: parseFloat(lineAmount)
         };
-        console.log(this.state);
-        console.log(editedLine, 'editline');
         if (lineId !== undefined) {
-
             budgetData.updateBudgetLineItem(lineId, editedLine)
             .then(() => {
                 this.setState({ showEditForm: false })

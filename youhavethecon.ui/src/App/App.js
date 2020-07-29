@@ -71,6 +71,7 @@ class App extends React.Component {
             <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
             <PrivateRoute path="/event/allevents/:conId/:userId" exact component={AllConEvents} authed={authed} />
             <PrivateRoute path="/addevent/:conId/:userId" exact component={AddEventForm} authed={authed} />
+            <PrivateRoute path="/editevent/:eventId/:conId/:userId" exact component={AddEventForm} authed={authed} />
           </Switch>
         </Router>
         
