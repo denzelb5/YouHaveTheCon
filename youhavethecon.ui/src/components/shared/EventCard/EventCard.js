@@ -10,19 +10,20 @@ class EventCard extends React.Component {
                 <div className="row">
                    
                     <div className="col-sm">
-                        {event.eventName}
+                        
+                      Name: {event.eventName}
                     </div>
                     
                     <div className="col-sm">
-                        {moment(event.eventDateTime).format('LL')} 
+                        Date: {moment(event.eventDateTime).format('LL')} 
                     </div>
 
                     <div className="col-sm">
-                        {moment(event.eventDateTime).format('LT')}
+                       Time: {moment(event.eventDateTime).format('LT')} - {moment(event.eventEndDate).format('LT')}
                     </div>
 
                     <div className="col-sm">
-                        {event.eventLocation}
+                       Place: {event.eventLocation}
                     </div>
                 </div>
             </div>

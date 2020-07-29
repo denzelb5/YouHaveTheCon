@@ -41,7 +41,23 @@ class AllConEvents extends React.Component {
         const { allConEvents, con } = this.state;
         return (
             <div>
-                    <h3>{con.conName}</h3>
+                <h3>{con.conName}</h3>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
+                            Name
+                        </div>
+                        <div className="col-sm">
+                            Date
+                        </div>
+                        <div className="col-sm">
+                            Time
+                        </div>
+                        <div className="col-sm">
+                            Location
+                        </div>
+                    </div>
+                </div>
                 <div>
                     {allConEvents.map((event) => <EventCard key={event.eventId} event={event} />)}
                 </div>
