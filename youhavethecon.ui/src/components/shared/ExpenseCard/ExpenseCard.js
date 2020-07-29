@@ -1,18 +1,74 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import expenseData from '../../../helpers/data/expenseData';
 import './ExpenseCard.scss';
 
 class ExpenseCard extends React.Component {
-    
+    state = {
+        showEditExpenseForm: false,
+        expName: '',
+        expCost: '',
+        expLineId: ''
+        
+    }
 
-    renderCategoryAmounts(conBudget) {
-        return conBudget.budgetLineItems.map((lineItem) => {
-            // using JS array split to get a new array of all the items BEFORE this one
-            const itemsBeforeThisOne = [];
-            //use reduce to sum up itemsBeforeThisOne total
-            const sumOfItemsBeforeThisOne = 5000
-        return <div key={lineItem.budgetLineItemId} className="col-sm ">${lineItem.amount}</div>
+    static props = {
+        onSave: PropTypes.func
+    }
+
+    // renderCategoryAmounts(conBudget) {
+    //     return conBudget.budgetLineItems.map((lineItem) => {
+    //         // using JS array split to get a new array of all the items BEFORE this one
+    //         const itemsBeforeThisOne = [];
+    //         //use reduce to sum up itemsBeforeThisOne total
+    //         const sumOfItemsBeforeThisOne = 5000
+    //     return <div key={lineItem.budgetLineItemId} className="col-sm ">${lineItem.amount}</div>
+    //     });
+    // }
+
+    expNameChange = (e) => {
+        e.preventDefault();
+        this.setState({ expName: e.target.value });
+    }
+
+    expCostChange = (e) => {
+        e.preventDefault();
+        this.setState({ expCost: e.target.value});
+    }
+
+    editExpenseEvent = (e) => {
+        const { conBudget } = this.props;
+        
+        const expenseNames = conBudget.expenses.map((expense) => expense);
+        expenseNames.forEach((exp) => {
+            if (parseInt(e.target.value) === exp.expenseId) {
+                this.setState({showEditExpenseForm: true})
+                this.setState({showLineForm: false})
+                this.setState({expLineId: parseInt(e.target.value)})
+            }
         });
+        console.log('expLineid', this.state.expLineId)
+    }
+
+    
+    updateExpenseItemEvent = (e) => {
+        e.preventDefault();
+        const { expName, expCost, expLineId } = this.state;
+        const expenseToUpdate = {
+            expenseName: expName,
+            cost: parseFloat(expCost)
+        };
+        console.log(this.state);
+        console.log('expenseToUpdate', expenseToUpdate);
+        if (expLineId !== undefined) {
+
+            expenseData.updateExpense(expLineId, expenseToUpdate)
+            .then(() => {
+                this.setState({ showEditExpenseForm: false })
+                this.props.onSave();
+            })
+            .catch((error) => console.error(error));
+        }
     }
 
     renderBudgetedAmountsForCategories() {
@@ -89,6 +145,7 @@ class ExpenseCard extends React.Component {
 
     render() {
         const { conBudget } = this.props;
+        const { showEditExpenseForm, expName, expCost } = this.state;
 
         if (conBudget.budgetLineItems !== undefined) {
 
@@ -109,7 +166,39 @@ class ExpenseCard extends React.Component {
                 <div className="row ">
                     <div className="col-sm">
                         <h5>Expense Name</h5>
-                        {conBudget.expenses.map((expense) => <div className="col-sm"> {expense.expenseName}</div>)}
+                        {conBudget.expenses.map((expense) => 
+                        <div className="col-sm"> 
+                        {expense.expenseName}
+                        <button className="btn btn-light" id={expense.expenseId} value={expense.expenseId} onClick={this.editExpenseEvent}>edit</button>
+                        </div>)}
+                        {showEditExpenseForm ? 
+                                  (
+                                    <form className="expense-form">
+                    
+                                    <div className="form-group">
+                                    <label htmlFor="expense-name">Expense Name</label>
+                                    <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter new expense name"
+                                    value={expName}
+                                    onChange={this.expNameChange}
+                                    />
+                                    
+                                    </div>
+                                    <div className="form-group">
+                                    <label htmlFor="amount-budgeted">Amount</label>
+                                    <input
+                                    type="number"  step="0.01" min="0" max="10"
+                                    className="form-control"
+                                    placeholder="Enter Expense Amount"
+                                    value={expCost}
+                                    onChange={this.expCostChange}
+                                    />
+                                        </div>
+                                        <div className="btn btn-dark" onClick={this.updateExpenseItemEvent}>Save</div>
+                                    </form> 
+                                  ) : <div></div>}
                     </div>
                     <div className="col-sm">
                         <h5>Category</h5>
