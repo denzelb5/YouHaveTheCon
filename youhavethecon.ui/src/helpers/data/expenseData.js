@@ -14,4 +14,6 @@ const addExpense = (newExpense) => {
     return axios.post(url, newExpense);
 }
 
-export default { addExpense };
+const updateExpense = (expenseId, expenseToUpdate) => axios.put(`${baseUrl}/api/con/${expenseId}/editexpense`, expenseToUpdate);
+
+export default { addExpense, updateExpense };

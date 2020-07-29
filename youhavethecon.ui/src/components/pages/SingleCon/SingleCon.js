@@ -129,7 +129,7 @@ class SingleCon extends React.Component {
                                             userId={userId}
                                             onSave={this.getConBudget} /> : ('')
                 }
-                <div><ExpenseCard conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses}/></div>
+                <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} onSave={this.getConBudget}/></div>
                 {/* <button className="btn btn-dark" id="create-expense">Add Expense</button> */}
             </div>
         )
