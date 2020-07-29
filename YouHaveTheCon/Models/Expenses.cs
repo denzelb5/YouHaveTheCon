@@ -13,4 +13,10 @@ namespace YouHaveTheCon.Models
         public decimal Cost { get; set; }
         public int BudgetLineItemId { get; set; }
     }
+
+    public class EditExpense
+    {
+        public string ExpenseName { get; set; }
+        public decimal Cost { get; set; }
+    }
 }

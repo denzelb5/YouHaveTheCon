@@ -72,6 +72,48 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        //public BudgetLineItem UpdateBudgetLine(int budgetLineItemId, EditLineItem lineToUpdate)
+        //{
+        //    var sql = @"update BudgetLineItem
+        //                set name = @name, amount = @amount
+        //                where budgetLineItemId = @budgetLineItemId";
+
+        //    using (var db = new SqlConnection(ConnectionString))
+        //    {
+        //        var parameters = new
+        //        {
+        //            name = lineToUpdate.Name,
+        //            amount = lineToUpdate.Amount,
+        //            budgetLineItemId = budgetLineItemId
+        //        };
+        //        var updatedLine = db.QueryFirstOrDefault<BudgetLineItem>(sql, parameters);
+        //        return updatedLine;
+
+        //    }
+
+        //}
+
+        public Expenses UpdateExpenseLine(int expenseId, EditExpense expenseToUpdate)
+        {
+            var sql = @"update Expenses
+                        set expenseName = @expenseName, cost = @cost
+                        where expenseId = @expenseId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    expenseName = expenseToUpdate.ExpenseName,
+                    cost = expenseToUpdate.Cost,
+                    expenseId = expenseId
+
+                };
+
+                var updatedExpense = db.QueryFirstOrDefault<Expenses>(sql, parameters);
+                return updatedExpense;
+            }
+        }
+
         //public Expense_budgetAmounts GetBudgetedAmounts(int budgetId, string name)
         //{
         //    var sql = @"select budgetlineitem.*, Expenses.*
