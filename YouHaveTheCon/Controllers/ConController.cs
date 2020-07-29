@@ -146,7 +146,7 @@ namespace YouHaveTheCon.Controllers
             var updatedLine = _budgetRepository.UpdateBudgetLine(budgetLineItemId, lineToUpdate);
             return Ok();
         }
-        // api/con/{expenseId}/edit
+        // api/con/{expenseId}/editexpense
         [HttpPut("{expenseId}/editexpense")]
         public IActionResult UpdateExpense(int expenseId, EditExpense expenseToUpdate)
         {
