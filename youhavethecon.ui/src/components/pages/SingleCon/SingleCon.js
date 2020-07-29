@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './SingleCon.scss';
 import conData from '../../../helpers/data/conData';
 import SingleConCard from '../../shared/SingleConCard/SingleConCard';
@@ -130,7 +131,7 @@ class SingleCon extends React.Component {
                                             onSave={this.getConBudget} /> : ('')
                 }
                 <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} onSave={this.getConBudget}/></div>
-                {/* <button className="btn btn-dark" id="create-expense">Add Expense</button> */}
+                <Link className="btn btn-dark" to={`/event/allevents/${conBudget.conId}/${conBudget.userId}`}>View My Events</Link>
             </div>
         )
     }
