@@ -95,5 +95,32 @@ namespace YouHaveTheCon.DataAccess
         }
 
 
+        public ConEvents EditEvent(int eventId, EditEventCommand eventToEdit)
+        {
+            var sql = @"update ConEvents
+                        set eventName = @eventName,
+                        eventDateTime = @eventDateTime,
+                        eventEndDate = @eventEndDate,
+                        eventLocation = @eventLocation
+                        where eventId = @eventId";
+                       
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    eventName = eventToEdit.EventName,
+                    eventDateTime = eventToEdit.EventDateTime,
+                    eventEndDate = eventToEdit.EventEndDate,
+                    eventLocation = eventToEdit.EventLocation,
+                    eventId = eventId
+                };
+
+                var updatedEvent = db.QueryFirstOrDefault<ConEvents>(sql, parameters);
+                return updatedEvent;
+            }
+        }
+
+
     }
 }

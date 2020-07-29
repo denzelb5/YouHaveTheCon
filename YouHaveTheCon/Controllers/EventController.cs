@@ -54,6 +54,16 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/event/{eventId}/updateevent
+        [HttpPut("{eventId}/updateevent")]
+        public IActionResult UpdateEvent(int eventId, EditEventCommand eventToUpdate)
+        {
+            var updatedEvent = _eventRepository.EditEvent(eventId, eventToUpdate);
+            {
+                return Ok();
+            }
+        }
+
 
     }
 }

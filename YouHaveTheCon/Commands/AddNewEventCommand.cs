@@ -14,4 +14,12 @@ namespace YouHaveTheCon.Commands
         public int ConId { get; set; }
         public int UserId { get; set; }
     }
+
+    public class EditEventCommand
+    {
+        public string EventName { get; set; }
+        public DateTime EventDateTime { get; set; }
+        public DateTime EventEndDate { get; set; }
+        public string EventLocation { get; set; }
+    }
 }
