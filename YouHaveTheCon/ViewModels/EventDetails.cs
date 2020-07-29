@@ -14,11 +14,6 @@ namespace YouHaveTheCon.ViewModels
         public int ExpenseId { get; set; }
         public int ConId { get; set; }
         public int UserId { get; set; }
-        public string ExpenseName { get; set; }
-        public decimal Cost { get; set; }
-        public int BudgetLineItemId { get; set; }
-        public int BudgetId { get; set; }
-        public string Name { get; set; }
-        public decimal Amount { get; set; }
+        public string ConName { get; set; }
     }
 }

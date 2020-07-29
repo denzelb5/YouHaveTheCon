@@ -6,6 +6,7 @@ using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
 using YouHaveTheCon.ViewModels;
+using YouHaveTheCon.Models;
 
 namespace YouHaveTheCon.DataAccess
 {
@@ -17,16 +18,14 @@ namespace YouHaveTheCon.DataAccess
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
 
-        public EventDetails GetAllEventsByConId(int conId, int userId)
+        public List<EventDetails> GetAllEventsByConId(int conId, int userId)
         {
-            var sql = @"select ConEvents.*, Expenses.ExpenseName, Expenses.Cost, BudgetLineItem.*
-                        from ConEvents
-                        join Expenses 
-                        on ConEvents.ExpenseId = Expenses.ExpenseId
-                        join BudgetLineItem
-                        on BudgetLineItem.BudgetLineItemId = Expenses.BudgetLineItemId
-                        where conEvents.conId = @conId
-                        and conEvents.userId = @userId";
+            var sql = @"select ConEvents.*, Convention.ConName
+                        from ConEvents 
+                        join Convention
+                        on ConEvents.conId = Convention.conId
+                        where ConEvents.conId = @conId
+                        and userId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -36,7 +35,7 @@ namespace YouHaveTheCon.DataAccess
                     userId = userId
                 };
 
-                var conEvents = db.QueryFirstOrDefault<EventDetails>(sql, parameters);
+                var conEvents = db.Query<EventDetails>(sql, parameters).ToList();
                 return conEvents;
             }
         }
