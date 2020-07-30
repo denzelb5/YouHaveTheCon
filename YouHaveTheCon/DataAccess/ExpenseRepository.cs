@@ -114,6 +114,22 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public Expenses RemoveExpense(int expenseId)
+        {
+            var sql = @"delete from Expenses where expenseId = @expenseId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    expenseId = expenseId
+                };
+
+                var deletedExpense = db.QueryFirstOrDefault<Expenses>(sql, parameters);
+                return deletedExpense;
+            }
+        }
+
         //public Expense_budgetAmounts GetBudgetedAmounts(int budgetId, string name)
         //{
         //    var sql = @"select budgetlineitem.*, Expenses.*

@@ -156,6 +156,14 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/con/delete/{expenseId}
+        [HttpDelete("delete/{expenseId}")]
+        public IActionResult deleteExpense(int expenseId)
+        {
+            var deletedExpense = _expenseRepository.RemoveExpense(expenseId);
+            return Ok(deletedExpense);
+        }
+
 
 
 

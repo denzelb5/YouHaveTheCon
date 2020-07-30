@@ -46,6 +46,11 @@ class SingleCon extends React.Component {
         .catch((error) => console.error(error));
     }
 
+    deleteExpense = (expenseId) => {
+        expenseData.deleteExpense(expenseId)
+          .then(() => this.getConBudget())
+          .catch((error) => console.error(error));
+      }
     // getBudgetAmountsForExpenses = () => {
     //     const { conBudget } = this.state;
     //     const { budgetId, name } = this.state;
@@ -130,7 +135,7 @@ class SingleCon extends React.Component {
                                             userId={userId}
                                             onSave={this.getConBudget} /> : ('')
                 }
-                <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} onSave={this.getConBudget}/></div>
+                <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} deleteExpense={this.deleteExpense} onSave={this.getConBudget}/></div>
                 <Link className="btn btn-dark" to={`/event/allevents/${conBudget.conId}/${conBudget.userId}`}>View My Events</Link>
             </div>
         )
