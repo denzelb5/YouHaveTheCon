@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { baseUrl } from '../apiKeys.json';
 
-const getBudgetForCon = (conId, userId) => axios.get(`${baseUrl}/api/con/budget/${conId}/${userId}`);
+const getBudgetForCon = (conId, userId) => new Promise((resolve, reject) => {
+    axios.get(`${baseUrl}/api/con/budget/${conId}/${userId}`)
+    .then((result) => {
+        const conBudget = result.data;
+        resolve(conBudget);
+    }).catch((error) => reject(error));
+});
 
 const addBudget = (newBudget) => axios.post(`${baseUrl}/api/con/budget/addbudget`, newBudget);
 
