@@ -64,6 +64,14 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/event/delete/{eventId}
+        [HttpDelete("delete/{eventId}")]
+        public IActionResult DeleteEventFromCon(int eventId)
+        {
+            var deletedEvent = _eventRepository.DeleteEvent(eventId);
+            return Ok(deletedEvent);
+        }
+
 
     }
 }

@@ -33,6 +33,14 @@ class AllConEvents extends React.Component {
         .catch((error) => console.error(error));
     }
 
+    deleteEvent = (eventId) => {
+        // const userId = parseInt(this.props.match.params.userId);
+        // const conId = parseInt(this.props.match.params.conId);
+        eventData.deleteEvent(eventId)
+          .then(() => this.getConEventsData())
+          .catch((error) => console.error(error));
+      }
+
     componentDidMount() {
         this.getConEventsData();
         this.getConNameData();
@@ -62,7 +70,7 @@ class AllConEvents extends React.Component {
                     </div>
                 </div>
                 <div>
-                    {allConEvents.map((event) => <EventCard key={event.eventId} event={event} />)}
+                    {allConEvents.map((event) => <EventCard key={event.eventId} event={event} deleteEvent={this.deleteEvent} />)}
                 </div>
                 <Link className="btn btn-dark" to={`/addevent/${conId}/${userId}`}>Add Event</Link>
             </div>

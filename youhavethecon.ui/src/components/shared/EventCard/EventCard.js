@@ -1,9 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './EventCard.scss';
 
 class EventCard extends React.Component {
+    static propTypes = {
+        deleteEvent: PropTypes.func
+    }
+
+    deleteEventEvent = (e) => {
+        e.preventDefault();
+        const { event, deleteEvent } = this.props;
+        deleteEvent(event.eventId);
+    }
+
     render() {
         const { event } = this.props;
         return (
@@ -13,6 +24,7 @@ class EventCard extends React.Component {
                     <div className="col-sm">
                         
                         {event.eventName}
+                         <button className="btn btn-light" onClick={this.deleteEventEvent}>X</button>
                     </div>
                     
                     <div className="col-sm">
