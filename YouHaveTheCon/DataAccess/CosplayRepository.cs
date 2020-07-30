@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using YouHaveTheCon.Models;
+using YouHaveTheCon.ViewModels;
 using Dapper;
 
 namespace YouHaveTheCon.DataAccess
@@ -27,6 +28,23 @@ namespace YouHaveTheCon.DataAccess
 
                 var cosplays = db.Query<Cosplay>(sql, parameters).ToList();
                 return cosplays;
+            }
+        }
+
+        public List<SingleCosplayInfo> GetPiecesByCosplayId(int cosplayId)
+        {
+            var sql = @"select CosplayPieces.*, CosPlayOutfit.CosplayImageUrl
+                        from CosplayPieces
+                        join CosPlayOutfit
+                        on CosplayPieces.CosplayId = CosPlayOutfit.CosplayId
+                        where CosplayPieces.cosplayId = @cosplayId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { cosplayId = cosplayId };
+
+                var pieces = db.Query<SingleCosplayInfo>(sql, parameters).ToList();
+                return pieces;
             }
         }
 
