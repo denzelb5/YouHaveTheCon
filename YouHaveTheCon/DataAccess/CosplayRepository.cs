@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouHaveTheCon.Models;
 using YouHaveTheCon.ViewModels;
+using YouHaveTheCon.Commands;
 using Dapper;
 
 namespace YouHaveTheCon.DataAccess
@@ -48,8 +49,64 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public int? GetPieceByName(string pieceName, int cosplayId, string bodyPartName)
+        {
+            var sql = @"select cosplayPiecesId from CosplayPieces
+                        where pieceName = @pieceName
+                        and cosplayId = @cosplayId
+                        and bodyPartName = @bodyPartName";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    pieceName = pieceName,
+                    cosplayId = cosplayId,
+                    bodyPartName = bodyPartName
+                };
+
+                var result = db.QueryFirstOrDefault<int>(sql, parameters);
+
+                if (result != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public CosplayPieces AddNewCosplayPiece(AddCosplayPieceCommand newPiece)
+        {
+            var sql = @"insert into CosplayPieces (pieceName, percentDone, CompletionHoursEstimate,
+                        CompletionMinutesEstimate, PieceImageUrl, cosplayId, bodyPartName)
+                        values (@pieceName, @percentDone, @completionHoursEstimate, @completionMinutesEstimate,
+                                @pieceImageUrl, @cosplayId, @bodyPartName)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    pieceName = newPiece.PieceName,
+                    percentDone = newPiece.PercentDone,
+                    completionHoursEstimate = newPiece.CompletionHoursEstimate,
+                    completionMinutesEstimate = newPiece.CompletionMinutesEstimate,
+                    pieceImageUrl = newPiece.PieceImageUrl,
+                    cosplayId = newPiece.CosplayId,
+                    bodyPartName = newPiece.BodyPartName
+
+                };
+
+                var addedPiece = db.QueryFirstOrDefault<CosplayPieces>(sql, parameters);
+                return addedPiece;
+            }
+                        
+        }
 
 
 
+        
     }
 }
