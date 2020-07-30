@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { baseUrl } from '../apiKeys.json';
-import authData from './authData';
 
 const getAllConsByUserId = (userId) => new Promise((resolve, reject) => {
     axios.get(`${baseUrl}/api/con/allcons/${userId}`)

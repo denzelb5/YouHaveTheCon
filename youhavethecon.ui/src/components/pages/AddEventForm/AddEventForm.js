@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './AddEventForm.scss';
 import eventData from '../../../helpers/data/eventData';
-import budgetData from '../../../helpers/data/budgetData';
+
 
 class AddEventForm extends React.Component {
     state = {

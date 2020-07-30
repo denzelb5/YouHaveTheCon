@@ -112,7 +112,6 @@ class ExpenseCard extends React.Component {
     
 
     renderRemainingFunds() {
-        const { conBudget } = this.props;
         
         // const totalCosts = [];
         // let expAmounts = conBudget.expenses.map((exp) => exp);

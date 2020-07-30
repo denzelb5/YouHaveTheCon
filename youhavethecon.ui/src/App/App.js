@@ -20,6 +20,7 @@ import {
 
 import './App.scss';
 import authData from '../helpers/data/authData';
+import SingleCosplay from '../components/pages/SingleCosplay/SingleCosplay';
 
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
@@ -68,7 +69,8 @@ class App extends React.Component {
             <PrivateRoute path="/convention/allcons/:userId" exact component={AllCons} authed={authed} />
             <PrivateRoute path="/con/:conId/:userId" exact component={SingleCon} authed={authed} />
             <PrivateRoute path ="/addcon" exact component={AddConForm} authed={authed} />
-            <PrivateRoute path="/cosplay/allcosplays" exact component={AllCosplays} authed={authed} />
+            <PrivateRoute path="/cosplay/allcosplays/:userId" exact component={AllCosplays} authed={authed} />
+            <PrivateRoute path="/cosplay/:cosplayId" exact component={SingleCosplay} authed={authed} />
             <PrivateRoute path="/event/allevents/:conId/:userId" exact component={AllConEvents} authed={authed} />
             <PrivateRoute path="/addevent/:conId/:userId" exact component={AddEventForm} authed={authed} />
             <PrivateRoute path="/editevent/:eventId/:conId/:userId" exact component={AddEventForm} authed={authed} />

@@ -52,7 +52,7 @@ class AddExpenseForm extends React.Component {
     }
 
     render() {
-        const { expenseName, cost, category, showExpenseForm } = this.state;
+        const { expenseName, cost, showExpenseForm } = this.state;
         const { conBudget } = this.props;
         return (
         <div>
