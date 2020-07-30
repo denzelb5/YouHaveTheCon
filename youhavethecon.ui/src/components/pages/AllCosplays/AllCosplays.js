@@ -4,10 +4,8 @@ import './AllCosplays.scss';
 class AllCosplays extends React.Component {
     render() {
         return (
-            <div className="all-cosplays">
-                <h1>Cosplay Page</h1>
-            </div>
-        )
+            <h1>AllCosplay Page</h1>
+        );
     }
 }
 

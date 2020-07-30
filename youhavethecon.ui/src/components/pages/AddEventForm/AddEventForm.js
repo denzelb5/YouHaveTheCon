@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './AddEventForm.scss';
 import eventData from '../../../helpers/data/eventData';
+import budgetData from '../../../helpers/data/budgetData';
 
 class AddEventForm extends React.Component {
     state = {
@@ -15,7 +16,8 @@ class AddEventForm extends React.Component {
 
     static props = {
         conId: PropTypes.int,
-        userId: PropTypes.int
+        userId: PropTypes.int,
+        onSave: PropTypes.func
     }
 
     eventNameChange = (e) => {
@@ -58,7 +60,7 @@ class AddEventForm extends React.Component {
             userId: userId
         };
         eventData.addEvent(eventToAdd)
-        .then((result) => {
+        .then(() => {
             this.props.history.push(`/event/allevents/${conId}/${userId}`)
         })
         .catch((error) => console.error(error));
@@ -81,11 +83,18 @@ class AddEventForm extends React.Component {
             eventEndDate: eventEndDate,
             eventLocation: eventLocation 
         };
-        eventData.updateEvent(eventId, eventToUpdate)
-        .then(() => {
-            this.props.history.push(`/event/allevents/${conId}/${userId}`)
-        })
-        .catch((error) => console.error(error));
+        if (eventId !== undefined && conId !== undefined && userId !== undefined) {
+            // budgetData.getBudgetForCon(conId, userId).then(() => {
+
+                eventData.updateEvent(eventId, eventToUpdate)
+                .then(() => {
+                    
+                    this.props.history.push(`/event/allevents/${conId}/${userId}`)
+                })
+                .catch((error) => console.error(error));
+    
+            // });
+        }
     }
 
 
