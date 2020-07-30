@@ -18,7 +18,8 @@ class BudgetCard extends React.Component {
     }
 
     static props = {
-        onSave: PropTypes.func
+        onSave: PropTypes.func,
+        deleteBudgetLine: PropTypes.func
     }
 
 
@@ -77,6 +78,13 @@ class BudgetCard extends React.Component {
         }
     }
 
+    deleteBudgetLineItemEvent = (e) => {
+        e.preventDefault();
+        const budgetLineItemId = parseInt(e.target.value);
+        const { deleteBudgetLine } = this.props;
+        deleteBudgetLine(budgetLineItemId);
+    }
+
     
    
     render() {
@@ -112,7 +120,7 @@ class BudgetCard extends React.Component {
                             {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId}
                                  className="col-sm ">{lineItem.name}
                                   <button className="btn btn-light" id={lineItem.budgetLineItemId} value={lineItem.budgetLineItemId} onClick={this.editLineEvent}>edit</button>
-                                    
+                                  <button className="btn btn-light" id={lineItem.budgetLineItemId} value={lineItem.budgetLineItemId} onClick={this.deleteBudgetLineItemEvent}>x</button>  
                                   </div>)}
                                   {showEditForm ? 
                                   (

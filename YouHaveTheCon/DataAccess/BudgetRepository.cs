@@ -212,6 +212,19 @@ namespace YouHaveTheCon.DataAccess
 
         }
 
+        public BudgetLineItem RemoveLineItem(int budgetLineItemId)
+        {
+            var sql = @"delete from BudgetLineItem where budgetLineItemId = @budgetLineItemId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new { budgetLineItemId = budgetLineItemId };
+
+                var deletedLine = db.QueryFirstOrDefault<BudgetLineItem>(sql, parameters);
+                return deletedLine;
+            }
+        }
+
         
     }
 }

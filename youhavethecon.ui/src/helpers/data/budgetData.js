@@ -9,10 +9,13 @@ const addBudgetLineItems = (newLineItem) => axios.post(`${baseUrl}/api/con/budge
 
 const updateBudgetLineItem = (budgetLineItemId, editedLine) => axios.put(`${baseUrl}/api/con/${budgetLineItemId}/edit`, editedLine);
 
+const deleteBudgetLineItem = (budgetLineItemId) => axios.delete(`${baseUrl}/api/con/deletebudgetline/${budgetLineItemId}`);
+
 export default { 
     getBudgetForCon,
-     addBudget, 
-     addBudgetLineItems,
-    updateBudgetLineItem
+    addBudget, 
+    addBudgetLineItems,
+    updateBudgetLineItem,
+    deleteBudgetLineItem
  };
 

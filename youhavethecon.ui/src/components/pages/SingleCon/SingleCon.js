@@ -51,6 +51,12 @@ class SingleCon extends React.Component {
           .then(() => this.getConBudget())
           .catch((error) => console.error(error));
       }
+
+    deleteBudgetLine = (budgetLineItemId) => {
+        budgetData.deleteBudgetLineItem(budgetLineItemId)
+        .then(() => this.getConBudget())
+        .catch((error) => console.error(error));
+    }
     // getBudgetAmountsForExpenses = () => {
     //     const { conBudget } = this.state;
     //     const { budgetId, name } = this.state;
@@ -110,7 +116,7 @@ class SingleCon extends React.Component {
                 }
                 
                 <div className="budget">
-                    <BudgetCard key={conBudget.budgetId} onSave={this.getConBudget} conBudget={conBudget} />
+                    <BudgetCard key={conBudget.budgetId} onSave={this.getConBudget} conBudget={conBudget} deleteBudgetLine={this.deleteBudgetLine} />
                 </div>
                 <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
                 {
