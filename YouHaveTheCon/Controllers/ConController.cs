@@ -164,6 +164,14 @@ namespace YouHaveTheCon.Controllers
             return Ok(deletedExpense);
         }
 
+        // api/con/deletebudgetline/{budgetLineItemId}
+        [HttpDelete("deletebudgetline/{budgetLineItemId}")]
+        public IActionResult deleteBudgetLineItem(int budgetLineItemId)
+        {
+            var deletedLine = _budgetRepository.RemoveLineItem(budgetLineItemId);
+            return Ok(deletedLine);
+        }
+
 
 
 
