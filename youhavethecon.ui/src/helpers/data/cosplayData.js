@@ -10,4 +10,16 @@ const getAllCosplaysByUserId = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 })
 
-export default { getAllCosplaysByUserId };
+const getAllCosplayPiecesByCosplayId = (cosplayId) => new Promise((resolve, reject) => {
+    axios.get(`${baseUrl}/api/cosplay/pieces/${cosplayId}`)
+    .then((result) => {
+        const allPieces = result.data;
+        resolve(allPieces);
+    })
+    .catch((error) => reject(error));
+})
+
+export default { 
+    getAllCosplaysByUserId,
+    getAllCosplayPiecesByCosplayId
+ };

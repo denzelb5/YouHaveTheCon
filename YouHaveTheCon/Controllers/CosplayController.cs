@@ -36,6 +36,22 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/cosplay/pieces/{cosplayId}
+        [HttpGet("pieces/{cosplayId}")]
+        public IActionResult GetAllPiecesByCosplayId(int cosplayId)
+        {
+            var pieces = _cosplayRepository.GetPiecesByCosplayId(cosplayId);
+
+            if (pieces == null)
+            {
+                return NotFound("Cosplay piece does not exist");
+            }
+            else
+            {
+                return Ok(pieces);
+            }
+        }
+
 
 
     }
