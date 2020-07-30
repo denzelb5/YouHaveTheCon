@@ -121,6 +121,22 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public ConEvents DeleteEvent(int eventId)
+        {
+            var sql = @"delete from ConEvents where eventId = @eventId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    eventId = eventId
+                };
+
+                var deletedEvent = db.QueryFirstOrDefault<ConEvents>(sql, parameters);
+                return deletedEvent;
+            }
+        }
+
 
     }
 }

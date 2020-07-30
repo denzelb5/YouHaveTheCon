@@ -11,10 +11,15 @@ const getConEventsByConId = (conId, userId) => new Promise((resolve, reject) => 
 });
 
 const addEvent = (eventToAdd) => axios.post(`${baseUrl}/api/event/addevent`, eventToAdd);
-const updateEvent = (eventId, eventToUpdate) => axios.put(`${baseUrl}/api/event/${eventId}/updateevent`, eventToUpdate);
+const updateEvent = (eventId, eventToUpdate) => {
+    axios.put(`${baseUrl}/api/event/${eventId}/updateevent`, eventToUpdate);
+}
+
+const deleteEvent = (eventId) => axios.delete(`${baseUrl}/api/event/delete/${eventId}`);
 
 export default { 
     getConEventsByConId, 
     addEvent, 
-    updateEvent
+    updateEvent,
+    deleteEvent
  };
