@@ -15,5 +15,10 @@ const addExpense = (newExpense) => {
 }
 
 const updateExpense = (expenseId, expenseToUpdate) => axios.put(`${baseUrl}/api/con/${expenseId}/editexpense`, expenseToUpdate);
+const deleteExpense = (expenseId) => axios.delete(`${baseUrl}/api/con/delete/${expenseId}`);
 
-export default { addExpense, updateExpense };
+export default { 
+    addExpense,
+    updateExpense,
+    deleteExpense
+ };

@@ -13,7 +13,9 @@ class ExpenseCard extends React.Component {
     }
 
     static props = {
-        onSave: PropTypes.func
+        onSave: PropTypes.func,
+        deleteExpense: PropTypes.func,
+        
     }
 
     // renderCategoryAmounts(conBudget) {
@@ -58,8 +60,6 @@ class ExpenseCard extends React.Component {
             expenseName: expName,
             cost: parseFloat(expCost)
         };
-        console.log(this.state);
-        console.log('expenseToUpdate', expenseToUpdate);
         if (expLineId !== undefined) {
 
             expenseData.updateExpense(expLineId, expenseToUpdate)
@@ -69,6 +69,13 @@ class ExpenseCard extends React.Component {
             })
             .catch((error) => console.error(error));
         }
+    }
+
+    deleteExpenseEvent = (e) => {
+        e.preventDefault();
+        const { deleteExpense } = this.props;
+        const expenseId = parseInt(e.target.value);
+        deleteExpense(expenseId);
     }
 
     renderBudgetedAmountsForCategories() {
@@ -154,9 +161,7 @@ class ExpenseCard extends React.Component {
             }
 
             const spentMoney = conBudget.expenses.reduce(addAllExpenses, 0);
-            console.log('spentMoney', spentMoney);
             let availableMoney = conBudget.amountBudgeted;
-            console.log('availMoney', availableMoney);
             let remainder = availableMoney - spentMoney;
 
         return (
@@ -170,6 +175,7 @@ class ExpenseCard extends React.Component {
                         <div className="col-sm"> 
                         {expense.expenseName}
                         <button className="btn btn-light" id={expense.expenseId} value={expense.expenseId} onClick={this.editExpenseEvent}>edit</button>
+                        <button className="btn btn-light" id={expense.expenseId} value={expense.expenseId} onClick={this.deleteExpenseEvent}>X</button>
                         </div>)}
                         {showEditExpenseForm ? 
                                   (

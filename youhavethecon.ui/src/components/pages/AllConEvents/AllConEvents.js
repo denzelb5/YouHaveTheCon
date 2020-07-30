@@ -34,8 +34,6 @@ class AllConEvents extends React.Component {
     }
 
     deleteEvent = (eventId) => {
-        // const userId = parseInt(this.props.match.params.userId);
-        // const conId = parseInt(this.props.match.params.conId);
         eventData.deleteEvent(eventId)
           .then(() => this.getConEventsData())
           .catch((error) => console.error(error));
