@@ -2,10 +2,12 @@ import React from 'react';
 import './SingleCosplay.scss';
 import cosplayData from '../../../helpers/data/cosplayData';
 import SingleCosplayCard from '../../shared/SingleCosplayCard/SingleCosplayCard';
+import AddCosplayPieceForm from '../../shared/AddCosplayPieceForm/AddCosplayPieceForm';
 
 class SingleCosplay extends React.Component {
     state = {
-        pieces: []
+        pieces: [],
+        displayAddForm: false
     }
 
     getCosplayPiecesData = () => {
@@ -19,14 +21,24 @@ class SingleCosplay extends React.Component {
         this.getCosplayPiecesData();
     }
 
+    showFormEvent = (e) => {
+        if (e.target.id === 'create-piece') {
+            this.setState({ displayAddForm: true });
+        }
+    }
+
+
 
     render() {
-        const { pieces } = this.state;
+        const { pieces, displayAddForm } = this.state;
+        const { cosplayId } = this.props.match.params;
         return (
             <div className="container cosplay-planner">
-                
-                {pieces.map((piece) => <SingleCosplayCard key={piece.cosplayPiecesId} piece={piece} />)}
-               
+                <button className="btn btn-light" id="create-piece" onClick={this.showFormEvent}>Add A Cosplay Piece</button>
+                {pieces.map((piece) => <SingleCosplayCard key={piece.cosplayPiecesId} piece={piece} onSave={this.getCosplayPiecesData} />)}
+               {
+                   displayAddForm ? <AddCosplayPieceForm cosplayId={cosplayId} onSave={this.getCosplayPiecesData} /> : ('')
+               }
 
             </div>
         );
