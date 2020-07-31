@@ -19,7 +19,11 @@ const getAllCosplayPiecesByCosplayId = (cosplayId) => new Promise((resolve, reje
     .catch((error) => reject(error));
 })
 
+const addCosplayPiece = (newPiece) => axios.post(`${baseUrl}/api/cosplay/addpiece`, newPiece);
+
+
 export default { 
     getAllCosplaysByUserId,
-    getAllCosplayPiecesByCosplayId
+    getAllCosplayPiecesByCosplayId,
+    addCosplayPiece
  };
