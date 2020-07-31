@@ -105,6 +105,52 @@ namespace YouHaveTheCon.DataAccess
                         
         }
 
+        public int? GetExistingTodoByName(string todoName, string todoNotes)
+        {
+            var sql = @"select TodoId from TodoItems 
+                        where todoName = @todoName
+                        and todoNotes = @todoNotes";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    todoName = todoName,
+                    todoNotes = todoNotes
+                };
+
+                var result = db.QueryFirstOrDefault<int>(sql, parameters);
+
+                if (result != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public TodoItems CreateNewTodo(AddTodoCommand newTodo)
+        {
+            var sql = @"insert into TodoItems (todoName, todoNotes)
+                        values (@todoName, @todoNotes)";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    todoName = newTodo.TodoName,
+                    todoNotes = newTodo.TodoNotes,
+
+                };
+
+                var addedTodo = db.QueryFirstOrDefault<TodoItems>(sql, parameters);
+                return addedTodo;
+            }
+        }
+
 
 
         

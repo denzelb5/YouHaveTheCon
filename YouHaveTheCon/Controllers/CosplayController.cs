@@ -72,6 +72,23 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/cosplay/todo/add
+        [HttpPost("todo/add")]
+        public IActionResult AddTodoItem(AddTodoCommand newTodo)
+        {
+            var existingTodo = _cosplayRepository.GetExistingTodoByName(newTodo.TodoName, newTodo.TodoNotes);
+
+            if (existingTodo == null)
+            {
+                var createdTodo = _cosplayRepository.CreateNewTodo(newTodo);
+                return Created("", createdTodo);
+            }
+            else
+            {
+                return BadRequest("ToDo already exists.");
+            }
+        }
+
 
     }
 }

@@ -70,7 +70,6 @@ class AddCosplayPieceForm extends React.Component {
             cosplayId: parseInt(this.props.cosplayId),
             bodyPartName: bodyPartName
         };
-        
             cosplayData.addCosplayPiece(newPiece)
             .then((result) => {
                 this.setState({ showAddPieceForm: true });
