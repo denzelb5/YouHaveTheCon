@@ -31,14 +31,15 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        public int? GetIdByCon(string ConName, DateTime ConStartDate, DateTime ConEndDate, string LocationName, string LocationInfo)
+        public int? GetIdByCon(string ConName, DateTime ConStartDate, DateTime ConEndDate, string LocationName, string LocationInfo, int userId)
         {
             var sql = @"select ConId from Convention
                         where ConName = @ConName
                         AND ConStartDate = @ConStartDate
                         And ConEndDate = @ConEndDate
                         and LocationName = @LocationName
-                        and LocationInfo = @LocationInfo";
+                        and LocationInfo = @LocationInfo
+                        and userId = @userId";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -48,7 +49,8 @@ namespace YouHaveTheCon.DataAccess
                     ConStartDate = ConStartDate,
                     ConEndDate = ConEndDate,
                     LocationName = LocationName,
-                    LocationInfo = LocationInfo
+                    LocationInfo = LocationInfo, 
+                    userId = userId
                 };
 
                 var result = db.QueryFirstOrDefault<int>(sql, parameters);
@@ -66,9 +68,9 @@ namespace YouHaveTheCon.DataAccess
 
         public Convention AddNewCon(AddNewConCommand newCon)
         {
-            var sql = @"Insert into Convention (ConName, ConStartDate, ConEndDate, LocationName, LocationInfo)
+            var sql = @"Insert into Convention (ConName, ConStartDate, ConEndDate, LocationName, LocationInfo, userId)
                         output inserted.*
-                        values (@ConName, @ConStartDate, @ConEndDate, @LocationName, @LocationInfo)";
+                        values (@ConName, @ConStartDate, @ConEndDate, @LocationName, @LocationInfo, @userId)";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -78,7 +80,8 @@ namespace YouHaveTheCon.DataAccess
                     ConStartDate = newCon.ConStartDate,
                     ConEndDate = newCon.ConEndDate,
                     LocationName = newCon.LocationName,
-                    LocationInfo = newCon.LocationInfo
+                    LocationInfo = newCon.LocationInfo,
+                    userId = newCon.UserId
                 };
 
                 var conToAdd = db.QueryFirstOrDefault<Convention>(sql, parameters);
@@ -101,5 +104,22 @@ namespace YouHaveTheCon.DataAccess
                 return convention;
             }
         }
+
+        public Convention RemoveCon(int conId)
+        {
+            var sql = @"delete from Convention where conId = @conId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    conId = conId
+                };
+
+                var deletedCon = db.QueryFirstOrDefault<Convention>(sql, parameters);
+                return deletedCon;
+            }
+        }
+
     }
 }

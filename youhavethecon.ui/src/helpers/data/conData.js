@@ -14,10 +14,12 @@ const getAllConsByUserId = (userId) => new Promise((resolve, reject) => {
 const getSingleCon = (conId, userId) => axios.get(`${baseUrl}/api/con/${conId}/${userId}`)
 const addCon = (newCon) => axios.post(`${baseUrl}/api/con/addcon`, newCon);
 const updateAmount = (budgetCategoryId, amountToUpdate) => axios.post(`${baseUrl}/api/con/budgetCategory/${budgetCategoryId}`, amountToUpdate);
+const deleteCon = (conId) => axios.delete(`${baseUrl}/api/con/deletecon/${conId}`);
 
 export default { 
     getAllConsByUserId, 
     addCon, 
     getSingleCon,
-    updateAmount
+    updateAmount,
+    deleteCon
  };

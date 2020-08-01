@@ -19,6 +19,12 @@ class AllCons extends React.Component {
     componentDidMount() {
         this.getConData();
     }
+
+    deleteCon = (conId) => {
+        conData.deleteCon(conId)
+          .then(() => this.getConData())
+          .catch((error) => console.error(error));
+    }
   
     render() {
         const { allCons } = this.state;
@@ -26,7 +32,7 @@ class AllCons extends React.Component {
         return (
             <div className="all-cons">
                 <div className="all-my-cons d-flex flex-wrap">
-                    {allCons.map((con) => <ConCard key={con.conId} con={con} />)}
+                    {allCons.map((con) => <ConCard key={con.conId} con={con} deleteCon={this.deleteCon} />)}
                 </div>
                 <Link className="btn btn-primary" to="/addcon">Add a con</Link>
             </div>

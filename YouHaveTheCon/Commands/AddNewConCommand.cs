@@ -12,5 +12,6 @@ namespace YouHaveTheCon.Commands
         public DateTime ConEndDate { get; set; }
         public string LocationName { get; set; }
         public string LocationInfo { get; set; }
+        public int UserId { get; set; }
     }
 }
