@@ -89,6 +89,23 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/cosplay/addcosplay
+        [HttpPost("addcosplay")]
+        public IActionResult AddNewCosplay(AddCosplayCommand newCosplay)
+        {
+            var existingCosplay = _cosplayRepository.GetCosplayByName(newCosplay.CosplayName, newCosplay.UserId, newCosplay.CosplayImageUrl);
+
+            if (existingCosplay == null)
+            {
+                var createdCosplay = _cosplayRepository.AddCosplay(newCosplay);
+                return Created("", createdCosplay);
+            }
+            else
+            {
+                return BadRequest("Cosplay already exists");
+            }
+        }
+
         // api/cosplay/7/todolist
         [HttpGet("{cosplayPiecesId}/todolist")]
         public IActionResult GetTodoItems(int cosplayPiecesId)

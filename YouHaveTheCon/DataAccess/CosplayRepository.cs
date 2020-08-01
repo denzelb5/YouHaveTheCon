@@ -19,7 +19,7 @@ namespace YouHaveTheCon.DataAccess
             ConnectionString = config.GetConnectionString("YouHaveTheConDB");
         }
 
-        public List<Cosplay> GetCosplaysByUser(int userId)
+        public List<CosPlayOutfit> GetCosplaysByUser(int userId)
         {
             var sql = @"select * from CosplayOutfit where userId = @userId";
 
@@ -27,7 +27,7 @@ namespace YouHaveTheCon.DataAccess
             {
                 var parameters = new { userId = userId };
 
-                var cosplays = db.Query<Cosplay>(sql, parameters).ToList();
+                var cosplays = db.Query<CosPlayOutfit>(sql, parameters).ToList();
                 return cosplays;
             }
         }
@@ -150,9 +150,39 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public int? GetCosplayByName(string cosplayName, int userId, string cosplayImageUrl)
+        {
+            var sql = @"select cosplayId from CosplayOutfit 
+                        where cosplayName = @cosplayName
+                        and userId = @userId
+                        and cosplayImageUrl = @cosplayImageUrl";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    cosplayName = cosplayName,
+                    userId = userId,
+                    cosplayImageUrl = cosplayImageUrl
+                };
+
+                var result = db.QueryFirstOrDefault<int>(sql, parameters);
+
+                if (result != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public TodoItems CreateNewTodo(AddTodoCommand newTodo)
         {
             var sql = @"insert into TodoItems (todoName, todoNotes, cosplayPiecesId)
+                        output inserted.*
                         values (@todoName, @todoNotes, @cosplayPiecesId)";
 
             using (var db = new SqlConnection(ConnectionString))
@@ -170,8 +200,30 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public CosPlayOutfit AddCosplay(AddCosplayCommand newCosplay)
+        {
+            var sql = @"insert into CosPlayOutfit (cosplayName, userId, dateCreated, dateDue, totalProgress, cosplayImageUrl)
+                        output inserted.*
+                        values (@cosplayName, @userId, @dateCreated, @dateDue, @totalProgress, @cosplayImageUrl)";
 
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                    cosplayName = newCosplay.CosplayName,
+                    userId = newCosplay.UserId,
+                    dateCreated = newCosplay.DateCreated,
+                    dateDue = newCosplay.DateDue,
+                    totalProgress = newCosplay.TotalProgress,
+                    cosplayImageUrl = newCosplay.CosplayImageUrl
+                };
+
+                var addedCosplay = db.QueryFirstOrDefault<CosPlayOutfit>(sql, parameters);
+                return addedCosplay;
+            }
+        }
 
         
+
     }
 }

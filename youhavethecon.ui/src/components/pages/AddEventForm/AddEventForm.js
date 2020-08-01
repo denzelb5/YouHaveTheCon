@@ -20,6 +20,10 @@ class AddEventForm extends React.Component {
         onSave: PropTypes.func
     }
 
+    // componentDidMount() {
+    //     this.getFormInfoEvent();
+    // }
+
     eventNameChange = (e) => {
         e.preventDefault();
         this.setState({ eventName: e.target.value });
@@ -96,6 +100,20 @@ class AddEventForm extends React.Component {
             // });
         }
     }
+
+    // getFormInfoEvent = () => {
+    //     if (this.props.match.params.eventId) {
+    //         eventData.getEventDetailsByEventId()
+    //         .then((eventData) => {
+    //             this.setState({
+    //                  eventName: eventData.eventName,
+    //                  eventDateTime: eventData.eventDateTime,
+    //                  eventEndDate: eventData.eventEndDate,
+    //                  eventLocation: eventData.eventLocation
+    //                 })
+    //         })
+    //     }
+    // }
 
 
 

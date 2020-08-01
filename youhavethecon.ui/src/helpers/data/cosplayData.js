@@ -27,11 +27,14 @@ const addTodoItems = (newTodo) => axios.post(`${baseUrl}/api/cosplay/todo/add`, 
 
 const addCosplayPiece = (newPiece) => axios.post(`${baseUrl}/api/cosplay/addpiece`, newPiece);
 
+const addCosplay = (newCosplay) => axios.post(`${baseUrl}/api/cosplay/addcosplay`, newCosplay);
+
 
 export default { 
     getAllCosplaysByUserId,
     getAllCosplayPiecesByCosplayId,
     addCosplayPiece,
     getTodoItemsForCosplayPiece,
-    addTodoItems
+    addTodoItems,
+    addCosplay
  };

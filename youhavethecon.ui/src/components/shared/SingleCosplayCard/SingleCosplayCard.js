@@ -30,7 +30,8 @@ class SingleCosplayCard extends React.Component {
         cosplayData.getTodoItemsForCosplayPiece(cosplayPiecesId)
         .then((response) => {
             const todos = response.data;
-            this.setState({ todoItems: todos })
+            this.setState({ todoItems: todos });
+            this.setState({showTodoAddForm: false});
         })
         .catch((error) => console.error(error));
     }
@@ -58,10 +59,15 @@ class SingleCosplayCard extends React.Component {
 
             return (
                 <div>
-                    <h3>{piece.bodyPartName}</h3>
-                    <div className="card col-4">
+                    
+                    <div className="card mb-3">
+                        <div className="row no-gutters">
+                            <div className="col md-4">
+                                <img src={piece.pieceImageUrl} className="card-img-top cosplay-image" alt="..."/>
+                            </div>
+                            <div className="col-md-8">
                         <div className="card-body">
-                            <img src={piece.pieceImageUrl} className="card-img-top cosplay-image" alt="..."/>
+                            <h3>{piece.bodyPartName}</h3>
                             <h5 className="card-title">{piece.pieceName}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{piece.percentDone}% Done</h6>
                             <p className="card-text">Completion Estimate: {piece.completionHoursEstimate} hours {piece.completionMinutesEstimate} minutes</p>
@@ -86,7 +92,8 @@ class SingleCosplayCard extends React.Component {
                                 }
     
                             </div>
-                            <div></div>
+                            <div></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>

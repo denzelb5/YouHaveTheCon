@@ -5,13 +5,15 @@ class TodoCard extends React.Component {
     render() {
         const { todo } = this.props;
         return (
-            <div>
-                <h6>TodoCard</h6>
-                <ul>
-                    <li>{todo.todoName}</li>
-                    <p>{todo.todoNotes}</p>
+           
+            <div className="card">
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">{todo.todoName}</li>
+                    <li className="list-group-item">{todo.todoNotes}</li>
+                    
                 </ul>
             </div>
+           
         );
     }
 }

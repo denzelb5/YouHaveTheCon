@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace YouHaveTheCon.Models
 {
-    public class Cosplay
+    public class CosPlayOutfit
     {
         public int CosplayId { get; set; }
         public string CosplayName { get; set; }

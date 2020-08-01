@@ -2,6 +2,7 @@ import React from 'react';
 import CosplayCard from '../../shared/CosplayCard/CosplayCard';
 import './AllCosplays.scss';
 import cosplayData from '../../../helpers/data/cosplayData';
+import { Link } from 'react-router-dom';
 
 class AllCosplays extends React.Component {
     state = {
@@ -19,11 +20,14 @@ class AllCosplays extends React.Component {
         this.getCosplayData();
     }
 
+    
     render() {
         const { allCosplays } = this.state;
+        const userId = parseInt(this.props.match.params.userId)
         return (
             <div>
                 <h1>AllCosplay Page</h1>
+                <Link className="btn btn-dark" to={`/addcosplay/${userId}`}>Add Cosplay</Link>
                 <div className="container d-flex flex-wrap">
                     {allCosplays.map((cosplay) => <CosplayCard key={cosplay.cosplayId} cosplay={cosplay} />)}
                 </div>

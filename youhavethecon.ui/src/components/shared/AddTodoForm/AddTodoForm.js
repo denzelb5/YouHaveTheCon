@@ -44,22 +44,17 @@ class AddTodoForm extends React.Component {
 
             cosplayData.addTodoItems(newTodo)
             .then(() => {
-                this.props.onSave()
-                this.setState({ showForm: true })
-                
+                this.props.onSave();
             })
             .catch((error) => console.error(error));
         }
     }
 
     render() {
-        const { todoName, todoNotes, showForm } = this.state;
+        const { todoName, todoNotes } = this.state;
         
         return (
             <div>
-                {
-                    showForm ? <div></div>
-                    :
                 <form>
                     <div className="row">
                         <div className="col">
@@ -83,8 +78,6 @@ class AddTodoForm extends React.Component {
                     <button className="btn btn-light" onClick={this.AddTodoEvent}>Save</button>
                     
                 </form>
-                }
-
             </div>
         );
     }
