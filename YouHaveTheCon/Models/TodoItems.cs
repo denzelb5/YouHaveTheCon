@@ -14,6 +14,7 @@ namespace YouHaveTheCon.Models
         public string TodoBuy { get; set; }
         public string TodoMake { get; set; }
         public string TodoNotes { get; set; }
-        public bool isDone { get; set; }
+        public bool IsDone { get; set; }
+        public int CosplayPiecesId { get; set; }
     }
 }

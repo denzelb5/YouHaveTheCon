@@ -89,6 +89,22 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/cosplay/7/todolist
+        [HttpGet("{cosplayPiecesId}/todolist")]
+        public IActionResult GetTodoItems(int cosplayPiecesId)
+        {
+            var todos = _cosplayRepository.GetToDoItemsForCosplayPiece(cosplayPiecesId);
+
+            if (todos == null)
+            {
+                return NotFound("Todo item does not exist");
+            }
+            else
+            {
+                return Ok(todos);
+            }
+        }
+
 
     }
 }

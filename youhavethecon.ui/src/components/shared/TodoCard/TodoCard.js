@@ -3,12 +3,13 @@ import './TodoCard.scss';
 
 class TodoCard extends React.Component {
     render() {
+        const { todo } = this.props;
         return (
             <div>
                 <h6>TodoCard</h6>
                 <ul>
-                    <li>Do some stuff</li>
-                    <li>Do more stuff</li>
+                    <li>{todo.todoName}</li>
+                    <p>{todo.todoNotes}</p>
                 </ul>
             </div>
         );

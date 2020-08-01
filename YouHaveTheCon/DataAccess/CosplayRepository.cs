@@ -49,6 +49,24 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
+        public List<TodoItems> GetToDoItemsForCosplayPiece(int cosplayPiecesId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"
+                select * 
+                from TodoItems
+                where cosplayPiecesId = @cosplayPiecesId";
+
+            var parameters = new
+            {
+                cosplayPiecesId = cosplayPiecesId
+            };
+
+            var todoItems = db.Query<TodoItems>(sql, parameters);
+            return todoItems.ToList();
+        }
+
         public int? GetPieceByName(string pieceName, int cosplayId, string bodyPartName)
         {
             var sql = @"select cosplayPiecesId from CosplayPieces
@@ -134,8 +152,8 @@ namespace YouHaveTheCon.DataAccess
 
         public TodoItems CreateNewTodo(AddTodoCommand newTodo)
         {
-            var sql = @"insert into TodoItems (todoName, todoNotes)
-                        values (@todoName, @todoNotes)";
+            var sql = @"insert into TodoItems (todoName, todoNotes, cosplayPiecesId)
+                        values (@todoName, @todoNotes, @cosplayPiecesId)";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -143,6 +161,7 @@ namespace YouHaveTheCon.DataAccess
                 {
                     todoName = newTodo.TodoName,
                     todoNotes = newTodo.TodoNotes,
+                    cosplayPiecesId = newTodo.CosplayPiecesId
 
                 };
 

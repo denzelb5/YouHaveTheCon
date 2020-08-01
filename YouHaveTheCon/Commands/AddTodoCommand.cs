@@ -9,5 +9,6 @@ namespace YouHaveTheCon.Commands
     {
         public string TodoName { get; set; }
         public string TodoNotes { get; set; }
+        public int CosplayPiecesId { get; set; }
     }
 }
