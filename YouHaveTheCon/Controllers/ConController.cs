@@ -43,7 +43,7 @@ namespace YouHaveTheCon.Controllers
         [HttpPost("addcon")]
         public IActionResult AddCon(AddNewConCommand newCon)
         {
-            var existingCon = _conRepository.GetIdByCon(newCon.ConName, newCon.ConStartDate, newCon.ConEndDate, newCon.LocationName, newCon.LocationInfo);
+            var existingCon = _conRepository.GetIdByCon(newCon.ConName, newCon.ConStartDate, newCon.ConEndDate, newCon.LocationName, newCon.LocationInfo, newCon.UserId);
 
             if (existingCon == null)
             {
@@ -170,6 +170,14 @@ namespace YouHaveTheCon.Controllers
         {
             var deletedLine = _budgetRepository.RemoveLineItem(budgetLineItemId);
             return Ok(deletedLine);
+        }
+
+        // api/con/deletecon/{conId}
+        [HttpDelete("deletecon/{conId}")]
+        public IActionResult deleteConvention(int conId)
+        {
+            var deletedCon = _conRepository.RemoveCon(conId);
+            return Ok(deletedCon);
         }
 
 

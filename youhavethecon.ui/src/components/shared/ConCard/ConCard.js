@@ -4,12 +4,20 @@ import moment from 'moment';
 import './ConCard.scss';
 
 class ConCard extends React.Component {
+
+    deleteConEvent = (e) => {
+        e.preventDefault();
+        const { con, deleteCon } = this.props;
+        deleteCon(con.conId);
+    }
+
     render() {
         const { con } = this.props;
         
         return (
             <div className="card col-3">
                 <div className="card-body">
+                    <button className="link" onClick={this.deleteConEvent}>x</button>
                     <h4 className="card-title">{con.conName}</h4>
                     <h5 className="card-subtitle mb-2 text-muted">{moment(con.conStartDate).format('LL')}</h5>
                     <h6 className="location-name">{con.locationName}</h6>

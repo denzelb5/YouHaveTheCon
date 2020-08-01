@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import conData from '../../../helpers/data/conData';
+import authData from '../../../helpers/data/authData';
 
 class AddConForm extends React.Component {
     state = {
@@ -38,16 +39,20 @@ class AddConForm extends React.Component {
 
     createNewConEvent = (e) => {
         e.preventDefault();
+        const userId = authData.getUserId();
         const newCon = {
             conId: '',
             conName: this.state.conName,
             conStartDate: this.state.conStartDate,
             conEndDate: this.state.conEndDate,
             locationName: this.state.locationName,
-            locationInfo: this.state.locationInfo
+            locationInfo: this.state.locationInfo,
+            userId: parseInt(userId)
         };
         conData.addCon(newCon)
-            .then((result) => this.props.history.push(`/con/allcons`))
+            .then((result) => { 
+              this.props.history.push(`/convention/allcons/${userId}`)
+            })
             .catch((error) => console.error(error));
             
 
@@ -61,7 +66,7 @@ class AddConForm extends React.Component {
             locationName,
             locationInfo
         } = this.state;
-        // const { conId } = this.props.match.params;
+        const userId = authData.getUserId();
         return ( 
           
             <form className="con-form">
@@ -123,7 +128,7 @@ class AddConForm extends React.Component {
           />
         </div>
         { <button className="btn btn-dark" onClick={this.createNewConEvent}>Save Con</button> }
-        <Link className="btn btn-primary" to="/con/allcons">Cancel</Link>
+        <Link className="btn btn-primary" to={`/convention/allcons/${userId}`}>Cancel</Link>
 
         {/* { !conId
        ?  <button className="btn btn-dark" onClick={this.createNewConEvent}>Save Con</button>
