@@ -37,7 +37,7 @@ class AllConEvents extends React.Component {
         eventData.deleteEvent(eventId)
           .then(() => this.getConEventsData())
           .catch((error) => console.error(error));
-      }
+    }
 
     componentDidMount() {
         this.getConEventsData();

@@ -122,6 +122,14 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/cosplay/todo/delete/{todoId}
+        [HttpDelete("todo/delete/{todoId}")]
+        public IActionResult deleteTodoItem(int todoId)
+        {
+            var deletedTodo = _cosplayRepository.RemoveTodo(todoId);
+            return Ok(deletedTodo);
+        }
+
 
     }
 }

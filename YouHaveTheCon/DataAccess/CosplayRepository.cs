@@ -223,7 +223,21 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        
+        public TodoItems RemoveTodo(int todoId)
+        {
+            var sql = @"delete from TodoItems where todoId = @todoId";
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var parameters = new
+                {
+                   todoId = todoId
+                };
+
+                var deletedTodo = db.QueryFirstOrDefault<TodoItems>(sql, parameters);
+                return deletedTodo;
+            }
+        }
 
     }
 }

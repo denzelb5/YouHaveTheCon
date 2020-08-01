@@ -18,7 +18,11 @@ class SingleCosplay extends React.Component {
         .catch((error) => console.error(error));
     }
 
-    
+    deleteTodo = (todoId) => {
+        cosplayData.deleteTodo(todoId)
+          .then(() => this.getCosplayPiecesData())
+          .catch((error) => console.error(error));
+    }
 
     
 
