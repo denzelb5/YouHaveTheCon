@@ -1,14 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './TodoCard.scss';
 
 class TodoCard extends React.Component {
+    static propTypes = {
+        deleteTodo: PropTypes.func
+    }
+
+    deleteTodoEvent = (e) => {
+        e.preventDefault();
+        const { todo, deleteTodo } = this.props;
+        deleteTodo(todo.todoId);
+    }
+
     render() {
         const { todo } = this.props;
         return (
            
             <div className="card">
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">{todo.todoName}</li>
+                    
+                        <li className="list-group-item d-flex">{todo.todoName}
+                            <button className="btn btn-light" onClick={this.deleteTodoEvent}>x</button>
+                        </li>
                     <li className="list-group-item">{todo.todoNotes}</li>
                     
                 </ul>

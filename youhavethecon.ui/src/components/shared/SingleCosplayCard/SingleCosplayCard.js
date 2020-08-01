@@ -15,7 +15,7 @@ class SingleCosplayCard extends React.Component {
     }
 
     static props = {
-        onSave: PropTypes.func
+        pieceonSave: PropTypes.func
     }
 
 
@@ -50,6 +50,12 @@ class SingleCosplayCard extends React.Component {
         this.setState({ showTodoAddForm: false })
     }
 
+    deleteTodo = (todoId) => {
+        cosplayData.deleteTodo(todoId)
+          .then(() => this.getTodoData())
+          .catch((error) => console.error(error));
+    }
+
     
 
     render() {
@@ -72,10 +78,10 @@ class SingleCosplayCard extends React.Component {
                             <h6 className="card-subtitle mb-2 text-muted">{piece.percentDone}% Done</h6>
                             <p className="card-text">Completion Estimate: {piece.completionHoursEstimate} hours {piece.completionMinutesEstimate} minutes</p>
                             <button onClick={ this.showAddForm} className="card-link">Add todo list</button>
-                            <a href="#" className="card-link">Add shopping list</a>
+                            
                             <div>
                             <div>
-                                         {/* {todoItems.map((todo) => <TodoCard key={todo.todoId} todo={todo}/>)}  */}
+                                         
                                      </div>
                                 {
                                     showTodoAddForm ? 
@@ -85,7 +91,7 @@ class SingleCosplayCard extends React.Component {
                                     </div>
                                     :
                                      <div>
-                                         {todoItems.map((todo) => <TodoCard key={todo.todoId} todo={todo}/>)} 
+                                         {todoItems.map((todo) => <TodoCard key={todo.todoId} todo={todo} deleteTodo={this.deleteTodo} />)} 
                                      </div>
                                      
                                      
