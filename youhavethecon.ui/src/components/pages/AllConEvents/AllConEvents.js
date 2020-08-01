@@ -21,7 +21,7 @@ class AllConEvents extends React.Component {
         const userId = parseInt(this.props.match.params.userId);
         const conId = parseInt(this.props.match.params.conId);
         eventData.getConEventsByConId(conId, userId)
-        .then((request) => this.setState({ allConEvents: request }))
+        .then((result) => this.setState({ allConEvents: result.data }))
         .catch((error) => console.error(error));
     }
 

@@ -49,7 +49,7 @@ class ExpenseCard extends React.Component {
                 this.setState({expLineId: parseInt(e.target.value)})
             }
         });
-        console.log('expLineid', this.state.expLineId)
+        
     }
 
     

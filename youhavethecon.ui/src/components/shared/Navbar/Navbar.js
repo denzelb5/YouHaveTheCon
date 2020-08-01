@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import authData from '../../../helpers/data/authData';
 import './Navbar.scss';
 
 class Navbar extends React.Component {
-    static propTypes = {
-      authed: PropTypes.bool
-    }
 
     logMeOut = () => {
       authData.logoutUser();
     }
 
     render() {
-        const { authed } = this.props;
+        const userId = authData.getUserId();
+        const authed = authData.authed();
 
         return (
             <div>
@@ -25,7 +22,7 @@ class Navbar extends React.Component {
                   { authed && ( 
                       <Link
                         className="nav-link"
-                        to="/convention/allcons/:userId">
+                        to={`/convention/allcons/${userId}`}>
                         My Cons
                       </Link>
                   )}
@@ -34,7 +31,7 @@ class Navbar extends React.Component {
                   { authed && (
                       <Link
                         className="nav-link"
-                        to="/cosplay/allcosplays">
+                        to={`/cosplay/allcosplays/${userId}`}>
                         My Cosplays
                       </Link>
                   )}

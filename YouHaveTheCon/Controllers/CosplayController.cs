@@ -72,6 +72,56 @@ namespace YouHaveTheCon.Controllers
             }
         }
 
+        // api/cosplay/todo/add
+        [HttpPost("todo/add")]
+        public IActionResult AddTodoItem(AddTodoCommand newTodo)
+        {
+            var existingTodo = _cosplayRepository.GetExistingTodoByName(newTodo.TodoName, newTodo.TodoNotes);
+
+            if (existingTodo == null)
+            {
+                var createdTodo = _cosplayRepository.CreateNewTodo(newTodo);
+                return Created("", createdTodo);
+            }
+            else
+            {
+                return BadRequest("ToDo already exists.");
+            }
+        }
+
+        // api/cosplay/addcosplay
+        [HttpPost("addcosplay")]
+        public IActionResult AddNewCosplay(AddCosplayCommand newCosplay)
+        {
+            var existingCosplay = _cosplayRepository.GetCosplayByName(newCosplay.CosplayName, newCosplay.UserId, newCosplay.CosplayImageUrl);
+
+            if (existingCosplay == null)
+            {
+                var createdCosplay = _cosplayRepository.AddCosplay(newCosplay);
+                return Created("", createdCosplay);
+            }
+            else
+            {
+                return BadRequest("Cosplay already exists");
+            }
+        }
+
+        // api/cosplay/7/todolist
+        [HttpGet("{cosplayPiecesId}/todolist")]
+        public IActionResult GetTodoItems(int cosplayPiecesId)
+        {
+            var todos = _cosplayRepository.GetToDoItemsForCosplayPiece(cosplayPiecesId);
+
+            if (todos == null)
+            {
+                return NotFound("Todo item does not exist");
+            }
+            else
+            {
+                return Ok(todos);
+            }
+        }
+
 
     }
 }

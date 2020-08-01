@@ -14,8 +14,8 @@ import expenseData from '../../../helpers/data/expenseData';
 
 class SingleCon extends React.Component {
     state = {
-        conId: parseInt(this.props.match.params.conId),
-        userId: parseInt(this.props.match.params.userId),
+        // conId: parseInt(this.props.match.params.conId),
+        // userId: parseInt(this.props.match.params.userId),
         singleCon: {},
         conBudget: {},
         expenses: {},
@@ -36,8 +36,8 @@ class SingleCon extends React.Component {
     }
 
     getConBudget = () => {
-        const { userId } = this.props.match.params;
-        const { conId } = this.props.match.params;
+        const  userId  = parseInt(this.props.match.params.userId);
+        const  conId  = parseInt(this.props.match.params.conId);
         budgetData.getBudgetForCon(conId, userId)
         .then((response) => {
             const conBudget = response.data;
@@ -137,7 +137,7 @@ class SingleCon extends React.Component {
                     showExpenseForm ? <AddExpenseForm 
                                             key={conBudget.expenses.expenseId} 
                                             conBudget={conBudget} 
-                                            budgetId={conBudget.budgetId}
+                                            budgetId={parseInt(conBudget.budgetId)}
                                             userId={userId}
                                             onSave={this.getConBudget} /> : ('')
                 }

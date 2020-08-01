@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YouHaveTheCon.Models;
 
 namespace YouHaveTheCon.ViewModels
 {
@@ -18,5 +19,6 @@ namespace YouHaveTheCon.ViewModels
         public int ExpenseId { get; set; }
         public int CosplayId { get; set; }
         public string BodyPartName { get; set; }
+        public List<TodoItems> TodoItems { get; set; }
     }
 }
