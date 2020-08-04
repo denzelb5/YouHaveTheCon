@@ -1,3 +1,28 @@
-.form-group {
-    max-width: 500px;
+.ev-head {
+    padding-top: .5em;
+    margin-bottom: .5em;
+    text-decoration: underline rgb(104, 25, 25);
+}
+.add-event {
+    padding: 1em;
+}
+
+.add-buttons {
+    margin: .5em;
+}
+
+
+.stark-div, .lann-div {
+    background-color: black;
+    height: 450px;
+    
+
+    .stark-pic, .lannister-pic {
+        height: 200px;
+        width: 200px;
+    }
+
+    .stark-pic {
+        margin-left: 25px
+    }
 }

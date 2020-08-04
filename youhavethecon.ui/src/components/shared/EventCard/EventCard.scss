@@ -1,0 +1,14 @@
+.event-buttons {
+    display: none;
+    font-size: .75em;
+}
+
+.event-name:hover .event-buttons {
+    display: inline-block;
+}
+
+.event-col {
+    text-align: left;
+    font-size: .75em;
+    border-bottom: .5px dashed silver;
+}

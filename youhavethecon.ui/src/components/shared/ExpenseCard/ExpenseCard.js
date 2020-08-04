@@ -18,16 +18,6 @@ class ExpenseCard extends React.Component {
         
     }
 
-    // renderCategoryAmounts(conBudget) {
-    //     return conBudget.budgetLineItems.map((lineItem) => {
-    //         // using JS array split to get a new array of all the items BEFORE this one
-    //         const itemsBeforeThisOne = [];
-    //         //use reduce to sum up itemsBeforeThisOne total
-    //         const sumOfItemsBeforeThisOne = 5000
-    //     return <div key={lineItem.budgetLineItemId} className="col-sm ">${lineItem.amount}</div>
-    //     });
-    // }
-
     expNameChange = (e) => {
         e.preventDefault();
         this.setState({ expName: e.target.value });
@@ -86,7 +76,7 @@ class ExpenseCard extends React.Component {
         expenseName.forEach((expense) => {
             budgetItemName.forEach((item) => {
                 if (expense.budgetLineItemId === item.budgetLineItemId) {
-                    matchingValues.push(<div  className="col-sm">{item.amount}</div>);
+                    matchingValues.push(<div  className="col-sm expense-col">{item.amount}</div>);
                 }
             });
         });
@@ -102,52 +92,13 @@ class ExpenseCard extends React.Component {
         expenses.forEach((exp) => {
             budgetCats.forEach((cat) => {
                 if (exp.budgetLineItemId === cat.budgetLineItemId) {
-                    matchingCats.push(<div className="col-sm">{cat.name}</div>)
+                    matchingCats.push(<div className="col-sm expense-col">{cat.name}</div>)
                 }
             });
         });
         return matchingCats;
     }
-
-    
-
-    renderRemainingFunds() {
-        
-        // const totalCosts = [];
-        // let expAmounts = conBudget.expenses.map((exp) => exp);
-        // let test = expAmounts.filter((x) => x.expenseName);
-        // console.log('test', test);
-        // let budgetCats = conBudget.budgetLineItems.map((item) => item);
-        // expAmounts.forEach((exp) => {
-        //             let total = exp.name.sort((a,b) => b.exp);
-        //             totalCosts.push(total);
-        //            console.log(totalCosts);
-        // });
-        // return totalCosts;
-        // const costs = expAmounts.map(c => c.cost);
-        // const keys = expAmounts.map((x) => x.expenseName);
-        // console.log('costs', costs);
-        // let test = expAmounts.reduce((r, o) => {
-        //     keys.forEach((k) => r[k] + o[k]);
-        //     return r;
-        // }, Object.assign(...keys.map((k) => ({ [k]: costs }))));
-
-        // const test2 = expAmounts.reduce((a, b) => {
-        //     costs.forEach((j) => a[j] + b[j]);
-        //     return a;
-        // }, Object.assign(...costs.map((f) => ({ 0 : [f]}))));
-        
-        // console.log('test', test, 'test2', test2);
-        // let total = expAmounts.expenseName.reduce((a, b) => b.cost + b.cost);
-        
-        // let results = expAmount.reduce((c, v) => (v.cost) + ' ' + c); 
-        // results.forEach((result) => {
-        //     let total = (result += result)
-            //  console.log('total', total);
-        //     return total;
-        // })
-        // console.log('results', results);
-    } 
+         
 
     render() {
         const { conBudget } = this.props;
@@ -164,17 +115,16 @@ class ExpenseCard extends React.Component {
             let remainder = availableMoney - spentMoney;
 
         return (
-            <div className="container">
-                <h1>Expense Card</h1>
-                
-                <div className="row ">
+            <div className="container expense-card">
+                <h1 className="expense-header">My Expenses</h1>               
+                <div className="row exp-box">
                     <div className="col-sm">
                         <h5>Expense Name</h5>
                         {conBudget.expenses.map((expense) => 
-                        <div className="col-sm"> 
-                        {expense.expenseName}
-                        <button className="btn btn-light" id={expense.expenseId} value={expense.expenseId} onClick={this.editExpenseEvent}>edit</button>
-                        <button className="btn btn-light" id={expense.expenseId} value={expense.expenseId} onClick={this.deleteExpenseEvent}>X</button>
+                        <div className="col-sm expense-buttons-div"> 
+                            {expense.expenseName}
+                            <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.editExpenseEvent}>edit</button>
+                            <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.deleteExpenseEvent}>X</button>
                         </div>)}
                         {showEditExpenseForm ? 
                                   (
@@ -205,20 +155,17 @@ class ExpenseCard extends React.Component {
                                     </form> 
                                   ) : <div></div>}
                     </div>
-                    <div className="col-sm">
+                    <div className="col-sm expense-col">
                         <h5>Category</h5>
                         {this.renderMatchingCategories()}
-                    </div>
-                    
+                    </div>                  
                     <div className="col-sm">
                         <h5>Amount Spent</h5>
-                        {conBudget.expenses.map((exp) => <div className="col-sm"> {exp.cost}</div>)}  
-                        
+                        {conBudget.expenses.map((exp) => <div className="col-sm expense-col"> {exp.cost}</div>)}                         
                     </div>
-                    <div className="col-sm">
-                        {/* <h5>{`Available Funds $${remainder.toFixed(2)}`}</h5> */}
+                    <div className="col-sm">                        
                         <h5>Amount Budgeted</h5>
-                        <div> {this.renderBudgetedAmountsForCategories()}</div>
+                        <div className="expense-col"> {this.renderBudgetedAmountsForCategories()}</div>
                     </div>
                     <div className="col-sm">
                         <h5>Remaining funds</h5>

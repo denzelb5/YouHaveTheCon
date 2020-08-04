@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import authData from '../../../helpers/data/authData';
 import { Link } from 'react-router-dom';
+import './Home.scss';
 
 
 
@@ -19,16 +20,20 @@ class Home extends React.Component {
         const { authed } = this.props;
         return (
             <div className="home">
-                <h1>Home page</h1>
-                
-                { !authed && (
-                    <Link
-                      className='btn btn-dark login-btn'
-                      to='/login'
-                      onClick={this.loginClickEvent}
-                      >Login
-                    </Link>
+                <div className="buffer-top"></div>
+                <div className="con-box">
+                    <h1 className="you-have-the-con">YOU HAVE THE CON</h1>
+                    { !authed && (
+                        <Link
+                        className='btn btn-danger login-btn'
+                        to='/login'
+                        onClick={this.loginClickEvent}
+                        >Login
+                        </Link>
                     )}
+
+                </div>
+                
             </div>
         )
     }

@@ -1,0 +1,31 @@
+@import '../../../styles/variables';
+
+.expense-card {
+    font-family: $yellowtail;
+    // background-image: url('https://storage.needpix.com/rsynced_images/journal-1577764_1280.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+   
+
+    .expense-buttons {
+        display: none;
+        font-size: .75em;
+    }
+
+    .expense-buttons-div:hover .expense-buttons {
+        display: inline-block;
+    }
+
+    .expense-header {
+        margin-bottom: 1em;
+        border-bottom: solid 1px black;
+    }
+
+    .exp-box {
+        border-bottom: solid 1px black;
+    }
+
+    .expense-buttons-div, .expense-col {
+        border-bottom: .5px dotted rgb(151, 115, 69);
+    }
+}

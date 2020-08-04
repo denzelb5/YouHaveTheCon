@@ -60,7 +60,8 @@ namespace YouHaveTheCon.DataAccess
                 select BudgetLineItem.Name, Expenses.*
                 from BudgetLineItem
                 join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
-                where BudgetId = @budgetId";
+                where BudgetId = @budgetId
+                and BudgetLineItem.isActive = 1";
 
             var parameters = new
             {
@@ -103,14 +104,16 @@ namespace YouHaveTheCon.DataAccess
         {
             var sql = @"select BudgetLineItemId from BudgetLineItem
                         where name = @name
-                        and amount = @amount";
+                        and amount = @amount
+                        and isActive = 1";
 
             using (var db = new SqlConnection(ConnectionString))
             {
                 var parameters = new
                 {
                     name = name,
-                    amount = amount
+                    amount = amount,
+                    
                 };
 
                 var lineItemId = db.QueryFirstOrDefault<int>(sql, parameters);
@@ -180,7 +183,8 @@ namespace YouHaveTheCon.DataAccess
                     Name,
                     Amount
                 from BudgetLineItem
-                where BudgetId = @budgetId";
+                where BudgetId = @budgetId
+                and isActive = 1";
 
             var parameters = new
             {
@@ -214,7 +218,7 @@ namespace YouHaveTheCon.DataAccess
 
         public BudgetLineItem RemoveLineItem(int budgetLineItemId)
         {
-            var sql = @"delete from BudgetLineItem where budgetLineItemId = @budgetLineItemId";
+            var sql = @"update BudgetLineItem set IsActive = 0 where budgetLineItemId = @budgetLineItemId";
 
             using (var db = new SqlConnection(ConnectionString))
             {

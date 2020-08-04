@@ -104,11 +104,11 @@ class BudgetCard extends React.Component {
             let remainder = availableMoney - spentMoney;
             return (
                 
-                <div className="container">
-                    <h1>This is the budget Card</h1>
-                    <div>
-                        <h4>Name:  {conBudget.budgetName}</h4>
-                        <h4> Amount Available:  ${conBudget.amountBudgeted}</h4>
+                <div className="container budget-card">
+                   
+                    <div className="d-flex justify-content-around">
+                        <h4 className="budget-header">Name:  {conBudget.budgetName}</h4>
+                        <h4 className="budget-header"> Amount Available:  ${conBudget.amountBudgeted}</h4>
                     </div>
                     <div className="row ">
                         <div className="col-sm">
@@ -117,9 +117,9 @@ class BudgetCard extends React.Component {
                             
                        
                             {conBudget.budgetLineItems.map((lineItem) => <div key={lineItem.budgetLineItemId}
-                                 className="col-sm ">{lineItem.name}
-                                  <button className="btn btn-light" id={lineItem.budgetLineItemId} value={lineItem.budgetLineItemId} onClick={this.editLineEvent}>edit</button>
-                                  <button className="btn btn-light" id={lineItem.budgetLineItemId} value={lineItem.budgetLineItemId} onClick={this.deleteBudgetLineItemEvent}>x</button>  
+                                    className="col-sm hover-btn">{lineItem.name}
+                                    <button className="btn btn-link sc-edit-btn" id={lineItem.budgetLineItemId} value={lineItem.budgetLineItemId} onClick={this.editLineEvent}>edit</button>
+                                    <button className="btn btn-link sc-delete-btn" id={lineItem.budgetLineItemId} value={lineItem.budgetLineItemId} onClick={this.deleteBudgetLineItemEvent}>x</button>  
                                   </div>)}
                                   {showEditForm ? 
                                   (
@@ -156,17 +156,13 @@ class BudgetCard extends React.Component {
                            {conBudget.budgetLineItems.map((line) => <div className="col-sm">{line.amount}</div>)} 
                         
                     </div>
-                    <div className="col-sm">
-                        <h5>{`Available Funds $${remainder.toFixed(2)}`}</h5>
-                    </div>
+                    
                         
                     </div>
-                    {/* {
-                        this.state.showUpdateForm ? <AddBudgetItemForm  toggle={this.toggleEditing}/> : 
-                        <div>
-
-                        </div>
-                    } */}
+                    <div className="col-sm remainder">
+                        <h5>{`Available Funds $${remainder.toFixed(2)}`}</h5>
+                    </div>
+                   
                     </div>
 
             );

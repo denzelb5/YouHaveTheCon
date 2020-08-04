@@ -21,7 +21,8 @@ class SingleCon extends React.Component {
         expenses: {},
         showBudgetForm: false,
         showLineForm: false,
-        showExpenseForm: false
+        showExpenseForm: false,
+        
     }
 
     getCurrentCon = () => {
@@ -57,22 +58,11 @@ class SingleCon extends React.Component {
         .then(() => this.getConBudget())
         .catch((error) => console.error(error));
     }
-    // getBudgetAmountsForExpenses = () => {
-    //     const { conBudget } = this.state;
-    //     const { budgetId, name } = this.state;
-    //     // const { name } = conBudget.budgetLineItems.name;
-    //     expenseData.getBudgetedAmountForExpenses(budgetId, name)
-    //     .then((response) => {
-    //         const { expenses } = response.data;
-    //         this.setState({ expenses })
-    //     })
-
-    //  }
+    
 
     componentDidMount() {
         this.getCurrentCon();
         this.getConBudget();
-        // this.getBudgetAmountsForExpenses();
     }
 
     showFormEvent = (e) => {
@@ -107,9 +97,14 @@ class SingleCon extends React.Component {
         
         return (
             <div className="single-con">
-                <h1>This is the SingleCon Page</h1>
+                <div className="buffer col-12"></div>
                 <SingleConCard key={singleCon.conId} singleCon={singleCon} />
-                <button id="create-budget" onClick={this.showFormEvent} className="btn btn-dark">Create A Budget</button> 
+
+            {
+                !conBudget.budgetId ?
+            (<button id="create-budget" onClick={this.showFormEvent} className="btn btn-dark">Create A Budget</button>)
+            : <h4 className="my-budget">My Budget</h4> 
+            }
                 
                 {
                     showBudgetForm ? <AddBudgetForm conId={conId} userId={userId} onSave={this.getConBudget}/> : ('')
@@ -118,7 +113,7 @@ class SingleCon extends React.Component {
                 <div className="budget">
                     <BudgetCard key={conBudget.budgetId} onSave={this.getConBudget} conBudget={conBudget} deleteBudgetLine={this.deleteBudgetLine} />
                 </div>
-                <button id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
+                <button className="btn btn-link add-cat" id="create-line-item" onClick={this.showLineEvent}>Add Category</button>
                 {
                     showLineForm ? <AddBudgetItemForm
                                         budgetId={conBudget.budgetId}
@@ -130,9 +125,7 @@ class SingleCon extends React.Component {
                                         
                                         /> : ('')
                 }
-                <div>
-                    <button className="btn btn-dark" id="show-expense-card" onClick={this.showExpenseEvent}>Add An Expense</button>
-                </div>
+                
                 {
                     showExpenseForm ? <AddExpenseForm 
                                             key={conBudget.expenses.expenseId} 
@@ -141,8 +134,12 @@ class SingleCon extends React.Component {
                                             userId={userId}
                                             onSave={this.getConBudget} /> : ('')
                 }
+                <div className="expense-buffer"></div>
                 <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} deleteExpense={this.deleteExpense} onSave={this.getConBudget}/></div>
-                <Link className="btn btn-dark" to={`/event/allevents/${conBudget.conId}/${conBudget.userId}`}>View My Events</Link>
+                <div>
+                    <button className="btn btn-link add-expense" id="show-expense-card" onClick={this.showExpenseEvent}>Add An Expense</button>
+                </div>
+                <Link className="btn btn-link view-events" to={`/event/allevents/${conBudget.conId}/${conBudget.userId}`}>View My Events</Link>
             </div>
         )
     }
