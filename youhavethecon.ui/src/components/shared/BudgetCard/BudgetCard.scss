@@ -1,7 +1,52 @@
-.row {
-    border: 10px solid lightgray;
+@import '../../../styles/variables';
+
+// .row {
+//     border: 3px solid lightgray;
+// }
+
+// .col-sm {
+//     border: 3px solid lightgray;
+// }
+
+.budget-card {
+    background-image: url('https://storage.needpix.com/rsynced_images/journal-1577764_1280.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    //background-color: black;
+    border-radius: 10px;
+    max-width: 700px;
+    font-family: $yellowtail;
+    padding-bottom: 0px;
+    padding-top: 50px;
+    min-height: 435px;
+
+    .budget-header {
+        text-decoration: underline;
+    }
+
+    .sc-edit-btn  {
+        display: none;
+
+    }
+
+    .sc-delete-btn {
+        display: none;
+    }
+
+    .hover-btn:hover .sc-delete-btn {
+        display: inline-block;
+    }
+   
+    .hover-btn:hover .sc-edit-btn {
+        display: inline-block;
+    }
+
+    .remainder {
+        margin-left: 25%;
+        margin-top: 7%;
+    }
 }
 
-.col-sm {
-    border: 3px solid lightgray;
-}
+
+
+

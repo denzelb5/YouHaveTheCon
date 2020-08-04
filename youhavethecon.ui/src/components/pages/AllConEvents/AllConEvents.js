@@ -49,28 +49,38 @@ class AllConEvents extends React.Component {
         const userId = parseInt(this.props.match.params.userId);
         const conId = parseInt(this.props.match.params.conId);
         return (
-            <div>
-                <h3>{con.conName}</h3>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm">
-                            Name
+            <div className="container event-box">
+                <h1 className="event-headline">My Events</h1>
+                <div className="row">
+                    <div className="col-3">
+                        <img src="https://cdn.pixabay.com/photo/2017/05/14/09/51/tardis-2311634_960_720.png" className="tardis d-flex justify-content-start" alt="tardis"/>
+                    </div>
+                   
+                    <div className="container events col-9">
+                        <h3>{con.conName}</h3>
+                        <div className="row">
+                            <div className="col-sm event-header">
+                                Name
+                            </div>
+                            <div className="col-sm event-header">
+                                Date
+                            </div>
+                            <div className="col-sm event-header">
+                                Time
+                            </div>
+                            <div className="col-sm event-header">
+                                Location
+                            </div>
                         </div>
-                        <div className="col-sm">
-                            Date
-                        </div>
-                        <div className="col-sm">
-                            Time
-                        </div>
-                        <div className="col-sm">
-                            Location
-                        </div>
+                <div className="events">
+                    {allConEvents.map((event) => <EventCard key={event.eventId} event={event} deleteEvent={this.deleteEvent} />)}
+                </div> 
                     </div>
                 </div>
-                <div>
-                    {allConEvents.map((event) => <EventCard key={event.eventId} event={event} deleteEvent={this.deleteEvent} />)}
+
+                <div className="add-event-btn">
+                    <Link className="btn btn-dark" to={`/addevent/${conId}/${userId}`}>Add Event</Link>
                 </div>
-                <Link className="btn btn-dark" to={`/addevent/${conId}/${userId}`}>Add Event</Link>
             </div>
 
         );

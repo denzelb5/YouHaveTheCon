@@ -1,0 +1,41 @@
+@import '../../../styles/_variables.scss';
+
+.single-con {
+    background-image: url('https://www.maxpixel.net/static/photo/1x/Antique-Old-Texture-Paper-Parchment-Background-1074131.jpg');
+    // background-repeat: no-repeat;
+    background-size: 100%;
+    
+    
+
+    .add-cat {
+        margin-right: 30%;
+        padding-top: 0;
+        color: black;
+        text-decoration: underline;
+        font-family: $yellowtail;
+    }
+
+    .my-budget {
+        font-family: $yellowtail;
+    }
+
+    .add-expense {
+        font-family: $yellowtail;
+        color: black;
+        text-decoration: underline;
+        margin-bottom: 6em;
+        margin-right: 60%;
+    }
+
+    .expense-buffer {
+        height: 6em;
+    }
+
+    .view-events {
+        margin-bottom: 6em;
+        text-decoration: underline;
+        font-size: 1.25em;
+        color: rgb(146, 46, 46);
+    } 
+    
+}

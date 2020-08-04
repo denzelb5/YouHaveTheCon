@@ -21,24 +21,25 @@ class EventCard extends React.Component {
             <div className="container">
                 <div className="row">
                    
-                    <div className="col-sm">
+                    <div className="col-sm event-name event-col">
                         
                         {event.eventName}
-                         <button className="btn btn-light" onClick={this.deleteEventEvent}>X</button>
+                         <button className="btn btn-link event-buttons" onClick={this.deleteEventEvent}>x</button>
+                         <Link className="btn btn-link event-buttons" to={`/editevent/${event.eventId}/${event.conId}/${event.userId}`}>Edit</Link>
                     </div>
                     
-                    <div className="col-sm">
+                    <div className="col-sm event-col">
                         {moment(event.eventDateTime).format('LL')} 
                     </div>
 
-                    <div className="col-sm">
+                    <div className="col-sm event-col">
                          {moment(event.eventDateTime).format('LT')} - {moment(event.eventEndDate).format('LT')}
                     </div>
 
-                    <div className="col-sm">
+                    <div className="col-sm event-col">
                         {event.eventLocation}
                     </div>
-                    <Link className="btn btn-light" to={`/editevent/${event.eventId}/${event.conId}/${event.userId}`}>Edit</Link>
+                    
                 </div>
             </div>
         )
