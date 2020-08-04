@@ -124,13 +124,15 @@ class ExpenseCard extends React.Component {
                         <div className="col-sm expense-buttons-div"> 
                             {expense.expenseName}
                             <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.editExpenseEvent}>edit</button>
-                            <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.deleteExpenseEvent}>X</button>
+                            <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.deleteExpenseEvent}>x</button>
                         </div>)}
                         {showEditExpenseForm ? 
                                   (
-                                    <form className="expense-form">
+                                      
+                                      <form className="expense-form">
+                                    <div className="form-row">
                     
-                                    <div className="form-group">
+                                    <div className="col-sm exp-form">
                                     <label htmlFor="expense-name">Expense Name</label>
                                     <input
                                     type="text"
@@ -141,7 +143,7 @@ class ExpenseCard extends React.Component {
                                     />
                                     
                                     </div>
-                                    <div className="form-group">
+                                    <div className="col-sm exp-form">
                                     <label htmlFor="amount-budgeted">Amount</label>
                                     <input
                                     type="number"  step="0.01" min="0" max="10"
@@ -152,6 +154,7 @@ class ExpenseCard extends React.Component {
                                     />
                                         </div>
                                         <div className="btn btn-dark" onClick={this.updateExpenseItemEvent}>Save</div>
+                                    </div>
                                     </form> 
                                   ) : <div></div>}
                     </div>

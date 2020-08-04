@@ -126,6 +126,11 @@ class SingleCon extends React.Component {
                                         /> : ('')
                 }
                 
+                <div className="expense-buffer"></div>
+                <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} deleteExpense={this.deleteExpense} onSave={this.getConBudget}/></div>
+                <div>
+                    <button className="btn btn-link add-expense" id="show-expense-card" onClick={this.showExpenseEvent}>Add An Expense</button>
+                </div>
                 {
                     showExpenseForm ? <AddExpenseForm 
                                             key={conBudget.expenses.expenseId} 
@@ -134,11 +139,6 @@ class SingleCon extends React.Component {
                                             userId={userId}
                                             onSave={this.getConBudget} /> : ('')
                 }
-                <div className="expense-buffer"></div>
-                <div><ExpenseCard key={conBudget.budgetId} conBudget={conBudget} budgetedAmount={this.getBudgetAmountsForExpenses} deleteExpense={this.deleteExpense} onSave={this.getConBudget}/></div>
-                <div>
-                    <button className="btn btn-link add-expense" id="show-expense-card" onClick={this.showExpenseEvent}>Add An Expense</button>
-                </div>
                 <Link className="btn btn-link view-events" to={`/event/allevents/${conBudget.conId}/${conBudget.userId}`}>View My Events</Link>
             </div>
         )
