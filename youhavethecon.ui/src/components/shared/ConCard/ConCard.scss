@@ -1,0 +1,43 @@
+.con-card {
+    margin: 2em;
+    
+    .con-name {
+        background-color: rgb(10, 36, 75);
+        color: silver;
+        text-decoration: underline;
+        font-size: 1.5em;
+        padding: 1em;
+    }
+    
+
+    .delete-con {
+        float: right;
+        position: relative;
+        color: black;
+        display: none;
+        background-color: rgba(128, 128, 128, 0.452);
+    }
+
+    .con-card-body {
+        background-color: rgb(197, 181, 159);
+        text-align: left;
+
+        .con-date {
+            text-decoration: underline;
+        }
+
+        .con-loc {
+            margin: 0;
+        }
+
+        .details {
+            color: rgb(136, 17, 9);
+            text-decoration: underline;
+        }
+    }
+
+    .con-card-body:hover .delete-con {
+        display: inline-block;
+    }
+
+}

@@ -1,0 +1,16 @@
+@import '../../../styles/variables';
+
+.all-cosplays {
+    background-color: rgb(10, 36, 75);
+    color: rgb(238, 227, 227);
+    padding-top: 2em;
+
+    .all-cos-head {
+        padding-top: 2em;
+
+        .add-cos-btn {
+            padding: 1em;
+            margin: 1em;
+        }
+    }
+}

@@ -52,7 +52,7 @@ class AddBudgetForm extends React.Component {
                     showBudgetBox ? (<div></div>) 
                     : (
                         <form className="budget-form">
-                            <h1>Add Budget Page</h1>
+                            
                         <div className="form-group">
                         <label htmlFor="budget-name">Budget Name</label>
                         <input
@@ -62,7 +62,7 @@ class AddBudgetForm extends React.Component {
                         value={budgetName}
                         onChange={this.budgetNameChange}
                         />
-                        
+                        <h1>Add Budget Page</h1>
                         </div>
                         <div className="form-group">
                         <label htmlFor="amount-budgeted">Amount To Budget</label>

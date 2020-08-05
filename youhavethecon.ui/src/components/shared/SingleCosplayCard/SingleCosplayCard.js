@@ -64,41 +64,46 @@ class SingleCosplayCard extends React.Component {
         if (todoItems !== undefined && piece !== undefined) {
 
             return (
-                <div>
-                    
+                <div className="single-cosplay-card">                  
                     <div className="card mb-3">
                         <div className="row no-gutters">
-                            <div className="col md-4">
+                            <div className="col md-4 image-background">
                                 <img src={piece.pieceImageUrl} className="card-img-top cosplay-image" alt="..."/>
                             </div>
-                            <div className="col-md-8">
-                        <div className="card-body">
-                            <h3>{piece.bodyPartName}</h3>
-                            <h5 className="card-title">{piece.pieceName}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">{piece.percentDone}% Done</h6>
-                            <p className="card-text">Completion Estimate: {piece.completionHoursEstimate} hours {piece.completionMinutesEstimate} minutes</p>
-                            <button onClick={ this.showAddForm} className="card-link">Add todo list</button>
-                            
-                            <div>
-                            <div>
-                                         
-                                     </div>
-                                {
-                                    showTodoAddForm ? 
+                                <div className="col-md-8">
                                     <div>
-                                        <AddTodoForm cosplayPiecesId={piece.cosplayPiecesId} onSave={this.getTodoData} hideForm={this.hideForm}/>
-                                        
+                                        <h3 className="body-part">{piece.bodyPartName}</h3>
                                     </div>
-                                    :
-                                     <div>
-                                         {todoItems.map((todo) => <TodoCard key={todo.todoId} todo={todo} deleteTodo={this.deleteTodo} />)} 
-                                     </div>
-                                     
-                                     
-                                }
-    
-                            </div>
-                            <div></div></div>
+                                <div  className="d-flex no-wrap">
+                                    <div className="card-body info-card col-6">
+                                        <div className="text-left piece-info">
+                                            <div>
+                                                <h5 className="card-title piece-name">Name: {piece.pieceName}</h5>
+                                            </div>
+                                            <div>
+                                                <h6 className="card-text">Total Progress: {piece.percentDone}% Done</h6>
+                                                <p className="card-text">Completion Estimate: {piece.completionHoursEstimate} hours {piece.completionMinutesEstimate} minutes</p>
+                                            </div>
+                                        </div> 
+                                          
+                                    </div>
+                                    <div className="col-6 text-center">  
+                                        <div>
+                                            <button onClick={ this.showAddForm} className="card-link">Add Todo Item</button>
+                                        </div>                                           
+                                    {
+                                        showTodoAddForm ? 
+                                        <div>
+                                            <AddTodoForm cosplayPiecesId={piece.cosplayPiecesId} onSave={this.getTodoData} hideForm={this.hideForm}/>
+                                            
+                                        </div>
+                                        :
+                                        <div className="text-center">
+                                            {todoItems.map((todo) => <TodoCard key={todo.todoId} todo={todo} deleteTodo={this.deleteTodo} />)} 
+                                        </div>                                  
+                                    }  
+                                    </div>                             
+                                </div>                       
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,22 @@
+.single-cosplay-card {
+    margin: 2em;
+    padding: 1em;
+
+
+    .body-part {
+        border-bottom: 5px solid black;
+    }
+
+    .piece-info {
+        align-items: left;
+    }
+
+    .cosplay-image {
+        height: 100%;
+    }
+
+    .info-card {
+        border-right: 1px solid red;
+    }
+
+}

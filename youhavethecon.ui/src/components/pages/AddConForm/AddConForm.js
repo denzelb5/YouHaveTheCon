@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import conData from '../../../helpers/data/conData';
 import authData from '../../../helpers/data/authData';
+import './AddConForm.scss';
 
 class AddConForm extends React.Component {
     state = {
@@ -68,10 +69,10 @@ class AddConForm extends React.Component {
         } = this.state;
         const userId = authData.getUserId();
         return ( 
-          
-            <form className="con-form">
-              <h1>Add Con Page</h1>
-        <div className="form-group">
+          <div className="add-con-form d-flex">
+            <form className="container col-6 con-form">
+              <h1 className="add-con-header">Enter Con Info</h1>
+        <div className="col-8 con-inputs">
           <label htmlFor="con-name">Con Name</label>
           <input
           type="text"
@@ -83,7 +84,7 @@ class AddConForm extends React.Component {
           />
           
         </div>
-        <div className="form-group">
+        <div className="col-6 con-inputs">
           <label htmlFor="con-start-date">Con Start Date</label>
           <input
           type="datetime-local"
@@ -94,7 +95,7 @@ class AddConForm extends React.Component {
           onChange={this.conStartChange}
           />
         </div>
-        <div className="form-group">
+        <div className="col-6 con-inputs">
           <label htmlFor="con-enddate">Con End Date</label>
           <input
           type="datetime-local"
@@ -105,7 +106,7 @@ class AddConForm extends React.Component {
           onChange={this.conEndChange}
           />
         </div>
-        <div className="form-group">
+        <div className="col-10 con-inputs">
           <label htmlFor="location-name">Location Name</label>
           <input
           type="text"
@@ -116,7 +117,7 @@ class AddConForm extends React.Component {
           onChange={this.locationNameChange}
           />
         </div>
-        <div className="form-group">
+        <div className="col-10 con-inputs">
           <label htmlFor="con-location-info">Enter Address</label>
           <input
           type="text"
@@ -127,8 +128,8 @@ class AddConForm extends React.Component {
           onChange={this.locationInfoChange}
           />
         </div>
-        { <button className="btn btn-dark" onClick={this.createNewConEvent}>Save Con</button> }
-        <Link className="btn btn-primary" to={`/convention/allcons/${userId}`}>Cancel</Link>
+        { <button className="btn btn-secondary add-con-btns" onClick={this.createNewConEvent}>Save Con</button> }
+        <Link className="btn btn-danger add-con-btns" to={`/convention/allcons/${userId}`}>Cancel</Link>
 
         {/* { !conId
        ?  <button className="btn btn-dark" onClick={this.createNewConEvent}>Save Con</button>
@@ -136,6 +137,8 @@ class AddConForm extends React.Component {
         } */}
         
       </form>
+      <div className="col-6"></div>
+      </div>
         );
     }
 }

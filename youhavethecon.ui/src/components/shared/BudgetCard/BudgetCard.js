@@ -21,20 +21,6 @@ class BudgetCard extends React.Component {
         deleteBudgetLine: PropTypes.func
     }
 
-
-    
-
-    
-    // renderCategoryAmounts(conBudget) {
-    //     return conBudget.budgetLineItems.map((lineItem) => {
-    //         // using JS array split to get a new array of all the items BEFORE this one
-    //         const itemsBeforeThisOne = [];
-    //         //use reduce to sum up itemsBeforeThisOne total
-    //         const sumOfItemsBeforeThisOne = 5000
-    //     return <div key={lineItem.budgetLineItemId} className="col-sm ">${lineItem.amount}</div>
-    //     });
-    // }
-
     lineNameChange = (e) => {
         e.preventDefault();
         this.setState({ lineName: e.target.value });
