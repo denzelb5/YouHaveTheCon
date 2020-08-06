@@ -17,16 +17,16 @@ An organizational app designed for "Cosplayers."  Cosplay is the act of dressing
 ## Walk Through
 
 Home Page -- An interface from the Star Trek series
-![Home Page](./screenshots/homePage.PNG)
+![Home Page](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/homePage.PNG)
 
 Logged In Page
-![Login Page](./screenshots/login.PNG)
+![Login Page](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/login.PNG)
 
 AllCons Page -- user can view all of the cons they are planning to attend.  User can also add or delete (delete button on hover) a con to this page. Cons are listed by upcoming date. Background is an old castle wall.
-![allCons Page](./screenshots/allCons.PNG)
+![allCons Page](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/allCons.PNG)
 
 Add A Con  -- user can add a con. Background homage to Star Wars death star.
-![addCon Page](./screenshots/addACon.PNG)
+![addCon Page](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addACon.PNG)
 
 Single Con Page / Budget Portion --
 * User can create or view their budget for the chosen con.  If no budget exists the user is prompted to create one.  There is only one budget allowed per con.  
@@ -34,50 +34,50 @@ Single Con Page / Budget Portion --
 The edit and delete buttons appear on hover in the line items. 
 * Styling pays homage to Harry Potter fans 
 
-![SingleCon/budget](./screenshots/singleCon.PNG)
+![SingleCon/budget](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/singleCon.PNG)
 
 Add a Category form
 
-![addCategory](./screenshots/addBudgetCategory.PNG)
+![addCategory](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addBudgetCategory.PNG)
 
 SingleCon / Expenses
 * User can add / edit / delete their expenses incurred at the con and compare them to the amount they budgeted for them.  Category names in dropdown are pulled in from the budget categories.
 * Edit / delete appear on line items on mouse hover.
 * Bottom Link -- links to the con schedule page where a user can track the events they are attending.
-![expenses](./screenshots/expenses.PNG)
+![expenses](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/expenses.PNG)
 
 Add An Expense Form
 
-![expenseForm](./screenshots/addExpense.PNG)
+![expenseForm](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addExpense.PNG)
 
 Con Schedule Page
 * User can create an at a glance schedule for their activities at the con.
 * Events appear in chronological order.
 * User can add / edit / delete events.  Edit / delete appear on hover per line item.
 
-![conSchedule](./screenshots/conSchedule.PNG)
+![conSchedule](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/conSchedule.PNG)
 
 Add Event Form
 
-![addEventForm](./screenshots/addEvent.PNG)
+![addEventForm](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addEvent.PNG)
 
 AllCosplays Page
 * User can view the outfits they would like to make or purchase and also add a cosplay.
 
 Add A Cosplay Form
-![addCosplayForm](./screenshots/addCosplay.PNG)
+![addCosplayForm](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addCosplay.PNG)
 
 Cosplay Pieces Page
 * User can add and track progress of the various pieces that make up one outfit.
 * User can create and delete todo tasks to help organize the creation process.
 
-![CosplayPiece](./screenshots/cosplayPiecePage.PNG)
+![CosplayPiece](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/cosplayPiecePage.PNG)
 
 Add Cosplay Piece Form
-![addCosplayPiece](./screenshots/addCosplayPiece.PNG)
+![addCosplayPiece](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addCosplayPiece.PNG)
 
 Add ToDo Form
-![addToDo](./screenshots/todoAdd.PNG)
+![addToDo](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/todoAdd.PNG)
 
 ## Contributors
 
