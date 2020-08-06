@@ -72,27 +72,6 @@ namespace YouHaveTheCon.DataAccess
             }
         }
 
-        //public BudgetLineItem UpdateBudgetLine(int budgetLineItemId, EditLineItem lineToUpdate)
-        //{
-        //    var sql = @"update BudgetLineItem
-        //                set name = @name, amount = @amount
-        //                where budgetLineItemId = @budgetLineItemId";
-
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-        //        var parameters = new
-        //        {
-        //            name = lineToUpdate.Name,
-        //            amount = lineToUpdate.Amount,
-        //            budgetLineItemId = budgetLineItemId
-        //        };
-        //        var updatedLine = db.QueryFirstOrDefault<BudgetLineItem>(sql, parameters);
-        //        return updatedLine;
-
-        //    }
-
-        //}
-
         public Expenses UpdateExpenseLine(int expenseId, EditExpense expenseToUpdate)
         {
             var sql = @"update Expenses
@@ -129,56 +108,7 @@ namespace YouHaveTheCon.DataAccess
                 return deletedExpense;
             }
         }
-
-        //public Expense_budgetAmounts GetBudgetedAmounts(int budgetId, string name)
-        //{
-        //    var sql = @"select budgetlineitem.*, Expenses.*
-        //                from BudgetLineItem 
-        //                join Expenses 
-        //                on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
-        //                where BudgetId = @budgetId
-        //                and BudgetLineItem.name = @name;";
-
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-        //        var parameters = new
-        //        {
-        //            budgetId = budgetId,
-        //            name = name
-        //        };
-
-        //        var expenseAmounts = db.QueryFirstOrDefault<Expense_budgetAmounts>(sql, parameters);
-
-        //        if (expenseAmounts != null)
-        //        {
-        //            expenseAmounts.Expenses = GetExpensesForBudget(expenseAmounts.BudgetId, expenseAmounts.Name);
-
-        //        }
-
-        //        return expenseAmounts;
-        //    }
-        //}
-
-        //public List<Expenses> GetExpensesForBudget(int budgetId, string name)
-        //{
-        //    using var db = new SqlConnection(ConnectionString);
-
-        //    var sql = @"
-        //        select BudgetLineItem.Name, Expenses.*
-        //        from BudgetLineItem
-        //        join Expenses on Expenses.BudgetLineItemId = BudgetLineItem.BudgetLineItemId
-        //        where BudgetId = @budgetId
-        //        and Expenses.expenseName = @name";
-
-        //    var parameters = new
-        //    {
-        //        budgetId = budgetId,
-        //        name = name
-        //    };
-
-        //    var expenses = db.Query<Expenses>(sql, parameters);
-        //    return expenses.ToList();
-        //}
+ 
 
 
     }
