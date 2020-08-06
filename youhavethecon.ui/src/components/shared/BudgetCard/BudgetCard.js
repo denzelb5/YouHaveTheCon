@@ -21,20 +21,6 @@ class BudgetCard extends React.Component {
         deleteBudgetLine: PropTypes.func
     }
 
-
-    
-
-    
-    // renderCategoryAmounts(conBudget) {
-    //     return conBudget.budgetLineItems.map((lineItem) => {
-    //         // using JS array split to get a new array of all the items BEFORE this one
-    //         const itemsBeforeThisOne = [];
-    //         //use reduce to sum up itemsBeforeThisOne total
-    //         const sumOfItemsBeforeThisOne = 5000
-    //     return <div key={lineItem.budgetLineItemId} className="col-sm ">${lineItem.amount}</div>
-    //     });
-    // }
-
     lineNameChange = (e) => {
         e.preventDefault();
         this.setState({ lineName: e.target.value });
@@ -84,6 +70,11 @@ class BudgetCard extends React.Component {
         deleteBudgetLine(budgetLineItemId);
     }
 
+    cancelEditForm = (e) => {
+        e.preventDefault();
+        this.setState({ showEditForm: false })
+    }
+
     
    
     render() {
@@ -123,30 +114,31 @@ class BudgetCard extends React.Component {
                                   </div>)}
                                   {showEditForm ? 
                                   (
-                                    <form className="budget-line">
+                                    <form className="edit-budget-line col-10">
                     
-                                    <div className="form-group">
+                                    <div className="form-group input-bl">
                                     <label htmlFor="budget-name">Category Name</label>
                                     <input
                                     type="text"
                                     className="form-control"
-                                    placeholder={conBudget.budgetLineItems.name}
+                                    placeholder="Enter New Category Name"
                                     value={lineName}
                                     onChange={this.lineNameChange}
                                     />
                                     
                                     </div>
-                                    <div className="form-group">
-                                    <label htmlFor="amount-budgeted">Amount</label>
-                                    <input
-                                    type="number"  step="0.01" min="0" max="10"
-                                    className="form-control"
-                                    placeholder="Enter Budget Amount"
-                                    value={lineAmount}
-                                    onChange={this.lineAmountChange}
-                                    />
-                                        </div>
-                                        <div className="btn btn-dark" onClick={this.updateLineItemEvent}>Save</div>
+                                    <div className="form-group input-bl">
+                                        <label htmlFor="amount-budgeted">Amount</label>
+                                        <input
+                                            type="number"  step="0.01" min="0" max="10"
+                                            className="form-control"
+                                            placeholder="Enter New Amount"
+                                            value={lineAmount}
+                                            onChange={this.lineAmountChange}
+                                        />
+                                    </div>
+                                        <div className="btn btn-dark edit-bl-btns" onClick={this.updateLineItemEvent}>Save</div>
+                                        <div className="btn btn-danger edit-bl-btns" onClick={this.cancelEditForm}>Cancel</div>
                                     </form> 
                                   ) : <div></div>}
                         </div>
@@ -160,7 +152,7 @@ class BudgetCard extends React.Component {
                         
                     </div>
                     <div className="col-sm remainder">
-                        <h5>{`Available Funds $${remainder.toFixed(2)}`}</h5>
+                        <h5>{`Remaining Funds: $${remainder.toFixed(2)}`}</h5>
                     </div>
                    
                     </div>

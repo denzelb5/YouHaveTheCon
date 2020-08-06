@@ -21,7 +21,7 @@ namespace YouHaveTheCon.DataAccess
 
         public List<Convention> GetAllConsByUserId(int userId)
         {
-            var sql = @"SELECT * FROM Convention where userId = @userId;";
+            var sql = @"SELECT * FROM Convention where userId = @userId order By ConStartDate ASC;";
 
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -94,7 +94,8 @@ namespace YouHaveTheCon.DataAccess
             var sql = @"select *
                         from Convention
                         where conId = @conId
-                        and userId = @userId";
+                        and userId = @userId
+                        order by ConStartDate ASC";
 
             using (var db = new SqlConnection(ConnectionString))
             {

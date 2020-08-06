@@ -13,7 +13,8 @@ class AddExpenseForm extends React.Component {
 
     static props = {
         budgetId: PropTypes.int,
-        onSave: PropTypes.func
+        onSave: PropTypes.func,
+        onClose: PropTypes.func
     }
 
     expenseNameChange = (e) => {
@@ -42,7 +43,7 @@ class AddExpenseForm extends React.Component {
         };
         expenseData.addExpense(newExpense)
         .then((result) => {
-            this.setState({ showExpenseForm: true })
+            this.props.onClose();
             this.props.onSave();
         })
         .catch((error) => {
@@ -53,67 +54,60 @@ class AddExpenseForm extends React.Component {
 
     closeExpenseForm = (e) => {
         e.preventDefault();
-        this.setState({ showExpenseForm: false })
+        this.props.onClose();
     }
 
     render() {
-        const { expenseName, cost, showExpenseForm } = this.state;
+        const { expenseName, cost } = this.state;
         const { conBudget } = this.props;
         return (
-        <div>
-            {
-                showExpenseForm ? (<div></div> )
-                : (
-           
-            <form className="expense container"> 
-                <div className="form-row">  
-                <div className="col-3">
-                    <label htmlFor="budget-name">Expense Name</label>
-                    <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter expense name"
-                    value={expenseName}
-                    onChange={this.expenseNameChange}
-                    />
-                </div>
-
-                <div className="col-3">
-                    <div className="dropdownSection">
-                        <div className="form-group">
-                         <label htmlFor="category" className="cat-label categoryDropdown">Choose Category</label>
-                         <select
-                             type="select"
-                             className="form-control"
-                             onChange={this.categoryChange}
-                         >
-                             <option>Category</option>
-                             {conBudget.budgetLineItems.map((line) => <option key={line.budgetLineItemId} value={line.budgetLineItemId} >{line.name}</option>)}
-                         </select>
-                     </div>
-                 </div>
-                
-             </div>
-
-
-                <div className="col-3">
-                    <label htmlFor="cost">Amount</label>
-                    <input
-                        type="number"  step="0.01" min="0" max="10"
+            <div>
+                <form className="add-expense-form container"> 
+                    <div className="form-row">  
+                    <div className="col-3">
+                        <label htmlFor="budget-name">Expense Name</label>
+                        <input
+                        type="text"
                         className="form-control"
-                        placeholder="Enter Cost"
-                        value={cost}
-                        onChange={this.costChange}
-                    />
-                </div>
-                
-                </div>
-                <div className="btn btn-dark add-exp-btn" onClick={this.addExpenseEvent}>Save</div>
-                <div className="btn btn-danger add-exp-btn" onClick={this.closeExpenseForm}>Cancel</div>
-            </form>
+                        placeholder="Enter expense name"
+                        value={expenseName}
+                        onChange={this.expenseNameChange}
+                        />
+                    </div>
 
-                )
-            }
+                    <div className="col-3">
+                        <div className="dropdownSection">
+                            <div className="form-group">
+                            <label htmlFor="category" className="cat-label categoryDropdown">Choose Category</label>
+                            <select
+                                type="select"
+                                className="form-control"
+                                onChange={this.categoryChange}
+                            >
+                                <option>Category</option>
+                                {conBudget.budgetLineItems.map((line) => <option key={line.budgetLineItemId} value={line.budgetLineItemId} >{line.name}</option>)}
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                    <div className="col-3">
+                        <label htmlFor="cost">Amount</label>
+                        <input
+                            type="number"  step="0.01" min="0" max="10"
+                            className="form-control"
+                            placeholder="Enter Cost"
+                            value={cost}
+                            onChange={this.costChange}
+                        />
+                    </div>
+                    
+                    </div>
+                    <div className="btn btn-dark add-exp-btn" onClick={this.addExpenseEvent}>Save</div>
+                    <div className="btn btn-danger add-exp-btn" onClick={this.closeExpenseForm}>Cancel</div>
+                </form>
             </div> 
         )
     }

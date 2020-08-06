@@ -1,0 +1,40 @@
+.single-cosplay-card {
+    margin: 2em;
+    padding: 1em;
+
+
+    .body-part {
+        border-bottom: 3px solid black;
+        margin: 1em;
+        padding-bottom: .5em;
+        
+    }
+
+    .piece-info {
+        align-items: left;
+    }
+
+    .cosplay-image {
+        height: 100%;
+    }
+
+    .info-card {
+        border-right: 1px solid black;
+        margin-bottom: 1em;
+    }
+
+    .todo-box {
+        padding: 1em;
+
+        .todo-head {
+            margin-right: 2em;
+        }
+    }
+
+    .add-todo-btn {
+        background-color: rgb(23, 122, 202);
+        color: white;
+    }
+
+
+}

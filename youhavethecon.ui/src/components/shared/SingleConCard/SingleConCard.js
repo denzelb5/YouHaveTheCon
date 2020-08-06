@@ -7,8 +7,8 @@ class SingleConCard extends React.Component {
         const { singleCon } = this.props;
         return (
             <div className="card col-12 single-con-card">
+                    <h3 className="card-title s-con-head">{singleCon.conName}</h3>
                 <div className="card-body d-flex justify-content-between">
-                    <h3 className="card-title">{singleCon.conName}</h3>
                     <p className="card-subtitle mb-2">{moment(singleCon.conStartDate).format('LL')} - {moment(singleCon.conEndDate).format('LL')}</p>
                     <p className="location-name">{singleCon.locationName}</p>
                     <p className="card-text">{singleCon.locationInfo}</p>

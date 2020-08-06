@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import budgetData from '../../../helpers/data/budgetData';
+import './AddBudgetForm.scss';
 
 
 class AddBudgetForm extends React.Component {
@@ -43,6 +44,11 @@ class AddBudgetForm extends React.Component {
         .catch((error) => console.error(error));
     }
 
+    closeAddBudgetForm = (e) => {
+        e.preventDefault();
+        this.props.onClose();
+    }
+
     render() {
         const { budgetName, amountBudgeted, showBudgetBox } = this.state;
        
@@ -51,9 +57,11 @@ class AddBudgetForm extends React.Component {
                 {
                     showBudgetBox ? (<div></div>) 
                     : (
-                        <form className="budget-form">
-                            <h1>Add Budget Page</h1>
-                        <div className="form-group">
+                        <div className="container">
+                            
+                        <form className="add-budget-form">
+                            
+                        <div className="form-group budg-inputs col-4">
                         <label htmlFor="budget-name">Budget Name</label>
                         <input
                         type="text"
@@ -62,9 +70,8 @@ class AddBudgetForm extends React.Component {
                         value={budgetName}
                         onChange={this.budgetNameChange}
                         />
-                        
                         </div>
-                        <div className="form-group">
+                        <div className="form-group budg-inputs col-4">
                         <label htmlFor="amount-budgeted">Amount To Budget</label>
                         <input
                         type="number"  step="0.01" min="0" max="10"
@@ -74,8 +81,13 @@ class AddBudgetForm extends React.Component {
                         onChange={this.amountBudgetedChange}
                         />
                             </div>
-                            <div className="btn btn-dark" onClick={this.AddNewBudgetEvent}>Save</div>
+                            <div className="add-budg-form-btns">
+                                <div className="btn btn-dark save-add-budg-btn budget-btns" onClick={this.AddNewBudgetEvent}>Save</div>
+                                <div className="btn btn-danger cancel-budg-btn budget-btns" onClick={this.closeAddBudgetForm}>Cancel</div>
+                            </div>
                         </form>
+                        </div>
+                        
                     )
                 }
             

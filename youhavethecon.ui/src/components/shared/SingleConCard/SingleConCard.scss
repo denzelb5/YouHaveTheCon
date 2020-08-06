@@ -1,12 +1,18 @@
 @import '../../../styles/_variables';
 
 .single-con-card {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/46/Churull.jpg');
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSPGBb4jkQulepSFiLwOK3wiTiJZxJvlMvX3A&usqp=CAU');
     background-repeat: no-repeat;
     background-size: 200%;
-    // font-family: $yellowtail;
+    color: rgb(219, 209, 209);
+    margin-bottom: 3em;
+    border: 3px black;
+    
+    .s-con-head {
+        padding-top: 1em;
+    }
 }
 
 .buffer {
-    height: 6em;
+    height: 1em;
 }

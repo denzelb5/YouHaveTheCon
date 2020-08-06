@@ -51,7 +51,7 @@ class AddTodoForm extends React.Component {
     }
 
     render() {
-        const { todoName, todoNotes } = this.state;
+        const { todoName } = this.state;
         
         return (
             <div>
@@ -60,20 +60,12 @@ class AddTodoForm extends React.Component {
                         <div className="col">
                             <input type="text"
                              className="form-control" 
-                             placeholder="ToDo name"
+                             placeholder="ToDo Name"
                              value={todoName}
                              onChange={this.nameChange}
                              />
                         </div>
-                        <div className="col">
-                            <textarea type="text"
-                             className="form-control"
-                             placeholder="Notes"
-                             value={todoNotes} 
-                             onChange={this.noteChange}
-                             rows="2">
-                            </textarea>
-                        </div>
+                        
                     </div>
                     <button className="btn btn-light" onClick={this.AddTodoEvent}>Save</button>
                     

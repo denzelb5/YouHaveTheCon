@@ -98,6 +98,11 @@ class ExpenseCard extends React.Component {
         });
         return matchingCats;
     }
+
+    cancelEditForm = (e) => {
+        e.preventDefault();
+        this.setState({ showEditExpenseForm: false });
+    }
          
 
     render() {
@@ -126,37 +131,7 @@ class ExpenseCard extends React.Component {
                             <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.editExpenseEvent}>edit</button>
                             <button className="btn btn-link expense-buttons" id={expense.expenseId} value={expense.expenseId} onClick={this.deleteExpenseEvent}>x</button>
                         </div>)}
-                        {showEditExpenseForm ? 
-                                  (
-                                      
-                                      <form className="expense-form">
-                                    <div className="form-row">
-                    
-                                    <div className="col-sm exp-form">
-                                    <label htmlFor="expense-name">Expense Name</label>
-                                    <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter new expense name"
-                                    value={expName}
-                                    onChange={this.expNameChange}
-                                    />
-                                    
-                                    </div>
-                                    <div className="col-sm exp-form">
-                                    <label htmlFor="amount-budgeted">Amount</label>
-                                    <input
-                                    type="number"  step="0.01" min="0" max="10"
-                                    className="form-control"
-                                    placeholder="Enter Expense Amount"
-                                    value={expCost}
-                                    onChange={this.expCostChange}
-                                    />
-                                        </div>
-                                        <div className="btn btn-dark" onClick={this.updateExpenseItemEvent}>Save</div>
-                                    </div>
-                                    </form> 
-                                  ) : <div></div>}
+                        
                     </div>
                     <div className="col-sm expense-col">
                         <h5>Category</h5>
@@ -175,8 +150,41 @@ class ExpenseCard extends React.Component {
                         <div>{remainder}</div>
                         
                     </div>
+                    </div>
+                    {showEditExpenseForm ? 
+                                  (
+                                      
+                                      <form className="expense-form">
+                                    <div className="form-row">
                     
-                </div>
+                                    <div className="col-3 exp-form">
+                                    <label htmlFor="expense-name">Expense Name</label>
+                                    <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter new expense name"
+                                    value={expName}
+                                    onChange={this.expNameChange}
+                                    />
+                                    
+                                    </div>
+                                    <div className="col-3 exp-form">
+                                    <label htmlFor="amount-budgeted">Amount</label>
+                                    <input
+                                    type="number"  step="0.01" min="0" max="10"
+                                    className="form-control"
+                                    placeholder="Enter Expense Amount"
+                                    value={expCost}
+                                    onChange={this.expCostChange}
+                                    />
+                                        </div>
+                                        <div className="btn btn-dark edit-save-btn" onClick={this.updateExpenseItemEvent}>Save</div>
+                                        <div className="btn btn-light cancel-edit" onClick={this.cancelEditForm}>Cancel</div>
+                                    </div>
+                                    </form> 
+                                  ) : <div></div>}
+                    
+                
             </div>
         )
         }

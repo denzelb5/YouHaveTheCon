@@ -20,10 +20,10 @@ class TodoCard extends React.Component {
             <div className="card">
                 <ul className="list-group list-group-flush">
                     
-                        <li className="list-group-item d-flex">{todo.todoName}
-                            <button className="btn btn-light" onClick={this.deleteTodoEvent}>x</button>
+                        <li className="list-group-item todo-item">{todo.todoName}
+                            <button className="btn btn-light del-todo" onClick={this.deleteTodoEvent}>x</button>
                         </li>
-                    <li className="list-group-item">{todo.todoNotes}</li>
+                    {/* <li className="list-group-item">Memo: {todo.todoNotes}</li> */}
                     
                 </ul>
             </div>

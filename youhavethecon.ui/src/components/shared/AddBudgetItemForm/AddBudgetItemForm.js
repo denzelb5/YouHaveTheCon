@@ -7,7 +7,7 @@ class AddBudgetItemForm extends React.Component {
     state = {
         name: '',
         amount: '',
-        showLineForm: false,
+        showLineForm: true,
         showEditForm: false
     }
 
@@ -16,7 +16,8 @@ class AddBudgetItemForm extends React.Component {
         conId: PropTypes.int,
         userId: PropTypes.int,
         budgetLineItems: PropTypes.array,
-        onSave: PropTypes.func
+        onSave: PropTypes.func,
+        onClose: PropTypes.func
     }
 
     itemNameChange = (e) => {
@@ -45,77 +46,47 @@ class AddBudgetItemForm extends React.Component {
         .catch((error) => console.error(error));
     }
 
+    closeAddLineFormEvent = (e) => {
+        e.preventDefault();
+        this.props.onClose();
+    }
+
     
 
     render() {
         const { 
             name, 
-            amount, 
-            showLineForm,
-            showEditForm } = this.state;
+            amount } = this.state;
         
         return (
         <div>
-            {
-                showLineForm ? (<div></div> )
-                : (
-                    <form className="budget-line">
-                    
-                <div className="form-group">
-                <label htmlFor="budget-name">Category Name</label>
-                <input
-                type="text"
-                className="form-control"
-                placeholder="Enter category name"
-                value={name}
-                onChange={this.itemNameChange}
-                />
-                
-                </div>
-                <div className="form-group">
-                <label htmlFor="amount-budgeted">Amount</label>
-                <input
-                type="number"  step="0.01" min="0" max="10"
-                className="form-control"
-                placeholder="Enter Budget Amount"
-                value={amount}
-                onChange={this.itemAmountChange}
-                />
-                    </div>
-                    <div className="btn btn-dark" onClick={this.AddNewLineItemEvent}>Save</div>
-                </form> 
-                )
-            },
-            {
-                showEditForm ? (<div></div>) 
-                : (
-                    <form className="budget-line">
-                    
-                    <div className="form-group">
+            <form className="budget-line container">
+                <div className=" d-flex">
+                <div className="form-group col-3">
                     <label htmlFor="budget-name">Category Name</label>
                     <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter category name"
-                    value={name}
-                    onChange={this.itemNameChange}
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Category name"
+                        value={name}
+                        onChange={this.itemNameChange}
                     />
-                    
-                    </div>
-                    <div className="form-group">
+                </div>
+                <div className="form-group col-3">
                     <label htmlFor="amount-budgeted">Amount</label>
                     <input
-                    type="number"  step="0.01" min="0" max="10"
-                    className="form-control"
-                    placeholder="Enter Budget Amount"
-                    value={amount}
-                    onChange={this.itemAmountChange}
+                        type="number"  step="0.01" min="0" max="10"
+                        className="form-control"
+                        placeholder="Enter Budget Amount"
+                        value={amount}
+                        onChange={this.itemAmountChange}
                     />
-                        </div>
-                        <div className="btn btn-dark" onClick={this.updateLineItemEvent}>Save</div>
-                    </form> 
-                )
-            } 
+                </div>
+                
+                <div className="btn btn-dark bl-save-btn bl-btns" onClick={this.AddNewLineItemEvent}>Save</div>
+                <div className="btn btn-danger bl-cancel-btn bl-btns" onClick={this.closeAddLineFormEvent}>Cancel</div>
+                </div>
+            </form> 
         </div>
          )
     }

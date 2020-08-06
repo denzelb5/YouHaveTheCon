@@ -1,0 +1,15 @@
+.todo-item {
+    padding: 0;
+    margin: .5em;
+
+    .del-todo {
+        float: right;
+        padding: 0;
+        display: none;
+    }
+}
+
+.todo-item:hover .del-todo {
+    display: inline;
+}
+
