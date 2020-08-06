@@ -33,20 +33,25 @@ class SingleCosplay extends React.Component {
         }
     }
 
+    togglePieceForm = () => {
+        this.setState({ displayAddForm: !this.state.displayAddForm });
+    }
+
 
 
     render() {
-        const { pieces, displayAddForm, todos } = this.state;
+        const { pieces, displayAddForm } = this.state;
         const { cosplayId } = this.props.match.params;
         return (
             <div className="cosplay-planner">
                 <div className="container">
+                    <h1 className="cos-plan-header">Cosplay Planner</h1>
                     <button className="btn btn-light" id="create-piece" onClick={this.showPieceFormEvent}>Add A Cosplay Piece</button>
+                    {
+                        displayAddForm ? <AddCosplayPieceForm cosplayId={cosplayId} onSave={this.getCosplayPiecesData} onClose={this.togglePieceForm} /> : ('')
+                    }
                     {pieces.map((piece) => <SingleCosplayCard key={piece.cosplayPiecesId} piece={piece} pieceOnSave={this.getCosplayPiecesData} />)}
                
-                    {
-                        displayAddForm ? <AddCosplayPieceForm cosplayId={cosplayId} onSave={this.getCosplayPiecesData} /> : ('')
-                    }
                 </div>
     
 

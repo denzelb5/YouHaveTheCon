@@ -21,7 +21,7 @@ class TodoCard extends React.Component {
                 <ul className="list-group list-group-flush">
                     
                         <li className="list-group-item todo-item">{todo.todoName}
-                            <button className="btn btn-light" onClick={this.deleteTodoEvent}>x</button>
+                            <button className="btn btn-light del-todo" onClick={this.deleteTodoEvent}>x</button>
                         </li>
                     {/* <li className="list-group-item">Memo: {todo.todoNotes}</li> */}
                     

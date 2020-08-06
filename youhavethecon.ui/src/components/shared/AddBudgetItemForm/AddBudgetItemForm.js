@@ -60,8 +60,9 @@ class AddBudgetItemForm extends React.Component {
         
         return (
         <div>
-            <form className="budget-line">
-                <div className="form-group">
+            <form className="budget-line container">
+                <div className=" d-flex">
+                <div className="form-group col-3">
                     <label htmlFor="budget-name">Category Name</label>
                     <input
                         type="text"
@@ -71,8 +72,7 @@ class AddBudgetItemForm extends React.Component {
                         onChange={this.itemNameChange}
                     />
                 </div>
-                <h1>AddcatForm</h1>
-                <div className="form-group">
+                <div className="form-group col-3">
                     <label htmlFor="amount-budgeted">Amount</label>
                     <input
                         type="number"  step="0.01" min="0" max="10"
@@ -82,8 +82,10 @@ class AddBudgetItemForm extends React.Component {
                         onChange={this.itemAmountChange}
                     />
                 </div>
-                <div className="btn btn-dark" onClick={this.AddNewLineItemEvent}>Save</div>
-                <div className="btn btn-light" onClick={this.closeAddLineFormEvent}>Cancel</div>
+                
+                <div className="btn btn-dark bl-save-btn bl-btns" onClick={this.AddNewLineItemEvent}>Save</div>
+                <div className="btn btn-danger bl-cancel-btn bl-btns" onClick={this.closeAddLineFormEvent}>Cancel</div>
+                </div>
             </form> 
         </div>
          )

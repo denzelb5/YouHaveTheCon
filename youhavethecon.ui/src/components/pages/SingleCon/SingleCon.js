@@ -84,12 +84,18 @@ class SingleCon extends React.Component {
     }
 
     toggleAddCategory = () => {
-        this.setState({showAddCategoryForm: !this.state.showAddCategoryForm});
+        this.setState({ showAddCategoryForm: !this.state.showAddCategoryForm });
     }
 
     toggleExpenseForm = () => {
-        this.setState({showExpenseForm: !this.state.showExpenseForm});
+        this.setState({ showExpenseForm: !this.state.showExpenseForm });
     }
+
+    toggleAddBudgetForm = () => {
+        this.setState({ showBudgetForm: !this.state.showBudgetForm });
+    }
+
+    
 
     render() {
         const { 
@@ -113,7 +119,7 @@ class SingleCon extends React.Component {
             }
                 
                 {
-                    showBudgetForm ? <AddBudgetForm conId={conId} userId={userId} onSave={this.getConBudget}/> : ('')
+                    showBudgetForm ? <AddBudgetForm conId={conId} userId={userId} onSave={this.getConBudget} onClose={this.toggleAddBudgetForm} /> : ('')
                 }
                 
                 <div className="budget">

@@ -15,7 +15,8 @@ class AddCosplayPieceForm extends React.Component {
     }
 
     static props = {
-        onSave: PropTypes.func
+        onSave: PropTypes.func,
+        onClose: PropTypes.func
     }
 
     pieceNameChange = (e) => {
@@ -58,8 +59,6 @@ class AddCosplayPieceForm extends React.Component {
             pieceImageUrl, 
             bodyPartName
         } = this.state;
-        
-        
         const newPiece = {
             cosplayPiecesId: '',
             pieceName: pieceName,
@@ -74,13 +73,12 @@ class AddCosplayPieceForm extends React.Component {
             .then((result) => {
                 this.setState({ showAddPieceForm: true });
                 this.props.onSave();
+                this.props.onClose();
             })
             .catch((error) => console.error(error));
 
         
     }
-
-
 
     render() {
         const {
@@ -95,76 +93,79 @@ class AddCosplayPieceForm extends React.Component {
 
         return (
              <div>
-                 {
-                showAddPieceForm ? (<div></div>) :
-                <form className="add-event">
-                    
-                <div className="form-group">
-                <label htmlFor="piece-name">Cosplay Piece Name</label>
-                <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Piece Name"
-                value={pieceName}
-                onChange={this.pieceNameChange}
-                />
-                
-                </div>
-                <div className="form-group">
-                    <label htmlFor="event-date">Percent Currently Done</label>
-                    <input
-                        type="number" 
-                        className="form-control"
-                        placeholder="Enter Percent Done"
-                        value={percentDone}
-                        onChange={this.percentDoneChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="hour-est">Estimated Hours To Complete</label>
-                    <input
-                        type="number" 
-                        className="form-control"
-                        placeholder="Enter Hour Estimate"
-                        value={completionHoursEstimate}
-                        onChange={this.compHoursChange}
-                    />
+                 { showAddPieceForm ? (<div></div>) :
+                    <div>
+                        <form className="add-cosplay-piece-form  d-flex container">
+                            <div className="col-6"> 
+                                <div className="form-group">
+                                    <label htmlFor="piece-name">Cosplay Piece Name</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter Piece Name"
+                                        value={pieceName}
+                                        onChange={this.pieceNameChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="event-date">Percent Currently Done</label>
+                                    <input
+                                        type="number" 
+                                        className="form-control"
+                                        placeholder="Enter Percent Done"
+                                        value={percentDone}
+                                        onChange={this.percentDoneChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="image-add">Piece Image</label>
+                                    <input
+                                        type="text" 
+                                        className="form-control"
+                                        placeholder="Enter Image Url"
+                                        value={pieceImageUrl}
+                                        onChange={this.imageChange}
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="form-group">
+                                    <label htmlFor="hour-est">Estimated Hours To Complete</label>
+                                    <input
+                                        type="number" 
+                                        className="form-control"
+                                        placeholder="Enter Hour Estimate"
+                                        value={completionHoursEstimate}
+                                        onChange={this.compHoursChange}
+                                    />
+                                </div>                   
+                                <div className="form-group">
+                                    <label htmlFor="minute-est">Estimated Minutes To Complete</label>
+                                    <input
+                                        type="number" 
+                                        className="form-control"
+                                        placeholder="Enter Minutes Estimate"
+                                        value={completionMinutesEstimate}
+                                        onChange={this.compMinuteChange}
+                                    />
+                                </div>           
+                                <div className="form-group">
+                                    <label htmlFor="body-part">Enter: Which Body Part?</label>
+                                    <input
+                                        type="text" 
+                                        className="form-control"
+                                        placeholder="Enter Body Part"
+                                        value={bodyPartName}
+                                        onChange={this.bodyPartChange}
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                        <button className="btn btn-dark add-piece-btns" onClick={this.addCosplayPieceEvent}>Add Piece</button>
+                        <button className="btn btn-light add-piece-btns" onClick={this.props.onClose}>Cancel</button>
                     </div>
-                <div className="form-group">
-                    <label htmlFor="minute-est">Estimated Minutes To Complete</label>
-                    <input
-                        type="number" 
-                        className="form-control"
-                        placeholder="Enter Minutes Estimate"
-                        value={completionMinutesEstimate}
-                        onChange={this.compMinuteChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="image-add">Piece Image</label>
-                    <input
-                        type="text" 
-                        className="form-control"
-                        placeholder="Enter Image Url"
-                        value={pieceImageUrl}
-                        onChange={this.imageChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="body-part">Enter: Which Body Part?</label>
-                    <input
-                        type="text" 
-                        className="form-control"
-                        placeholder="Enter Body Part"
-                        value={bodyPartName}
-                        onChange={this.bodyPartChange}
-                    />
-                </div>
-                <button className="btn btn-dark" onClick={this.addCosplayPieceEvent}>Add Cosplay Piece</button>
-            </form>
-            }
-            </div>
-                 
+                }
+            </div>                 
         );
     }
 }

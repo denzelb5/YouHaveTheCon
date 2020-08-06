@@ -1,18 +1,9 @@
 @import '../../../styles/variables';
 
-// .row {
-//     border: 3px solid lightgray;
-// }
-
-// .col-sm {
-//     border: 3px solid lightgray;
-// }
-
 .budget-card {
     background-image: url('https://storage.needpix.com/rsynced_images/journal-1577764_1280.png');
     background-size: 100%;
     background-repeat: no-repeat;
-    //background-color: black;
     border-radius: 10px;
     max-width: 700px;
     font-family: $yellowtail;
@@ -43,8 +34,22 @@
 
     .remainder {
         margin-left: 25%;
-        margin-top: 7%;
+        margin-top: 7%; 
     }
+}
+
+.edit-budget-line {
+    margin-top: 2em;
+    border-top: 2px solid tan;
+    margin-left: 2em;
+}
+
+.edit-bl-btns {
+    margin: .75em;
+}
+
+.input-bl {
+    margin: 0;
 }
 
 

@@ -81,15 +81,17 @@ class SingleCosplayCard extends React.Component {
                                                 <h5 className="card-title piece-name">Name: {piece.pieceName}</h5>
                                             </div>
                                             <div>
-                                                <h6 className="card-text">Total Progress: {piece.percentDone}% Done</h6>
-                                                <p className="card-text">Completion Estimate: {piece.completionHoursEstimate} hours {piece.completionMinutesEstimate} minutes</p>
+                                                <h6 className="card-text">Total Progress: {piece.percentDone}% </h6>
+                                                <p className="card-text">Time Needed: {piece.completionHoursEstimate} hours {piece.completionMinutesEstimate} min</p>
                                             </div>
                                         </div> 
                                           
                                     </div>
                                     <div className="col-6 text-center">  
-                                        <div>
-                                            <button onClick={ this.showAddForm} className="card-link">Add Todo Item</button>
+                                        <div className="d-flex justify-content-between">
+                                            <div></div>
+                                            <h4 className="todo-head">ToDo</h4>
+                                            <button onClick={ this.showAddForm} className="card-link add-todo-btn">+</button>
                                         </div>                                           
                                     {
                                         showTodoAddForm ? 
@@ -98,7 +100,7 @@ class SingleCosplayCard extends React.Component {
                                             
                                         </div>
                                         :
-                                        <div className="text-center">
+                                        <div className="text-center todo-box">
                                             {todoItems.map((todo) => <TodoCard key={todo.todoId} todo={todo} deleteTodo={this.deleteTodo} />)} 
                                         </div>                                  
                                     }  

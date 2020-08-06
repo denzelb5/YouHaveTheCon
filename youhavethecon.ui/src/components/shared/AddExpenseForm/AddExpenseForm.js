@@ -62,7 +62,7 @@ class AddExpenseForm extends React.Component {
         const { conBudget } = this.props;
         return (
             <div>
-                <form className="expense container"> 
+                <form className="add-expense-form container"> 
                     <div className="form-row">  
                     <div className="col-3">
                         <label htmlFor="budget-name">Expense Name</label>
