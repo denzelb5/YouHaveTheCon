@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import AddTodoForm from '../AddTodoForm/AddTodoForm';
 import TodoCard from '../TodoCard/TodoCard';
 import cosplayData from  '../../../helpers/data/cosplayData';

@@ -22,7 +22,7 @@ import {
 import './App.scss';
 import authData from '../helpers/data/authData';
 import SingleCosplay from '../components/pages/SingleCosplay/SingleCosplay';
-import AddCosplayPieceForm from '../components/shared/AddCosplayPieceForm/AddCosplayPieceForm';
+
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

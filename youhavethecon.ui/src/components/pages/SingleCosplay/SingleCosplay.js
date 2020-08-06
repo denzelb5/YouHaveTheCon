@@ -3,7 +3,7 @@ import './SingleCosplay.scss';
 import cosplayData from '../../../helpers/data/cosplayData';
 import SingleCosplayCard from '../../shared/SingleCosplayCard/SingleCosplayCard';
 import AddCosplayPieceForm from '../../shared/AddCosplayPieceForm/AddCosplayPieceForm';
-import TodoCard from '../../shared/TodoCard/TodoCard';
+
 
 class SingleCosplay extends React.Component {
     state = {
@@ -17,10 +17,6 @@ class SingleCosplay extends React.Component {
         .then((request) => this.setState({ pieces: request }))
         .catch((error) => console.error(error));
     }
-
-    
-
-    
 
     componentDidMount() {
         this.getCosplayPiecesData();
