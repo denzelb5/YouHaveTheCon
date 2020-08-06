@@ -108,7 +108,7 @@ namespace YouHaveTheCon.DataAccess
 
         public Convention RemoveCon(int conId)
         {
-            var sql = @"delete from Convention where conId = @conId";
+            var sql = @"update Convention set IsActive = 0 where conId = @conId";
 
             using (var db = new SqlConnection(ConnectionString))
             {

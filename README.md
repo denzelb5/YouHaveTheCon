@@ -1,15 +1,18 @@
 # You Have The Con 
-### NSS Backend Capstone
+### NSS Back-End Capstone
 
 ## Description:
 
 An organizational app designed for "Cosplayers."  Cosplay is the act of dressing up as a character or concept. People who do it regularly are called "cosplayers". Cosplay fans typically will attend at least one if not several Cosplay Conventions, or "cons" as they are called, per year.  This app is a tool to help cosplayers organize that process.  Users can create a budget per con, track their expenses per con, create a schedule of events while attending a con, and track the progress of various outfits needed for a con.  The styling of the app gives a shout out to many of the different fandoms of cosplayers.  The home page uses a Star Trek interface as a backdrop.  The budgeting page is an homage to wizards with old parchment paper and a handwritten font. The numerous add forms in the app pay homage to Star Wars, Lord of the Rings, and Game Of Thrones as well. 
 
 ## Technologies:
-* ReactJs
+* Reactjs
 * ASP.NetCore
 * T-SQL
 * C#
+* HTML5
+* CSS / SCSS
+* Bootstrap
 
 ## Walk Through
 
@@ -40,7 +43,7 @@ Add a Category form
 SingleCon / Expenses
 * User can add / edit / delete their expenses incurred at the con and compare them to the amount they budgeted for them.  Category names in dropdown are pulled in from the budget categories.
 * Edit / delete appear on line items on mouse hover.
-* Bottom Link links to the con schedule page where a user can track the events they are attending.
+* Bottom Link -- links to the con schedule page where a user can track the events they are attending.
 ![expenses](./screenshots/expenses.PNG)
 
 Add An Expense Form
