@@ -59,7 +59,7 @@ Con Schedule Page
 
 Add Event Form
 
-![addEventForm](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addEvent.PNG)
+![addEventForm](https://github.com/denzelb5/YouHaveTheCon/raw/master/screenshots/addevent.PNG)
 
 AllCosplays Page
 * User can view the outfits they would like to make or purchase and also add a cosplay.
