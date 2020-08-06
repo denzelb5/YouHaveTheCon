@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import userData from '../../../helpers/data/userData';
 import authData from '../../../helpers/data/authData';
 import './Login.scss';
 

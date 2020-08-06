@@ -24,7 +24,8 @@ namespace YouHaveTheCon.DataAccess
             var sql = @"select *
                         from ConEvents 
                         where conId = @conId
-                        and userId = @userId";
+                        and userId = @userId
+                        order by eventDateTime ASC";
 
             using (var db = new SqlConnection(ConnectionString))
             {

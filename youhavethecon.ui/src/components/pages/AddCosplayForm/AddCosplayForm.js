@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AddCosplayForm.scss';
 import cosplayData from '../../../helpers/data/cosplayData';
 
@@ -71,10 +72,12 @@ class AddCosplayForm extends React.Component {
             cosplayImageUrl
         } = this.state;
 
+        const userId = parseInt(this.props.match.params.userId);
+
         return (
-            <div>
-                <h1>add cosplay form</h1>
-                <form className="add-cosplay">
+            <div className="add-cosplay-form">
+                <h3 className="add-cosplay-form-header">Add Cosplay Info Here</h3>
+                <form className="add-cosplay col-5">
                     
                     <div className="form-group">
                     <label htmlFor="cosplay-name">Cosplay Name</label>
@@ -87,7 +90,7 @@ class AddCosplayForm extends React.Component {
                     />
                     
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-8">
                         <label htmlFor="date-created">Date Created</label>
                         <input
                             type="datetime-local" 
@@ -97,7 +100,7 @@ class AddCosplayForm extends React.Component {
                             onChange={this.dateCreatedChange}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-8">
                         <label htmlFor="date-due">Due Date</label>
                         <input
                             type="datetime-local" 
@@ -107,7 +110,7 @@ class AddCosplayForm extends React.Component {
                             onChange={this.dateDueChange}
                         />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group col-8">
                         <label htmlFor="progress">Percent Done</label>
                         <input
                             type="number" 
@@ -127,12 +130,8 @@ class AddCosplayForm extends React.Component {
                             onChange={this.imageChange}
                         />
                         </div>
-    
-                       
-                            <button className="btn btn-dark" onClick={this.addCosplayEvent}>Save</button>
-                           
-    
-                        {/* <Link className="btn btn-danger" to={`/event/allevents/${conId}/${userId}`}>Cancel</Link> */}
+                            <button className="btn btn-primary add-coplay-btns" onClick={this.addCosplayEvent}>Save</button>
+                            <Link className="btn btn-dark add-cosplay-btns" to={`/cosplay/allcosplays/${userId}`}>Cancel</Link>
                     </form> 
             </div>
 

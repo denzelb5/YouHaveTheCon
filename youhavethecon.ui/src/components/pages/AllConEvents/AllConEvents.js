@@ -50,7 +50,7 @@ class AllConEvents extends React.Component {
         const conId = parseInt(this.props.match.params.conId);
         return (
             <div className="container event-box">
-                <h1 className="event-headline">My Events</h1>
+                <h1 className="event-headline">Con Schedule</h1>
                 <div className="row">
                     <div className="col-3">
                         <img src="https://cdn.pixabay.com/photo/2017/05/14/09/51/tardis-2311634_960_720.png" className="tardis d-flex justify-content-start" alt="tardis"/>

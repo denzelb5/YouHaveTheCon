@@ -1,68 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# You Have The Con 
+### NSS Backend Capstone
 
-## Available Scripts
+## Description:
 
-In the project directory, you can run:
+An organizational app designed for "Cosplayers."  Cosplay is the act of dressing up as a character or concept. People who do it regularly are called "cosplayers". Cosplay fans typically will attend at least one if not several Cosplay Conventions, or "cons" as they are called, per year.  This app is a tool to help cosplayers organize that process.  Users can create a budget per con, track their expenses per con, create a schedule of events while attending a con, and track the progress of various outfits needed for a con.  The styling of the app gives a shout out to many of the different fandoms of cosplayers.  The home page uses a Star Trek interface as a backdrop.  The budgeting page is an homage to wizards with old parchment paper and a handwritten font. The numerous add forms in the app pay homage to Star Wars, Lord of the Rings, and Game Of Thrones as well. 
 
-### `npm start`
+## Technologies:
+* ReactJs
+* ASP.NetCore
+* T-SQL
+* C#
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Walk Through
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Home Page -- An interface from the Star Trek series
+![Home Page](./screenshots/homePage.PNG)
 
-### `npm test`
+Logged In Page
+![Login Page](./screenshots/login.PNG)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+AllCons Page -- user can view all of the cons they are planning to attend.  User can also add or delete (delete button on hover) a con to this page. Cons are listed by upcoming date. Background is an old castle wall.
+![allCons Page](./screenshots/allCons.PNG)
 
-### `npm run build`
+Add A Con  -- user can add a con. Background homage to Star Wars death star.
+![addCon Page](./screenshots/addACon.PNG)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Single Con Page / Budget Portion --
+* User can create or view their budget for the chosen con.  If no budget exists the user is prompted to create one.  There is only one budget allowed per con.  
+* User can add / edit / delete categories in the budget.  The budget  will calculate your remaining funds based on the available funds entered when creating the budget.
+The edit and delete buttons appear on hover in the line items. 
+* Styling pays homage to Harry Potter fans 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![SingleCon/budget](./screenshots/singleCon.PNG)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Add a Category form
 
-### `npm run eject`
+![addCategory](./screenshots/addBudgetCategory.PNG)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+SingleCon / Expenses
+* User can add / edit / delete their expenses incurred at the con and compare them to the amount they budgeted for them.  Category names in dropdown are pulled in from the budget categories.
+* Edit / delete appear on line items on mouse hover.
+* Bottom Link links to the con schedule page where a user can track the events they are attending.
+![expenses](./screenshots/expenses.PNG)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Add An Expense Form
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![expenseForm](./screenshots/addExpense.PNG)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Con Schedule Page
+* User can create an at a glance schedule for their activities at the con.
+* Events appear in chronological order.
+* User can add / edit / delete events.  Edit / delete appear on hover per line item.
 
-## Learn More
+![conSchedule](./screenshots/conSchedule.PNG)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Add Event Form
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![addEventForm](./screenshots/addEvent.PNG)
 
-### Code Splitting
+AllCosplays Page
+* User can view the outfits they would like to make or purchase and also add a cosplay.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Add A Cosplay Form
+![addCosplayForm](./screenshots/addCosplay.PNG)
 
-### Analyzing the Bundle Size
+Cosplay Pieces Page
+* User can add and track progress of the various pieces that make up one outfit.
+* User can create and delete todo tasks to help organize the creation process.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![CosplayPiece](./screenshots/cosplayPiecePage.PNG)
 
-### Making a Progressive Web App
+Add Cosplay Piece Form
+![addCosplayPiece](./screenshots/addCosplayPiece.PNG)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Add ToDo Form
+![addToDo](./screenshots/todoAdd.PNG)
 
-### Advanced Configuration
+## Contributors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+* Denise Baker
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
